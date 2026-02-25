@@ -92,10 +92,7 @@
 
 <script>
     function irParaCheckout() {
-        // NOVO LINK ATUALIZADO
         var linkCheckout = "https://kendzi.shop/checkouts/checkout-page/";
-        
-        // Força a saída de frames e evita conflitos com WordPress
         window.top.location.href = linkCheckout;
     }
 
@@ -106,11 +103,13 @@
 
         if(stepNum === 5) {
             const container = document.getElementById('vsl-container');
+            // Inserção da nova VSL
             container.innerHTML = '<vturb-smartplayer id="vid-699cd07f85a22216bd65765a" style="display: block; margin: 0 auto; width: 100%; "></vturb-smartplayer>';
-            const script = document.createElement("script");
-            script.src = "https://scripts.converteai.net/8601e46d-aefa-4f58-8660-6b2d544da48c/players/699cd07f85a22216bd65765a/v4/player.js";
-            script.async = true;
-            document.head.appendChild(script);
+            
+            var s = document.createElement("script");
+            s.src = "https://scripts.converteai.net/8601e46d-aefa-4f58-8660-6b2d544da48c/players/699cd07f85a22216bd65765a/v4/player.js";
+            s.async = !0;
+            document.head.appendChild(s);
         }
     }
 </script>
