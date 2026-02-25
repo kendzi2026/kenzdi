@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Google Rewards</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    <style>
+        :root { --primary: #4285F4; --green: #34A853; --bg: #f8f9fa; }
+        * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+        body, html { height: 100%; margin: 0; font-family: 'Segoe UI', Tahoma, sans-serif; background-color: var(--bg); overflow: hidden; }
+        .main-wrapper { display: flex; justify-content: center; align-items: center; height: 100vh; width: 100vw; padding: 20px; }
+        .quiz-card { width: 100%; max-width: 420px; background: #fff; border-radius: 30px; padding: 25px 20px; box-shadow: 0 20px 40px rgba(0,0,0,0.1); text-align: center; position: relative; max-height: 95vh; overflow-y: auto; }
+        .balance-tag { background: #e6f4ea; color: var(--green); padding: 8px 18px; border-radius: 50px; font-weight: 800; font-size: 1.2rem; border: 2px solid var(--green); display: inline-block; margin-bottom: 15px; animation: pulse 2s infinite; }
+        .step { display: none; width: 100%; }
+        .step.active { display: block; animation: fadeInRight 0.3s ease; }
+        h2 { font-size: 1.15rem; color: #202124; margin-bottom: 15px; line-height: 1.3; }
+        .quiz-img { width: 100%; max-height: 180px; object-fit: contain; border-radius: 15px; margin-bottom: 15px; }
+        .trophy-img { width: 140px; margin-bottom: 10px; animation: float 3s ease-in-out infinite; }
+        @keyframes float { 0%, 100% { transform: translateY(0px); } 50% { transform: translateY(-10px); } }
+        .options-list { display: grid; gap: 8px; }
+        .option-item { border: 2px solid #e8eaed; padding: 16px; border-radius: 15px; cursor: pointer; display: flex; justify-content: space-between; align-items: center; font-weight: 600; transition: 0.2s; background: #fff; color: #3c4043; font-size: 1rem; }
+        .option-item:active { background: #f1f3f4; border-color: var(--primary); transform: scale(0.98); }
+        .btn-checkout { background: var(--green); color: white; padding: 20px; border-radius: 15px; display: block; font-weight: 800; margin: 15px auto; box-shadow: 0 4px 10px rgba(52, 168, 83, 0.3); border: none; width: 100%; font-size: 1.2rem; cursor: pointer; text-transform: uppercase; }
+        .footer-img { width: 100%; margin-top: 20px; border-radius: 10px; }
+        #vsl-container { background: #000; border-radius: 15px; min-height: 200px; margin: 15px 0; display: flex; align-items: center; justify-content: center; color: white; overflow: hidden; }
+        @keyframes pulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.05); } }
+    </style>
+</head>
+<body>
+
+<div class="main-wrapper">
+    <div class="quiz-card">
+        <div class="balance-tag">💰 $<span id="balance">22.39</span></div>
+
+        <div class="step active" id="step0">
+            <img src="https://cdn-icons-png.flaticon.com/512/3112/3112946.png" class="trophy-img">
+            <h2 style="color: var(--primary);">🎁 Parabéns!</h2>
+            <p>Você foi selecionado para o sistema Google Rewards.</p>
+            <p>Saldo garantido: <b style="color: var(--green);">$ 22,39</b>!</p>
+            <div class="options-list">
+                <div class="option-item" onclick="nextStep(1, 22.39)" style="justify-content: center; background: var(--primary); color: white;">ATIVAR CONTA AGORA 🚀</div>
+            </div>
+        </div>
+
+        <div class="step" id="step1">
+            <h2>Que nota você dá à Coca-Cola? 🥤</h2>
+            <img src="https://quiiz.dadinho.shop/images/3go.png" class="quiz-img">
+            <div class="options-list">
+                <div class="option-item" onclick="nextStep(2, 66.89)">Nota 10 <span>🤩</span></div>
+                <div class="option-item" onclick="nextStep(2, 66.89)">Nota 5 <span>😐</span></div>
+            </div>
+        </div>
+
+        <div class="step" id="step2">
+            <h2>Gostou desta imagem do KFC? 🍗</h2>
+            <img src="https://quiiz.dadinho.shop/images/4go.jpeg" class="quiz-img">
+            <div class="options-list">
+                <div class="option-item" onclick="nextStep(3, 111.39)">Amei! <span>😋</span></div>
+                <div class="option-item" onclick="nextStep(3, 111.39)">Ruim <span>👎</span></div>
+            </div>
+        </div>
+
+        <div class="step" id="step3">
+            <h2>Compraria este serviço? 🛍️</h2>
+            <img src="https://quiiz.dadinho.shop/images/5go.jpeg" class="quiz-img">
+            <div class="options-list">
+                <div class="option-item" onclick="nextStep(4, 155.89)">Sim <span>✅</span></div>
+                <div class="option-item" onclick="nextStep(4, 155.89)">Não <span>❌</span></div>
+            </div>
+        </div>
+
+        <div class="step" id="step4">
+            <h2>Onde deseja receber o valor? 📱</h2>
+            <img src="https://quiiz.dadinho.shop/images/3go%20%281%29.png" class="quiz-img">
+            <div class="options-list">
+                <div class="option-item" onclick="nextStep(5, 200.39)">Mpesa <span>🇲🇿</span></div>
+                <div class="option-item" onclick="nextStep(5, 200.39)">Emola <span>🍊</span></div>
+            </div>
+        </div>
+
+        <div class="step" id="step5">
+            <h2 style="color: var(--green);">SALDO: $ 200.39</h2>
+            <div id="vsl-container">Carregando vídeo...</div>
+            
+            <button onclick="irParaCheckout()" class="btn-checkout">Levantar Dinheiro Agora 🚀</button>
+            
+            <img src="https://page.dadinho.shop//images/Captura-de-Tela-2025-07-02-as-20.16.40.png" class="footer-img">
+        </div>
+    </div>
+</div>
+
+<script>
+    function irParaCheckout() {
+        // NOVO LINK ATUALIZADO
+        var linkCheckout = "https://kendzi.shop/checkouts/checkout-page/";
+        
+        // Força a saída de frames e evita conflitos com WordPress
+        window.top.location.href = linkCheckout;
+    }
+
+    function nextStep(stepNum, balanceValue) {
+        document.getElementById('balance').innerText = balanceValue.toFixed(2);
+        document.querySelectorAll('.step').forEach(s => s.classList.remove('active'));
+        document.getElementById('step' + stepNum).classList.add('active');
+
+        if(stepNum === 5) {
+            const container = document.getElementById('vsl-container');
+            container.innerHTML = '<vturb-smartplayer id="vid-699cd07f85a22216bd65765a" style="display: block; margin: 0 auto; width: 100%; "></vturb-smartplayer>';
+            const script = document.createElement("script");
+            script.src = "https://scripts.converteai.net/8601e46d-aefa-4f58-8660-6b2d544da48c/players/699cd07f85a22216bd65765a/v4/player.js";
+            script.async = true;
+            document.head.appendChild(script);
+        }
+    }
+</script>
+
+</body>
+</html>
