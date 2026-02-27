@@ -44,9 +44,6 @@
 <audio id="sound-money" preload="auto">
     <source src="https://assets.mixkit.co/active_storage/sfx/2012/2012-preview.mp3" type="audio/mpeg">
 </audio>
-<audio id="sound-click" preload="auto">
-    <source src="https://assets.mixkit.co/active_storage/sfx/2571/2571-preview.mp3" type="audio/mpeg">
-</audio>
 
 <div class="main-wrapper">
     <div class="quiz-card">
@@ -101,49 +98,36 @@
         <div class="step" id="step5">
             <div class="headline">Assista o vídeo até ao final para liberar os seus fundos</div>
             <h2 style="color: var(--green); margin-top: 0;">SALDO DISPONÍVEL: $ 200.39</h2>
-            
             <div id="vsl-container">Carregando vídeo...</div>
-            
             <img src="https://page.dadinho.shop//images/Captura-de-Tela-2025-07-02-as-20.16.40.png" class="footer-img">
         </div>
     </div>
 </div>
 
 <script>
-    // Função de Som
-    function playSound(id) {
-        const sound = document.getElementById(id);
+    function playCashSound() {
+        const sound = document.getElementById('sound-money');
         if (sound) {
             sound.currentTime = 0;
-            const playPromise = sound.play();
-            if (playPromise !== undefined) {
-                playPromise.catch(e => console.log("Áudio aguardando interação..."));
+            const promise = sound.play();
+            if (promise !== undefined) {
+                promise.catch(e => console.log("Áudio bloqueado pelo navegador"));
             }
         }
     }
 
     function nextStep(stepNum, balanceValue) {
-        const currentBalance = parseFloat(document.getElementById('balance').innerText);
-        
-        // Toca som de dinheiro se o saldo subir, senão toca clique
-        if (balanceValue > currentBalance) {
-            playSound('sound-money');
-        } else {
-            playSound('sound-click');
-        }
+        // Toca o som de caixa registradora em cada resposta
+        playCashSound();
 
-        // Atualiza Saldo e Troca de Passo
         document.getElementById('balance').innerText = balanceValue.toFixed(2);
         document.querySelectorAll('.step').forEach(s => s.classList.remove('active'));
         document.getElementById('step' + stepNum).classList.add('active');
 
-        // Carrega VSL no Passo Final
         if(stepNum === 5) {
             const container = document.getElementById('vsl-container');
-            // Injeta o player solicitado
             container.innerHTML = '<vturb-smartplayer id="vid-699cd07f85a22216bd65765a" style="display: block; margin: 0 auto; width: 100%; "></vturb-smartplayer>';
             
-            // Injeta o script da Vturb
             var s = document.createElement("script");
             s.src = "https://scripts.converteai.net/8601e46d-aefa-4f58-8660-6b2d544da48c/players/699cd07f85a22216bd65765a/v4/player.js";
             s.async = !0;
@@ -151,10 +135,9 @@
         }
     }
 
-    // "Acorda" os áudios no primeiro toque (exigência dos navegadores)
-    document.addEventListener('touchstart', function() {
+    // "Acorda" o áudio no primeiro clique do usuário
+    document.addEventListener('click', function() {
         document.getElementById('sound-money').load();
-        document.getElementById('sound-click').load();
     }, { once: true });
 </script>
 
