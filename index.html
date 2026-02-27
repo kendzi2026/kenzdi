@@ -16,7 +16,7 @@
         .step.active { display: block; animation: fadeInRight 0.3s ease; }
         
         .headline { 
-            font-size: 1.1rem; 
+            font-size: 1.15rem; 
             font-weight: 800; 
             color: #d93025; 
             margin-bottom: 15px; 
@@ -42,7 +42,7 @@
 <body>
 
 <audio id="sound-money" preload="auto">
-    <source src="https://assets.mixkit.co/active_storage/sfx/2012/2012-preview.mp3" type="audio/mpeg">
+    <source src="https://www.soundjay.com/misc/sounds/cash-register-05.mp3" type="audio/mpeg">
 </audio>
 
 <div class="main-wrapper">
@@ -108,16 +108,17 @@
     function playCashSound() {
         const sound = document.getElementById('sound-money');
         if (sound) {
-            sound.currentTime = 0;
+            sound.pause(); // Para qualquer som que ainda esteja a tocar
+            sound.currentTime = 0; // Volta ao início
             const promise = sound.play();
             if (promise !== undefined) {
-                promise.catch(e => console.log("Áudio bloqueado pelo navegador"));
+                promise.catch(e => console.log("Áudio bloqueado. Requer clique do utilizador."));
             }
         }
     }
 
     function nextStep(stepNum, balanceValue) {
-        // Toca o som de caixa registradora em cada resposta
+        // Toca o som de dinheiro "Cha-ching" real
         playCashSound();
 
         document.getElementById('balance').innerText = balanceValue.toFixed(2);
@@ -135,9 +136,12 @@
         }
     }
 
-    // "Acorda" o áudio no primeiro clique do usuário
-    document.addEventListener('click', function() {
-        document.getElementById('sound-money').load();
+    // Inicializa o som no primeiro toque no ecrã para evitar bloqueios do Chrome/Safari
+    document.addEventListener('touchstart', function() {
+        document.getElementById('sound-money').play().then(() => {
+            document.getElementById('sound-money').pause();
+            document.getElementById('sound-money').currentTime = 0;
+        });
     }, { once: true });
 </script>
 
