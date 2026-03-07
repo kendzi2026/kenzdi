@@ -1,218 +1,229 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-MZ">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Google Rewards Moçambique</title>
+    <title>Kotiriwa - Oportunidades de Emprego em Moçambique</title>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        kotiriwa: {
+                            blue: '#1A365D',
+                            gold: '#C5A065',
+                            light: '#F4F7FA',
+                            text: '#2D3748',
+                        },
+                    },
+                    fontFamily: {
+                        sans: ['Poppins', 'sans-serif'],
+                        heading: ['Montserrat', 'sans-serif'],
+                    },
+                },
+            },
+        }
+    </script>
     
     <style>
-        :root { --primary: #4285F4; --green: #34A853; --bg: #f8f9fa; --red: #d93025; }
-        * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
-        body, html { margin: 0; font-family: 'Segoe UI', Tahoma, sans-serif; background-color: var(--bg); overflow-x: hidden; }
-        
-        /* Verificação de Idade */
-        #age-verification { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: white; z-index: 9999; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 20px; }
-        .age-logo { width: 180px; margin-bottom: 20px; }
-        .btn-age-verify { background: var(--primary); color: white; border: none; padding: 18px; border-radius: 15px; font-weight: bold; width: 100%; max-width: 300px; cursor: pointer; text-transform: uppercase; margin-top: 10px; }
+        select {
+            appearance: none;
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="%23A0AEC0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>');
+            background-repeat: no-repeat;
+            background-position: right 1rem center;
+            background-size: 1em;
+        }
 
-        .main-wrapper { display: none; justify-content: center; align-items: center; min-height: 100vh; width: 100vw; padding: 20px; }
-        .quiz-card { width: 100%; max-width: 420px; background: #fff; border-radius: 30px; padding: 25px 20px; box-shadow: 0 20px 40px rgba(0,0,0,0.1); text-align: center; position: relative; max-height: 95vh; overflow-y: auto; }
-        
-        .balance-tag { background: #e6f4ea; color: var(--green); padding: 8px 18px; border-radius: 50px; font-weight: 800; font-size: 1.2rem; border: 2px solid var(--green); display: inline-block; margin-bottom: 15px; animation: pulse 2s infinite; }
-        
-        .step { display: none; width: 100%; }
-        .step.active { display: block; animation: fadeInRight 0.3s ease; }
-        
-        .headline { font-size: 1.1rem; font-weight: 800; color: var(--red); margin-bottom: 15px; text-transform: uppercase; }
-        h2 { font-size: 1.15rem; color: #202124; margin-bottom: 15px; line-height: 1.3; }
-        .quiz-img { width: 100%; max-height: 180px; object-fit: contain; border-radius: 15px; margin-bottom: 15px; }
-        .trophy-img { width: 120px; margin-bottom: 10px; animation: float 3s ease-in-out infinite; }
-        
-        .options-list { display: grid; gap: 8px; }
-        .option-item { border: 2px solid #e8eaed; padding: 16px; border-radius: 15px; cursor: pointer; display: flex; justify-content: space-between; align-items: center; font-weight: 600; transition: 0.2s; background: #fff; color: #3c4043; font-size: 1rem; }
-        .option-item:active { background: #f1f3f4; border-color: var(--primary); transform: scale(0.98); }
-        
-        #vsl-container { background: #000; border-radius: 15px; min-height: 200px; margin: 15px 0; overflow: hidden; }
+        @keyframes pulse-gold {
+            0%, 100% { box-shadow: 0 0 0 0 rgba(197, 160, 101, 0.4); }
+            50% { box-shadow: 0 0 15px 10px rgba(197, 160, 101, 0); }
+        }
+        .pulse-gold { animation: pulse-gold 2s infinite; }
 
-        /* Comentários */
-        .comments-container { margin-top: 30px; border-top: 1px solid #e0e0e0; padding-top: 20px; text-align: left; }
-        .comment-item { display: flex; margin-bottom: 25px; gap: 12px; align-items: flex-start; }
-        .comment-avatar { width: 45px; height: 45px; border-radius: 50%; object-fit: cover; flex-shrink: 0; }
-        .comment-body { background: #f0f2f5; padding: 12px; border-radius: 18px; flex: 1; }
-        .comment-name { font-weight: bold; font-size: 0.9rem; margin-bottom: 4px; display: block; color: #050505; }
-        .comment-text { font-size: 0.9rem; color: #050505; margin: 0; line-height: 1.4; }
-        .comment-img-proof { width: 100%; border-radius: 10px; margin-top: 10px; border: 1px solid #ddd; }
-        
-        @keyframes pulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.03); } }
-        @keyframes float { 0%, 100% { transform: translateY(0px); } 50% { transform: translateY(-10px); } }
+        .vaga-card { transition: all 0.3s ease-in-out; }
+        .vaga-card:hover {
+            transform: translateY(-5px) scale(1.02);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .page-section { display: none; }
+        .page-section.active { display: block; }
+
+        .modal { transition: opacity 0.3s ease; }
     </style>
 </head>
-<body>
+<body class="bg-kotiriwa-light font-sans text-kotiriwa-text antialiased">
 
-<audio id="moneySound" preload="auto">
-    <source src="https://www.soundjay.com/misc/sounds/cash-register-05.mp3" type="audio/mpeg">
-</audio>
-
-<div id="age-verification">
-    <img src="https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png" class="age-logo">
-    <h2>Verificação de Segurança</h2>
-    <p>Confirme se reside em Moçambique para continuar.</p>
-    <button class="btn-age-verify" onclick="confirmarEEntrar()">Sim, sou residente em Moçambique</button>
-</div>
-
-<div class="main-wrapper" id="main-content">
-    <div class="quiz-card">
-        <div class="balance-tag">💰 $<span id="balance">22.39</span></div>
-
-        <div class="step active" id="step0">
-            <img src="https://cdn-icons-png.flaticon.com/512/3112/3112946.png" class="trophy-img">
-            <h2 style="color: var(--primary);">🎁 Parabéns!</h2>
-            <p>Você foi selecionado para o sistema <b>Google Rewards Moçambique</b>.</p>
-            <p>Saldo garantido: <b style="color: var(--green);">$ 22,39</b>!</p>
-            <div class="options-list">
-                <div class="option-item" onclick="nextStep(1, 22.39, false)" style="justify-content: center; background: var(--primary); color: white;">ATIVAR CONTA AGORA 🚀</div>
+    <header class="bg-white shadow-sm sticky top-0 z-50 animate__animated animate__fadeInDown">
+        <nav class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+            <div class="flex items-center gap-3">
+                <img src="https://i.ibb.co/spfGSrzK/Gemini-Generated-Image-3y6a2j3y6a2j3y6a.png" alt="Logótipo Kotiriwa" class="h-12 w-12 rounded-full border-2 border-kotiriwa-gold shadow-sm object-cover">
+                <span class="font-heading font-bold text-2xl text-kotiriwa-blue tracking-tight">Kotiriwa</span>
             </div>
-        </div>
-
-        <div class="step" id="step1">
-            <h2>Que nota você dá à Coca-Cola? 🥤</h2>
-            <img src="https://quiiz.dadinho.shop/images/3go.png" class="quiz-img">
-            <div class="options-list">
-                <div class="option-item" onclick="nextStep(2, 66.89, true)">Nota 10 <span>🤩</span></div>
-                <div class="option-item" onclick="nextStep(2, 66.89, true)">Nota 5 <span>😐</span></div>
+            <div class="text-sm font-medium text-kotiriwa-blue/80 hidden md:block italic">
+                Associação Nacional de Emprego
             </div>
-        </div>
+        </nav>
+    </header>
 
-        <div class="step" id="step2">
-            <h2>Gostou desta imagem do KFC? 🍗</h2>
-            <img src="https://quiiz.dadinho.shop/images/4go.jpeg" class="quiz-img">
-            <div class="options-list">
-                <div class="option-item" onclick="nextStep(3, 111.39, true)">Amei! <span>😋</span></div>
-                <div class="option-item" onclick="nextStep(3, 111.39, true)">Ruim <span>👎</span></div>
+    <main class="max-w-4xl mx-auto px-6 py-12">
+
+        <section id="page-auth" class="page-section active animate__animated animate__fadeIn">
+            <div class="bg-white p-8 md:p-12 rounded-3xl shadow-xl max-w-md mx-auto">
+                <h1 class="font-heading font-bold text-2xl text-kotiriwa-blue mb-6 text-center">Criar Conta Kotiriwa</h1>
+                <form id="form-auth" class="space-y-5">
+                    <div>
+                        <label class="block text-sm font-semibold text-kotiriwa-blue mb-2">Digite seu e-mail</label>
+                        <input type="email" id="auth-email" required class="w-full px-5 py-4 border border-gray-200 rounded-xl focus:ring-2 focus:ring-kotiriwa-gold" placeholder="exemplo@email.com">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-semibold text-kotiriwa-blue mb-2">Escolha uma senha</label>
+                        <input type="password" id="auth-pass" required class="w-full px-5 py-4 border border-gray-200 rounded-xl focus:ring-2 focus:ring-kotiriwa-gold" placeholder="Sua senha">
+                    </div>
+                    <button type="submit" class="w-full py-4 bg-kotiriwa-blue text-white font-bold rounded-xl hover:bg-opacity-90 transition-all">
+                        CRIAR CONTA
+                    </button>
+                </form>
             </div>
-        </div>
+        </section>
 
-        <div class="step" id="step3">
-            <h2>Compraria este serviço? 🛍️</h2>
-            <img src="https://quiiz.dadinho.shop/images/5go.jpeg" class="quiz-img">
-            <div class="options-list">
-                <div class="option-item" onclick="nextStep(4, 155.89, true)">Sim <span>✅</span></div>
-                <div class="option-item" onclick="nextStep(4, 155.89, true)">Não <span>❌</span></div>
-            </div>
-        </div>
-
-        <div class="step" id="step4">
-            <h2>Onde deseja receber o valor? 📱</h2>
-            <img src="https://quiiz.dadinho.shop/images/3go%20%281%29.png" class="quiz-img">
-            <div class="options-list">
-                <div class="option-item" onclick="nextStep(5, 200.39, true)">M-pesa <span>🇲🇿</span></div>
-                <div class="option-item" onclick="nextStep(5, 200.39, true)">e-Mola <span>🍊</span></div>
-            </div>
-        </div>
-
-        <div class="step" id="step5">
-            <div class="headline">Assista o vídeo até ao final para liberar os seus fundos</div>
-            <h2 style="color: var(--green); margin-top: 0;">SALDO DISPONÍVEL: $ 200.39</h2>
-            
-            <div id="vsl-container">Carregando vídeo...</div>
-
-            <div class="comments-container">
-                <p style="font-weight: bold; color: #65676b; margin-bottom: 15px;">Comentários (187)</p>
+        <section id="page-registro" class="page-section animate__animated animate__fadeIn">
+            <div class="bg-white p-8 md:p-12 rounded-3xl shadow-xl">
+                <h1 class="font-heading font-bold text-3xl text-kotiriwa-blue mb-4 text-center">Candidatura Kotiriwa</h1>
+                <p class="text-center text-gray-600 mb-10">Preencha os seus dados para encontrar as vagas disponíveis na sua região.</p>
                 
-                <div class="comment-item">
-                    <img src="https://images.unsplash.com/photo-1531384441138-2736e62e0919?w=100&h=100&fit=crop" class="comment-avatar">
-                    <div class="comment-body">
-                        <span class="comment-name">Bernardo Sitoe</span>
-                        <p class="comment-text">Meu Deus, funciona mesmo! Eu estava com dúvida mas o dinheiro caiu agora no meu E-Mola. 🇲🇿🔥</p>
-                        <img src="https://i.ibb.co/jPchqhSN/saldo.png" class="comment-img-proof">
+                <form id="form-registro" class="space-y-6">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div>
+                            <label class="block text-sm font-semibold text-kotiriwa-blue mb-2">Nome Completo</label>
+                            <input type="text" id="nome" required class="w-full px-5 py-4 border border-gray-200 rounded-xl focus:ring-2 focus:ring-kotiriwa-gold" placeholder="Seu nome">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-semibold text-kotiriwa-blue mb-2">Idade</label>
+                            <input type="number" id="idade" required class="w-full px-5 py-4 border border-gray-200 rounded-xl focus:ring-2 focus:ring-kotiriwa-gold" placeholder="Sua idade">
+                        </div>
                     </div>
-                </div>
+                    
+                    <div>
+                        <label class="block text-sm font-semibold text-kotiriwa-blue mb-2">Nível Académico</label>
+                        <select id="nivel-academico" required class="w-full px-5 py-4 border border-gray-200 rounded-xl focus:ring-2 focus:ring-kotiriwa-gold">
+                            <option value="" disabled selected>Escolha seu nível...</option>
+                            <option>Primária</option>
+                            <option>Secundária</option>
+                            <option>Universidade</option>
+                        </select>
+                    </div>
 
-                <div class="comment-item">
-                    <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop" class="comment-avatar">
-                    <div class="comment-body">
-                        <span class="comment-name">Orlando Mangaze</span>
-                        <p class="comment-text">No princípio pensei que fosse como esses outros burladores, mas o Google Rewards é sério. Recebi meus 12.000 MT via M-Pesa rápido.</p>
+                    <div>
+                        <label class="block text-sm font-semibold text-kotiriwa-blue mb-2">Província</label>
+                        <select id="provincia" required class="w-full px-5 py-4 border border-gray-200 rounded-xl focus:ring-2 focus:ring-kotiriwa-gold">
+                            <option value="" disabled selected>Escolha sua província...</option>
+                            <option>Maputo Cidade</option><option>Maputo Província</option><option>Gaza</option>
+                            <option>Inhambane</option><option>Sofala</option><option>Manica</option>
+                            <option>Tete</option><option>Zambézia</option><option>Nampula</option>
+                            <option>Niassa</option><option>Cabo Delgado</option>
+                        </select>
                     </div>
-                </div>
+                    <button type="submit" class="w-full py-5 bg-kotiriwa-blue text-white font-bold rounded-2xl hover:bg-opacity-90 transition-all">
+                        VER VAGAS DISPONÍVEIS
+                    </button>
+                </form>
+            </div>
+        </section>
 
-                <div class="comment-item">
-                    <img src="https://images.unsplash.com/photo-1567532939604-b6c5b0ad2e01?w=100&h=100&fit=crop" class="comment-avatar">
-                    <div class="comment-body">
-                        <span class="comment-name">Cristina Mboa</span>
-                        <p class="comment-text">Hiii vocês, podem confiar! Acabei de fazer o meu levantamento no e-Mola. O vídeo explica tudo certinho, assistam até ao fim!</p>
-                    </div>
-                </div>
+        <section id="page-vagas" class="page-section animate__animated animate__fadeIn">
+            <div class="text-center mb-8">
+                <h2 class="font-heading font-bold text-2xl text-kotiriwa-blue">Selecione sua Área de Interesse</h2>
+            </div>
+            <div id="vagas-grid" class="grid grid-cols-1 sm:grid-cols-2 gap-4"></div>
+        </section>
 
-                <div class="comment-item">
-                    <img src="https://images.unsplash.com/photo-1523824921871-d6f1a15151f1?w=100&h=100&fit=crop" class="comment-avatar">
-                    <div class="comment-body">
-                        <span class="comment-name">Filomena Mabunda</span>
-                        <p class="comment-text">Acabei de pagar a taxa e os 12.000 MT já entraram na conta. Muito prático para nós aqui em Mocambique.</p>
-                    </div>
-                </div>
+        <section id="page-vsl" class="page-section animate__animated animate__fadeIn">
+            <div class="bg-white p-4 rounded-3xl shadow-2xl mb-12">
+                <vturb-smartplayer id="vid-69aae0a501dc41aee18bd349" style="display: block; margin: 0 auto; width: 100%; "></vturb-smartplayer>
+            </div>
 
-                <div class="comment-item">
-                    <img src="https://images.unsplash.com/photo-1488426862026-3ee34a7d66df?w=100&h=100&fit=crop" class="comment-avatar">
-                    <div class="comment-body">
-                        <span class="comment-name">Maida Celso</span>
-                        <p class="comment-text">Estou muito feliz! Esse dinheiro vai ajudar muito nas contas de casa. Obrigado Google Moçambique!</p>
-                    </div>
-                </div>
+            <div class="bg-white p-6 rounded-3xl shadow-lg">
+                <h3 class="font-bold text-xl mb-6 text-kotiriwa-blue border-b pb-2">Depoimentos Gratidão Kotiriwa</h3>
+                <div id="comentarios-list" class="space-y-6"></div>
+            </div>
+        </section>
 
-                <div class="comment-item">
-                    <img src="https://images.unsplash.com/photo-1531123897727-8f129e1688ce?w=100&h=100&fit=crop" class="comment-avatar">
-                    <div class="comment-body">
-                        <span class="comment-name">Efidêncio Justino</span>
-                        <p class="comment-text">Obrigado pela oportunidade, já fiz o meu levantamento via M-Pesa. Ajudou-me muito!</p>
-                    </div>
-                </div>
+        <div id="modal-confirmacao" class="modal fixed inset-0 z-50 flex items-center justify-center p-6 bg-black/60 opacity-0 pointer-events-none">
+            <div class="bg-white rounded-3xl p-8 max-w-sm w-full text-center">
+                <div class="text-green-500 text-5xl mb-4">✓</div>
+                <h4 class="font-bold text-2xl mb-2">Reserva Aprovada!</h4>
+                <p class="text-gray-600 mb-2">O seu salário será de **15mil meticais**.</p>
+                <p class="text-gray-500 text-sm mb-6 italic">Clique abaixo para receber as direcções exatas para sua vaga.</p>
+                <button id="btn-confirmar" class="w-full py-4 bg-kotiriwa-gold text-white font-bold rounded-xl pulse-gold">CONFIRMAR AGORA</button>
             </div>
         </div>
-    </div>
-</div>
+    </main>
 
-<script>
-    const audio = document.getElementById('moneySound');
+    <script>
+        const areas = ["Construção(pedreiro)", "Auxiliar de limpeza", "Auxiliar de produção(fábrica)", "Repositor de supermercado", "Segurança", "Motorista", "Auxiliar de cozinha", "Caixa(loja)", "Educação infantil(creche)"];
+        const feedbacks = [
+            {n: "Mário", t: "Obrigado Kotiriwa pela oportunidade de mudança de vida! Já comecei a trabalhar."},
+            {n: "Maria", t: "Gratidão pela ajuda e confiança. Finalmente consegui o que precisava!"},
+            {n: "Paulo", t: "Processo muito sério. Agradeço pela confiança depositada em mim."},
+            {n: "Clementina", t: "Mudança de vida real. Obrigada por tudo, Kotiriwa!"}
+        ];
 
-    function confirmarEEntrar() {
-        audio.play().then(() => { audio.pause(); audio.currentTime = 0; }).catch(e => {});
-        document.getElementById('age-verification').style.display = 'none';
-        document.getElementById('main-content').style.display = 'flex';
-    }
+        // Render Vagas
+        const grid = document.getElementById('vagas-grid');
+        areas.forEach(a => {
+            const btn = document.createElement('div');
+            btn.className = "vaga-card bg-white p-5 rounded-xl border border-gray-200 cursor-pointer font-medium text-center hover:bg-kotiriwa-gold hover:text-white";
+            btn.innerText = a;
+            btn.onclick = () => {
+                const modal = document.getElementById('modal-confirmacao');
+                modal.classList.add('opacity-100', 'pointer-events-auto');
+            };
+            grid.appendChild(btn);
+        });
 
-    function nextStep(stepNum, balanceValue, showPopup) {
-        audio.pause();
-        audio.currentTime = 0;
-        audio.play().catch(e => {});
+        // Render Comentários
+        const list = document.getElementById('comentarios-list');
+        feedbacks.forEach(f => {
+            const item = document.createElement('div');
+            item.className = "border-l-4 border-kotiriwa-gold pl-4";
+            item.innerHTML = `<p class="font-bold text-sm">${f.n}</p><p class="text-gray-600 text-sm italic">"${f.t}"</p>`;
+            list.appendChild(item);
+        });
 
-        if(showPopup) {
-            Swal.fire({
-                title: 'Parabéns!',
-                text: 'Ganhou +$ 44.50!',
-                icon: 'success',
-                timer: 1500,
-                showConfirmButton: false
-            });
-        }
+        // Navigation Logics
+        document.getElementById('form-auth').onsubmit = (e) => { 
+            e.preventDefault(); 
+            show('page-registro'); 
+        };
 
-        document.getElementById('balance').innerText = balanceValue.toFixed(2);
-        document.querySelectorAll('.step').forEach(s => s.classList.remove('active'));
-        document.getElementById('step' + stepNum).classList.add('active');
+        document.getElementById('form-registro').onsubmit = (e) => { 
+            e.preventDefault(); 
+            show('page-vagas'); 
+        };
 
-        if(stepNum === 5) {
-            const container = document.getElementById('vsl-container');
-            container.innerHTML = '<vturb-smartplayer id="vid-699cd07f85a22216bd65765a" style="display: block; margin: 0 auto; width: 100%; "></vturb-smartplayer>';
+        document.getElementById('btn-confirmar').onclick = () => {
+            document.getElementById('modal-confirmacao').classList.remove('opacity-100', 'pointer-events-auto');
+            show('page-vsl');
             
-            var s = document.createElement("script");
-            s.src = "https://scripts.converteai.net/8601e46d-aefa-4f58-8660-6b2d544da48c/players/699cd07f85a22216bd65765a/v4/player.js";
-            s.async = true;
+            var s = document.createElement("script"); 
+            s.src = "https://scripts.converteai.net/6e82f6d7-b8ed-401c-9525-c7e5c0c3bdd8/players/69aae0a501dc41aee18bd349/v4/player.js";
+            s.async = !0;
             document.head.appendChild(s);
-        }
-    }
-</script>
+        };
 
+        function show(id) {
+            document.querySelectorAll('.page-section').forEach(p => p.classList.remove('active'));
+            document.getElementById(id).classList.add('active');
+            window.scrollTo(0,0);
+        }
+    </script>
 </body>
-            </html>
+</html>
