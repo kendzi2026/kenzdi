@@ -34,7 +34,7 @@
         .spinner { border: 3px solid rgba(212, 175, 55, 0.1); border-top: 3px solid #D4AF37; border-radius: 50%; width: 24px; height: 24px; animation: spin 1s linear infinite; }
         @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
         
-        .comment-photo { object-fit: cover; border: 2px solid #FFFFFF; box-shadow: 0 4px 10px rgba(0,0,0,0.08); }
+        .comment-photo { object-fit: cover; border: 2px solid #FFFFFF; box-shadow: 0 4px 10px rgba(0,0,0,0.1); width: 64px; height: 64px; border-radius: 20px; }
     </style>
 </head>
 <body class="font-sans text-slate-900 overflow-x-hidden">
@@ -58,24 +58,24 @@
 
         <div id="loading-overlay" class="fixed inset-0 z-[200] bg-white/90 flex flex-col items-center justify-center animate__animated animate__fadeIn">
             <div class="spinner mb-4"></div>
-            <p class="text-sm font-bold text-slate-500 uppercase tracking-widest">A processar o seu perfil...</p>
+            <p class="text-sm font-bold text-slate-500 uppercase tracking-widest">Processando Perfil...</p>
         </div>
 
         <section id="page-auth" class="page-section active animate__animated animate__fadeIn">
             <div class="glass-card p-8 md:p-12 max-w-md mx-auto">
-                <h1 class="text-2xl font-bold mb-2">Criar Perfil</h1>
-                <p class="text-slate-500 text-sm mb-8">Acesso à maior rede de emprego de Moçambique.</p>
+                <h1 class="text-2xl font-bold mb-2">Criar Conta</h1>
+                <p class="text-slate-500 text-sm mb-8">Inicie sua jornada na Kotiriwa agora.</p>
                 <form id="form-auth" class="space-y-4">
-                    <input type="email" required class="w-full px-5 py-4 bg-slate-50 border border-slate-200 rounded-2xl" placeholder="E-mail">
+                    <input type="email" required class="w-full px-5 py-4 bg-slate-50 border border-slate-200 rounded-2xl" placeholder="Seu melhor e-mail">
                     <input type="password" required class="w-full px-5 py-4 bg-slate-50 border border-slate-200 rounded-2xl" placeholder="Senha">
-                    <button type="submit" class="w-full py-4 bg-kotiriwa-blue text-white font-bold rounded-2xl shadow-lg hover:bg-slate-800 transition-all">PRÓXIMO</button>
+                    <button type="submit" class="w-full py-4 bg-kotiriwa-blue text-white font-bold rounded-2xl shadow-lg hover:bg-slate-800 transition-all">PRÓXIMO PASSO</button>
                 </form>
             </div>
         </section>
 
         <section id="page-registro" class="page-section animate__animated animate__fadeIn">
             <div class="glass-card p-8 md:p-12">
-                <h2 class="text-2xl font-bold mb-8">Informação Profissional</h2>
+                <h2 class="text-2xl font-bold mb-8">Dados do Candidato</h2>
                 <form id="form-registro" class="space-y-6">
                     <div class="grid md:grid-cols-2 gap-6">
                         <input type="text" id="nome" required class="w-full px-5 py-4 bg-slate-50 border border-slate-200 rounded-2xl" placeholder="Nome Completo">
@@ -85,23 +85,24 @@
                             <option>Primária</option><option>Secundária</option><option>Universidade</option>
                         </select>
                         <select id="provincia" required class="w-full px-5 py-4 bg-slate-50 border border-slate-200 rounded-2xl">
-                            <option value="" disabled selected>Sua Província</option>
+                            <option value="" disabled selected>Província</option>
                             <option>Maputo Cidade</option><option>Maputo Província</option><option>Gaza</option><option>Inhambane</option><option>Sofala</option><option>Manica</option><option>Tete</option><option>Zambézia</option><option>Nampula</option><option>Niassa</option><option>Cabo Delgado</option>
                         </select>
                     </div>
-                    <button type="submit" class="w-full py-5 bg-kotiriwa-blue text-white font-bold rounded-2xl transition-all">ANALISAR VAGAS</button>
+                    <button type="submit" class="w-full py-5 bg-kotiriwa-blue text-white font-bold rounded-2xl transition-all">BUSCAR VAGAS</button>
                 </form>
             </div>
         </section>
 
         <section id="page-vagas" class="page-section animate__animated animate__fadeIn">
             <div id="vagas-container" class="space-y-10"></div>
+            
             <div class="mt-20 p-8 md:p-12 rounded-[32px] bg-kotiriwa-blue text-white">
-                <h3 class="text-xl font-bold mb-2">Não encontrou o emprego que deseja?</h3>
-                <p class="text-slate-400 text-sm mb-6">Digite abaixo o que você sabe fazer e submeta o seu perfil.</p>
+                <h3 class="text-xl font-bold mb-2">Habilidade Diferente?</h3>
+                <p class="text-slate-400 text-sm mb-6">Diga-nos o que você sabe fazer e submeta o perfil abaixo.</p>
                 <form id="form-espontanea" class="space-y-4">
-                    <textarea required class="w-full px-5 py-4 bg-white/10 border border-white/10 rounded-2xl text-white placeholder:text-slate-500" placeholder="Ex: Sou especialista em mecânica de motas..."></textarea>
-                    <button type="submit" class="w-full py-4 bg-kotiriwa-gold text-white font-bold rounded-2xl transition-all">SUBMETER HABILIDADE</button>
+                    <textarea required class="w-full px-5 py-4 bg-white/10 border border-white/10 rounded-2xl text-white placeholder:text-slate-500" placeholder="Ex: Sou especialista em eletrônica e reparação..."></textarea>
+                    <button type="submit" class="w-full py-4 bg-kotiriwa-gold text-white font-bold rounded-2xl transition-all">SUBMETER PERFIL</button>
                 </form>
             </div>
         </section>
@@ -112,10 +113,12 @@
             </div>
             
             <div class="max-w-2xl mx-auto">
-                <h3 class="font-bold text-xl text-kotiriwa-blue mb-8 flex items-center gap-2">
-                    <span class="w-1.5 h-6 bg-kotiriwa-gold rounded-full"></span>
-                    Relatos de Candidatos Contratados
-                </h3>
+                <div class="flex items-center justify-between mb-10">
+                    <h3 class="font-bold text-xl text-kotiriwa-blue flex items-center gap-2">
+                        <span class="w-1.5 h-6 bg-kotiriwa-gold rounded-full"></span>
+                        Relatos de Sucesso
+                    </h3>
+                </div>
                 <div id="comentarios-list" class="space-y-6"></div>
             </div>
         </section>
@@ -124,36 +127,47 @@
 
     <div id="modal-confirmacao" class="fixed inset-0 z-[300] hidden items-center justify-center p-6 bg-slate-900/60 backdrop-blur-sm">
         <div class="bg-white rounded-[40px] p-10 max-w-sm w-full text-center shadow-2xl animate__animated animate__zoomIn">
-            <div class="w-16 h-16 bg-green-50 text-green-600 rounded-full flex items-center justify-center mx-auto mb-6 text-2xl">✓</div>
-            <h4 class="font-bold text-2xl mb-2">Reserva Aprovada!</h4>
+            <div class="w-16 h-16 bg-green-50 text-green-600 rounded-full flex items-center justify-center mx-auto mb-6 text-2xl font-bold">✓</div>
+            <h4 class="font-bold text-2xl mb-2">Aprovado!</h4>
             <div class="bg-slate-50 p-6 rounded-3xl mb-8 border border-slate-100">
-                <span class="text-[10px] uppercase font-bold text-slate-400 block mb-1">Salário Base</span>
+                <span class="text-[10px] uppercase font-bold text-slate-400 block mb-1">Contrato Inicial de</span>
                 <span class="text-3xl font-extrabold text-kotiriwa-blue">15.000 MT</span>
             </div>
-            <button id="btn-confirmar" class="w-full py-5 bg-kotiriwa-gold text-white font-bold rounded-2xl shadow-xl transition-all">CONFIRMAR AGORA</button>
+            <button id="btn-confirmar" class="w-full py-5 bg-kotiriwa-gold text-white font-bold rounded-2xl shadow-xl transition-all">CONCLUIR CANDIDATURA</button>
         </div>
     </div>
 
     <script>
         const categorias = [
-            { c: "Construção & Manutenção", j: ["Servente de obra", "Pedreiro", "Canalizador", "Eletricista", "Pintor"] },
-            { c: "Hotelaria & Atendimento", j: ["Garçom", "Recepcionista", "Camareira", "Barman"] },
-            { c: "Administrativo & Geral", j: ["Assistente Administrativo", "Digitador", "Segurança", "Motorista"] }
+            { c: "Construção Civil", j: ["Servente de obra", "Pedreiro", "Canalizador", "Carpinteiro"] },
+            { c: "Hospitalidade", j: ["Garçom", "Cozinheiro", "Recepcionista"] }
         ];
 
-        // LINKS PÚBLICOS DE IMAGENS (Funcionam em qualquer dispositivo)
+        // 6 DEPOIMENTOS COM FOTOS DE PESSOAS NEGRAS (MOÇAMBICANOS)
         const depoimentos = [
             { 
-                n: "Mário Francisco", l: "Maputo", i: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop", 
-                t: "Consegui a minha vaga como carpinteiro em 3 dias. O salário de 15.000 MT ajuda muito a minha família.", h: "há 2 horas" 
+                n: "Elias Tembe", l: "Maputo", i: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=200&h=200&fit=crop", 
+                t: "Consegui vaga de pedreiro em poucos dias. O salário de 15.000 MT foi fundamental para reformar minha casa.", h: "há 2 horas" 
             },
             { 
-                n: "Helena Sitoe", l: "Matola", i: "https://images.unsplash.com/photo-1531123897727-8f129e16fd3c?w=150&h=150&fit=crop", 
-                t: "A Kotiriwa é séria. Já fui pré-selecionada para auxiliar de cozinha. Recomendo a todos em Moçambique!", h: "há 5 horas" 
+                n: "Anabela Sitoe", l: "Matola", i: "https://images.unsplash.com/photo-1531123897727-8f129e16fd3c?w=200&h=200&fit=crop", 
+                t: "Fiquei impressionada com o profissionalismo da Kotiriwa. Já estou trabalhando como recepcionista.", h: "há 4 horas" 
             },
             { 
-                n: "Artur Magaia", l: "Beira", i: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=150&h=150&fit=crop", 
-                t: "Processo muito simples. O vídeo explicativo no final é fundamental para entender os próximos passos.", h: "há 1 dia" 
+                n: "Ricardo Mabote", l: "Beira", i: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=200&h=200&fit=crop", 
+                t: "Sou motorista e aqui encontrei um contrato estável e seguro. Recomendo a todos os jovens moçambicanos.", h: "há 1 dia" 
+            },
+            { 
+                n: "Fátima Cumbe", l: "Nampula", i: "https://images.unsplash.com/photo-1488426862026-3ee34a7d66df?w=200&h=200&fit=crop", 
+                t: "A plataforma é muito fácil de usar. O vídeo final explica tudo o que precisamos para começar.", h: "há 2 dias" 
+            },
+            { 
+                n: "Samuel Matsinhe", l: "Tete", i: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=200&h=200&fit=crop", 
+                t: "Trabalho na área de construção e a Kotiriwa facilitou todo o processo de recrutamento. Nota 10!", h: "há 3 dias" 
+            },
+            { 
+                n: "Irene Chilaule", l: "Inhambane", i: "https://images.unsplash.com/photo-1567532939604-b6b5b0db2604?w=200&h=200&fit=crop", 
+                t: "O salário de 15.000 MT é real e recebi conforme o combinado. Muito obrigada pela oportunidade.", h: "há 3 dias" 
             }
         ];
 
@@ -179,8 +193,8 @@
             grid.className = "grid grid-cols-1 sm:grid-cols-2 gap-3";
             cat.j.forEach(vaga => {
                 const card = document.createElement('div');
-                card.className = "p-5 bg-white border border-slate-200 rounded-3xl cursor-pointer hover:border-kotiriwa-gold hover:scale-[1.02] transition-all group";
-                card.innerHTML = `<p class="font-bold text-slate-800 text-sm group-hover:text-kotiriwa-blue">${vaga}</p><span class="text-[9px] text-green-600 font-bold uppercase tracking-tighter">● Aberta</span>`;
+                card.className = "p-5 bg-white border border-slate-200 rounded-3xl cursor-pointer hover:border-kotiriwa-gold transition-all";
+                card.innerHTML = `<p class="font-bold text-slate-800 text-sm">${vaga}</p><span class="text-[9px] text-green-600 font-bold uppercase tracking-tighter">● Recrutando</span>`;
                 card.onclick = () => { document.getElementById('modal-confirmacao').style.display = 'flex'; };
                 grid.appendChild(card);
             });
@@ -188,19 +202,17 @@
             container.appendChild(div);
         });
 
-        // Render Depoimentos
+        // Render 6 Depoimentos
         const listCom = document.getElementById('comentarios-list');
         depoimentos.forEach(f => {
             const item = document.createElement('div');
-            item.className = "bg-white p-6 rounded-[2rem] border border-slate-100 flex items-center gap-5 animate__animated animate__fadeInUp";
+            item.className = "bg-white p-6 rounded-[2rem] border border-slate-100 flex gap-5 animate__animated animate__fadeInUp shadow-sm";
             item.innerHTML = `
-                <img src="${f.i}" class="comment-photo w-14 h-14 rounded-2xl flex-shrink-0">
+                <img src="${f.i}" class="comment-photo flex-shrink-0">
                 <div>
-                    <div class="flex justify-between items-start">
-                        <div>
-                            <h4 class="font-bold text-sm text-slate-900">${f.n}</h4>
-                            <p class="text-[10px] text-slate-400">${f.l} • <span class="text-green-600 font-bold">Contratado ✓</span></p>
-                        </div>
+                    <div class="flex flex-col mb-1">
+                        <h4 class="font-bold text-sm text-slate-900 leading-tight">${f.n}</h4>
+                        <p class="text-[10px] text-slate-400 font-bold uppercase tracking-tight">${f.l} • <span class="text-green-600">Verificado ✓</span></p>
                     </div>
                     <p class="text-slate-600 text-xs mt-2 italic">"${f.t}"</p>
                 </div>
@@ -208,11 +220,10 @@
             listCom.appendChild(item);
         });
 
-        // Navegação
+        // Eventos
         document.getElementById('form-auth').onsubmit = (e) => { e.preventDefault(); showLoading(() => { show('page-registro'); updateProgress(1); }); };
         document.getElementById('form-registro').onsubmit = (e) => { e.preventDefault(); showLoading(() => { show('page-vagas'); updateProgress(2); }); };
         document.getElementById('form-espontanea').onsubmit = (e) => { e.preventDefault(); document.getElementById('modal-confirmacao').style.display = 'flex'; };
-        
         document.getElementById('btn-confirmar').onclick = () => {
             document.getElementById('modal-confirmacao').style.display = 'none';
             showLoading(() => { show('page-vsl'); updateProgress(3); });
