@@ -1,235 +1,162 @@
 <!DOCTYPE html>
-<html lang="pt-MZ">
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kotiriwa | Plataforma Nacional de Emprego</title>
-    
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
-
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        kotiriwa: { blue: '#0F172A', gold: '#D4AF37', border: '#E2E8F0', bg: '#F8FAFC' },
-                    },
-                    fontFamily: { sans: ['Plus Jakarta Sans', 'sans-serif'] },
-                },
-            },
-        }
-    </script>
-    
+    <title>Exclusive | @leiaitslove</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
-        body { background-color: #F8FAFC; -webkit-font-smoothing: antialiased; }
-        .glass-card { background: #FFFFFF; border: 1px solid #E2E8F0; border-radius: 24px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.02); }
-        .page-section { display: none; }
-        .page-section.active { display: block; }
-        .step-dot { transition: all 0.4s ease; background-color: #E2E8F0; }
-        .step-dot.active { background-color: #D4AF37; width: 24px; }
+        :root {
+            --primary: #00aff0;
+            --dark-bg: #000000;
+            --card-bg: #1a1a1a;
+            --text-main: #ffffff;
+            --text-secondary: #8a96a3;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+
+        body { background-color: var(--dark-bg); color: var(--text-main); overflow-x: hidden; }
+
+        /* Modal de Idade */
+        #age-verification {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.95); z-index: 9999;
+            display: flex; align-items: center; justify-content: center; text-align: center; padding: 20px;
+        }
+        .modal-content { max-width: 400px; background: #111; padding: 30px; border-radius: 15px; border: 1px solid #333; }
+        .btn-enter { background: var(--primary); color: white; padding: 12px 25px; border: none; border-radius: 25px; cursor: pointer; font-weight: bold; margin-top: 20px; width: 100%; text-decoration: none; display: block; }
+        .btn-exit { color: #ff4444; background: transparent; border: none; margin-top: 15px; cursor: pointer; }
+
+        /* Header e Perfil */
+        .cover-photo { width: 100%; height: 250px; background: url('capa.jpg') center/cover; position: relative; }
+        .profile-container { max-width: 600px; margin: -60px auto 0; padding: 0 20px; position: relative; }
+        .profile-pic { width: 120px; height: 120px; border-radius: 50%; border: 4px solid var(--dark-bg); background: url('perfil.jpg') center/cover; }
         
-        #loading-overlay { display: none; }
-        .spinner { border: 3px solid rgba(212, 175, 55, 0.1); border-top: 3px solid #D4AF37; border-radius: 50%; width: 24px; height: 24px; animation: spin 1s linear infinite; }
-        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+        .user-info { margin-top: 15px; }
+        .status-online { color: #44b700; font-size: 14px; margin-bottom: 5px; }
+        .username { font-size: 20px; font-weight: bold; }
+        .handle { color: var(--text-secondary); font-size: 14px; }
+
+        /* Stats */
+        .stats { display: flex; gap: 20px; margin: 20px 0; color: var(--text-secondary); font-size: 14px; border-bottom: 1px solid #333; padding-bottom: 15px; }
+        .stats b { color: white; }
+
+        .bio { font-size: 15px; line-height: 1.5; margin-bottom: 20px; }
+
+        /* Feed Simulado */
+        .post-card { background: var(--card-bg); border-radius: 10px; padding: 15px; margin-bottom: 15px; border: 1px solid #333; }
+        .post-header { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; }
+        .post-blur { height: 200px; background: #252525; border-radius: 8px; display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden; }
+        .post-blur::after { content: "🔒 Content VIP"; color: var(--text-secondary); font-weight: bold; }
+
+        /* Seção de Planos */
+        .subscription-box { background: #111; border: 1px solid var(--primary); border-radius: 15px; padding: 25px; margin: 30px 0; }
+        .plan-option { background: #222; border: 1px solid #444; padding: 15px; border-radius: 10px; margin-bottom: 15px; display: flex; justify-content: space-between; align-items: center; text-decoration: none; color: white; transition: 0.3s; }
+        .plan-option:hover { border-color: var(--primary); transform: scale(1.02); }
+        .popular-badge { background: var(--primary); font-size: 10px; padding: 3px 8px; border-radius: 10px; position: absolute; margin-top: -25px; }
+
+        footer { text-align: center; padding: 40px 0; color: var(--text-secondary); font-size: 12px; }
     </style>
 </head>
-<body class="font-sans text-slate-900 overflow-x-hidden">
+<body>
 
-    <header class="sticky top-0 z-50 bg-white/80 backdrop-blur-md border-b border-slate-200">
-        <div class="max-w-5xl mx-auto px-6 py-4 flex items-center justify-between">
-            <div class="flex items-center gap-3">
-                <img src="https://i.ibb.co/spfGSrzK/Gemini-Generated-Image-3y6a2j3y6a2j3y6a.png" class="h-10 w-10 rounded-xl shadow-sm object-cover">
-                <span class="font-bold text-xl text-kotiriwa-blue">Kotiriwa</span>
-            </div>
-            <div class="flex gap-2" id="progress-dots">
-                <div class="step-dot h-2 w-2 rounded-full active"></div>
-                <div class="step-dot h-2 w-2 rounded-full"></div>
-                <div class="step-dot h-2 w-2 rounded-full"></div>
-                <div class="step-dot h-2 w-2 rounded-full"></div>
-            </div>
-        </div>
-    </header>
-
-    <main class="max-w-4xl mx-auto px-6 py-12">
-
-        <div id="loading-overlay" class="fixed inset-0 z-[200] bg-white/90 flex flex-col items-center justify-center animate__animated animate__fadeIn">
-            <div class="spinner mb-4"></div>
-            <p class="text-sm font-bold text-slate-500 uppercase tracking-widest">Processando Perfil...</p>
-        </div>
-
-        <section id="page-auth" class="page-section active animate__animated animate__fadeIn">
-            <div class="glass-card p-8 md:p-12 max-w-md mx-auto">
-                <h1 class="text-2xl font-bold mb-2">Criar Conta</h1>
-                <p class="text-slate-500 text-sm mb-8">Inicie sua jornada na Kotiriwa agora.</p>
-                <form id="form-auth" class="space-y-4">
-                    <input type="email" required class="w-full px-5 py-4 bg-slate-50 border border-slate-200 rounded-2xl" placeholder="Seu melhor e-mail">
-                    <input type="password" required class="w-full px-5 py-4 bg-slate-50 border border-slate-200 rounded-2xl" placeholder="Senha">
-                    <button type="submit" class="w-full py-4 bg-kotiriwa-blue text-white font-bold rounded-2xl shadow-lg hover:bg-slate-800 transition-all">PRÓXIMO PASSO</button>
-                </form>
-            </div>
-        </section>
-
-        <section id="page-registro" class="page-section animate__animated animate__fadeIn">
-            <div class="glass-card p-8 md:p-12">
-                <h2 class="text-2xl font-bold mb-8">Dados do Candidato</h2>
-                <form id="form-registro" class="space-y-6">
-                    <div class="grid md:grid-cols-2 gap-6">
-                        <input type="text" id="nome" required class="w-full px-5 py-4 bg-slate-50 border border-slate-200 rounded-2xl" placeholder="Nome Completo">
-                        <input type="number" id="idade" required class="w-full px-5 py-4 bg-slate-50 border border-slate-200 rounded-2xl" placeholder="Idade">
-                        <select id="nivel-academico" required class="w-full px-5 py-4 bg-slate-50 border border-slate-200 rounded-2xl">
-                            <option value="" disabled selected>Nível Académico</option>
-                            <option>Primária</option><option>Secundária</option><option>Universidade</option>
-                        </select>
-                        <select id="provincia" required class="w-full px-5 py-4 bg-slate-50 border border-slate-200 rounded-2xl">
-                            <option value="" disabled selected>Província</option>
-                            <option>Maputo Cidade</option><option>Maputo Província</option><option>Gaza</option><option>Inhambane</option><option>Sofala</option><option>Manica</option><option>Tete</option><option>Zambézia</option><option>Nampula</option><option>Niassa</option><option>Cabo Delgado</option>
-                        </select>
-                    </div>
-                    <button type="submit" class="w-full py-5 bg-kotiriwa-blue text-white font-bold rounded-2xl transition-all">BUSCAR VAGAS</button>
-                </form>
-            </div>
-        </section>
-
-        <section id="page-vagas" class="page-section animate__animated animate__fadeIn">
-            <div id="vagas-container" class="space-y-10"></div>
-            
-            <div class="mt-20 p-8 md:p-12 rounded-[32px] bg-kotiriwa-blue text-white">
-                <h3 class="text-xl font-bold mb-2">Habilidade Diferente?</h3>
-                <p class="text-slate-400 text-sm mb-6">Diga-nos o que você sabe fazer e submeta o perfil abaixo.</p>
-                <form id="form-espontanea" class="space-y-4">
-                    <textarea required class="w-full px-5 py-4 bg-white/10 border border-white/10 rounded-2xl text-white placeholder:text-slate-500" placeholder="Ex: Sou especialista em eletrônica e reparação..."></textarea>
-                    <button type="submit" class="w-full py-4 bg-kotiriwa-gold text-white font-bold rounded-2xl transition-all">SUBMETER PERFIL</button>
-                </form>
-            </div>
-        </section>
-
-        <section id="page-vsl" class="page-section animate__animated animate__fadeIn">
-            <div class="glass-card p-2 overflow-hidden mb-16 shadow-2xl">
-                <vturb-smartplayer id="vid-69aae0a501dc41aee18bd349" style="display: block; width: 100%; border-radius: 20px;"></vturb-smartplayer>
-            </div>
-            
-            <div class="max-w-2xl mx-auto">
-                <div class="flex items-center justify-between mb-10">
-                    <h3 class="font-bold text-xl text-kotiriwa-blue flex items-center gap-2">
-                        <span class="w-1.5 h-6 bg-kotiriwa-gold rounded-full"></span>
-                        Relatos de Sucesso
-                    </h3>
-                </div>
-                <div id="comentarios-list" class="space-y-6"></div>
-            </div>
-        </section>
-
-    </main>
-
-    <div id="modal-confirmacao" class="fixed inset-0 z-[300] hidden items-center justify-center p-6 bg-slate-900/60 backdrop-blur-sm">
-        <div class="bg-white rounded-[40px] p-10 max-w-sm w-full text-center shadow-2xl animate__animated animate__zoomIn">
-            <div class="w-16 h-16 bg-green-50 text-green-600 rounded-full flex items-center justify-center mx-auto mb-6 text-2xl font-bold">✓</div>
-            <h4 class="font-bold text-2xl mb-2">Aprovado!</h4>
-            <div class="bg-slate-50 p-6 rounded-3xl mb-8 border border-slate-100">
-                <span class="text-[10px] uppercase font-bold text-slate-400 block mb-1">Contrato Inicial de</span>
-                <span class="text-3xl font-extrabold text-kotiriwa-blue">15.000 MT</span>
-            </div>
-            <button id="btn-confirmar" class="w-full py-5 bg-kotiriwa-gold text-white font-bold rounded-2xl shadow-xl transition-all">CONCLUIR CANDIDATURA</button>
+    <div id="age-verification">
+        <div class="modal-content">
+            <h1 style="font-size: 40px;">🔞</h1>
+            <h2>Verificação de Idade</h2>
+            <p style="margin-top: 10px; color: #888;">Este site contém conteúdo exclusivo para maiores de 18 anos. Ao continuar, confirma que tem pelo menos 18 anos.</p>
+            <button class="btn-enter" onclick="verifyAge()">Tenho 18+ anos — Entrar</button>
+            <button class="btn-exit" onclick="window.location.href='https://google.com'">Não tenho 18 anos — Sair</button>
         </div>
     </div>
 
-    <script>
-        const categorias = [
-            { c: "Construção Civil", j: ["Servente de obra", "Pedreiro", "Canalizador", "Carpinteiro"] },
-            { c: "Hospitalidade", j: ["Garçom", "Cozinheiro", "Recepcionista"] }
-        ];
+    <div class="cover-photo"></div>
 
-        const depoimentos = [
-            { 
-                n: "Elias Tembe", l: "Maputo", 
-                t: "Consegui vaga de pedreiro em poucos dias. O salário de 15.000 MT foi fundamental para reformar minha casa.", h: "há 2 horas" 
-            },
-            { 
-                n: "Anabela Sitoe", l: "Matola", 
-                t: "Fiquei impressionada com o profissionalismo da Kotiriwa. Já estou trabalhando como recepcionista.", h: "há 4 horas" 
-            },
-            { 
-                n: "Ricardo Mabote", l: "Beira", 
-                t: "Sou motorista e aqui encontrei um contrato estável e seguro. Recomendo a todos os jovens moçambicanos.", h: "há 1 dia" 
-            },
-            { 
-                n: "Fátima Cumbe", l: "Nampula", 
-                t: "A plataforma é muito fácil de usar. O vídeo final explica tudo o que precisamos para começar.", h: "há 2 dias" 
-            },
-            { 
-                n: "Samuel Matsinhe", l: "Tete", 
-                t: "Trabalho na área de construção e a Kotiriwa facilitou todo o processo de recrutamento. Nota 10!", h: "há 3 dias" 
-            },
-            { 
-                n: "Irene Chilaule", l: "Inhambane", 
-                t: "O salário de 15.000 MT é real e recebi conforme o combinado. Muito obrigada pela oportunidade.", h: "há 3 dias" 
-            }
-        ];
+    <div class="profile-container">
+        <div class="profile-pic"></div>
+        
+        <div class="user-info">
+            <p class="status-online">🟢 Disponível agora</p>
+            <p class="username">leiaitslove <i class="fas fa-check-circle" style="color: var(--primary);"></i></p>
+            <p class="handle">@leiaitslove • Maputo 🇲🇿</p>
+        </div>
 
-        function showLoading(callback) {
-            document.getElementById('loading-overlay').style.display = 'flex';
-            setTimeout(() => { document.getElementById('loading-overlay').style.display = 'none'; callback(); }, 1200);
-        }
+        <div class="stats">
+            <span><b>354</b> 📷 Fotos</span>
+            <span><b>148</b> 📸 Vídeos</span>
+            <span><b>20.2K</b> ❤️ Likes</span>
+        </div>
 
-        function updateProgress(step) {
-            const dots = document.querySelectorAll('.step-dot');
-            dots.forEach((dot, idx) => {
-                dot.classList.toggle('active', idx === step);
-                dot.style.backgroundColor = idx <= step ? '#D4AF37' : '#E2E8F0';
-            });
-        }
+        <div class="bio">
+            Conteúdo exclusivo 🔒 +18<br>
+            Acesso privado que não vai para redes sociais 🔥<br>
+            Atualizações diárias + área VIP 👑
+        </div>
 
-        const container = document.getElementById('vagas-container');
-        categorias.forEach(cat => {
-            const div = document.createElement('div');
-            div.innerHTML = `<h3 class="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-4">${cat.c}</h3>`;
-            const grid = document.createElement('div');
-            grid.className = "grid grid-cols-1 sm:grid-cols-2 gap-3";
-            cat.j.forEach(vaga => {
-                const card = document.createElement('div');
-                card.className = "p-5 bg-white border border-slate-200 rounded-3xl cursor-pointer hover:border-kotiriwa-gold transition-all";
-                card.innerHTML = `<p class="font-bold text-slate-800 text-sm">${vaga}</p><span class="text-[9px] text-green-600 font-bold uppercase tracking-tighter">● Recrutando</span>`;
-                card.onclick = () => { document.getElementById('modal-confirmacao').style.display = 'flex'; };
-                grid.appendChild(card);
-            });
-            div.appendChild(grid);
-            container.appendChild(div);
-        });
-
-        const listCom = document.getElementById('comentarios-list');
-        depoimentos.forEach(f => {
-            const item = document.createElement('div');
-            item.className = "bg-white p-6 rounded-[2rem] border border-slate-100 animate__animated animate__fadeInUp shadow-sm";
-            item.innerHTML = `
-                <div class="w-full">
-                    <div class="flex flex-col mb-1">
-                        <h4 class="font-bold text-sm text-slate-900 leading-tight">${f.n}</h4>
-                        <p class="text-[10px] text-slate-400 font-bold uppercase tracking-tight">${f.l} • <span class="text-green-600">Verificado ✓</span></p>
-                    </div>
-                    <p class="text-slate-600 text-xs mt-2 italic">"${f.t}"</p>
+        <div class="subscription-box">
+            <h3 style="margin-bottom: 20px; text-align: center;">Desbloqueie todo o conteúdo VIP 👑</h3>
+            
+            <a href="https://kendzi.shop/checkouts/checkout-page-12/" class="plan-option">
+                <div>
+                    <b>🔥 30 Dias</b><br>
+                    <small style="color: #888;">Acesso Completo</small>
                 </div>
-            `;
-            listCom.appendChild(item);
-        });
+                <b>199 MT</b>
+            </a>
 
-        document.getElementById('form-auth').onsubmit = (e) => { e.preventDefault(); showLoading(() => { show('page-registro'); updateProgress(1); }); };
-        document.getElementById('form-registro').onsubmit = (e) => { e.preventDefault(); showLoading(() => { show('page-vagas'); updateProgress(2); }); };
-        document.getElementById('form-espontanea').onsubmit = (e) => { e.preventDefault(); document.getElementById('modal-confirmacao').style.display = 'flex'; };
-        document.getElementById('btn-confirmar').onclick = () => {
-            document.getElementById('modal-confirmacao').style.display = 'none';
-            showLoading(() => { show('page-vsl'); updateProgress(3); });
-            var s = document.createElement("script"); 
-            s.src = "https://scripts.converteai.net/6e82f6d7-b8ed-401c-9525-c7e5c0c3bdd8/players/69aae0a501dc41aee18bd349/v4/player.js";
-            s.async = !0; document.head.appendChild(s);
-        };
+            <div style="position: relative;">
+                <span class="popular-badge">⭐ Mais popular</span>
+                <a href="https://kendzi.shop/checkouts/checkout-page-12/" class="plan-option" style="border-color: var(--primary);">
+                    <div>
+                        <b>👑 3 Meses</b><br>
+                        <small style="color: #888;">Acesso VIP</small>
+                    </div>
+                    <b>297 MT</b>
+                </a>
+            </div>
+            
+            <p style="font-size: 11px; color: #666; text-align: center; margin-top: 10px;">
+                Pagamento seguro • Acesso imediato • Cancele quando quiser
+            </p>
+        </div>
 
-        function show(id) {
-            document.querySelectorAll('.page-section').forEach(p => p.classList.remove('active'));
-            document.getElementById(id).classList.add('active');
-            window.scrollTo({ top: 0, behavior: 'smooth' });
+        <div class="post-card">
+            <div class="post-header">
+                <div class="profile-pic" style="width: 40px; height: 40px; border: none;"></div>
+                <div>
+                    <b>leiaitslove</b> <br>
+                    <small style="color: #666;">Conteúdo VIP 🔒 • 2h</small>
+                </div>
+            </div>
+            <div class="post-blur"></div>
+            <p style="margin-top: 10px; text-align: center; color: var(--primary); font-weight: bold;">Desbloqueie abaixo</p>
+        </div>
+
+        <div class="post-card">
+            <div class="post-header">
+                <div class="profile-pic" style="width: 40px; height: 40px; border: none;"></div>
+                <div>
+                    <b>leiaitslove</b> <br>
+                    <small style="color: #666;">Conteúdo VIP 🔒 • 5h</small>
+                </div>
+            </div>
+            <div class="post-blur"></div>
+            <p style="margin-top: 10px; text-align: center; color: var(--primary); font-weight: bold;">Desbloqueie abaixo</p>
+        </div>
+
+        <footer>
+            © 2026 Exclusive Content. Todos os direitos reservados.
+        </footer>
+    </div>
+
+    <script>
+        function verifyAge() {
+            document.getElementById('age-verification').style.display = 'none';
+            document.body.style.overflow = 'auto';
         }
+        // Bloquear scroll inicial
+        document.body.style.overflow = 'hidden';
     </script>
 </body>
 </html>
