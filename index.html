@@ -1,169 +1,214 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Exclusive | @leiaitslove</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <title>WhatSpy - Relatório Concluído</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
     <style>
-        :root {
-            --primary: #00aff0;
-            --dark-bg: #000000;
-            --card-bg: #1a1a1a;
-            --text-main: #ffffff;
-            --text-secondary: #8a96a3;
-        }
-
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Helvetica, Arial, sans-serif; }
-
-        body { background-color: var(--dark-bg); color: var(--text-main); overflow-x: hidden; }
-
-        /* Modal de Idade */
-        #age-verification {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0,0,0,0.98); z-index: 9999;
-            display: flex; align-items: center; justify-content: center; text-align: center; padding: 20px;
-        }
-        .modal-content { max-width: 400px; background: #111; padding: 40px 30px; border-radius: 20px; border: 1px solid #333; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
-        .btn-enter { background: var(--primary); color: white; padding: 15px 25px; border: none; border-radius: 30px; cursor: pointer; font-weight: bold; margin-top: 25px; width: 100%; text-decoration: none; display: block; font-size: 16px; }
-        .btn-exit { color: #888; background: transparent; border: none; margin-top: 20px; cursor: pointer; font-size: 14px; text-decoration: underline; }
-
-        /* Header e Perfil */
-        .cover-photo { 
-            width: 100%; height: 280px; 
-            background: url('https://i.postimg.cc/qM1LzNn7/capa.jpg') center/cover; 
-            position: relative; 
-            border-bottom: 1px solid #333;
-        }
-        .profile-container { max-width: 600px; margin: -60px auto 0; padding: 0 15px; position: relative; }
-        .profile-pic { 
-            width: 120px; height: 120px; border-radius: 50%; 
-            border: 4px solid var(--dark-bg); 
-            background: url('https://i.postimg.cc/mD8P8pTr/perfil.jpg') center/cover; 
-            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
-        }
-        
-        .user-info { margin-top: 15px; }
-        .status-online { color: #44b700; font-size: 13px; font-weight: bold; margin-bottom: 5px; }
-        .username { font-size: 22px; font-weight: bold; display: flex; align-items: center; gap: 5px; }
-        .handle { color: var(--text-secondary); font-size: 14px; margin-bottom: 15px; }
-
-        /* Stats */
-        .stats { display: flex; gap: 25px; margin: 20px 0; color: var(--text-secondary); font-size: 14px; border-bottom: 1px solid #222; padding-bottom: 20px; }
-        .stats b { color: white; margin-right: 3px; }
-
-        .bio { font-size: 15px; line-height: 1.6; color: #e1e1e1; margin-bottom: 25px; }
-
-        /* Posts */
-        .post-card { background: var(--card-bg); border-radius: 12px; padding: 15px; margin-bottom: 20px; border: 1px solid #262626; }
-        .post-header { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; }
-        .post-blur { 
-            height: 300px; background: #252525; border-radius: 10px; 
-            display: flex; flex-direction: column; align-items: center; justify-content: center; 
-            position: relative; overflow: hidden; border: 1px dashed #444;
-        }
-        .post-blur i { font-size: 40px; color: #444; margin-bottom: 10px; }
-
-        /* Planos */
-        .subscription-box { background: #0a0a0a; border: 1px solid var(--primary); border-radius: 15px; padding: 25px; margin: 30px 0; }
-        .plan-option { background: #1a1a1a; border: 1px solid #333; padding: 18px; border-radius: 12px; margin-bottom: 15px; display: flex; justify-content: space-between; align-items: center; text-decoration: none; color: white; transition: 0.2s; }
-        .plan-option:hover { border-color: var(--primary); background: #222; }
-        .popular-badge { background: var(--primary); font-size: 10px; padding: 4px 10px; border-radius: 20px; position: absolute; top: -12px; left: 15px; font-weight: bold; text-transform: uppercase; }
-
-        footer { text-align: center; padding: 50px 0; color: var(--text-secondary); font-size: 12px; letter-spacing: 0.5px; }
+        .blink { animation: blinker 1.5s linear infinite; }
+        @keyframes blinker { 50% { opacity: 0; } }
     </style>
 </head>
-<body>
+<body class="bg-gray-950 text-gray-100 font-sans antialiased">
 
-    <div id="age-verification">
-        <div class="modal-content">
-            <span style="font-size: 50px;">🔞</span>
-            <h2 style="margin-top: 15px;">Verificação de Idade</h2>
-            <p style="margin-top: 15px; color: #aaa; font-size: 14px;">Este site contém conteúdo exclusivo para maiores de 18 anos. Ao continuar, você confirma que possui a idade legal.</p>
-            <button class="btn-enter" onclick="verifyAge()">Tenho 18+ anos — Entrar</button>
-            <button class="btn-exit" onclick="window.location.href='https://google.com'">Não tenho 18 anos — Sair</button>
-        </div>
+    <div class="bg-red-600 text-white text-center py-2 px-4 text-sm font-bold blink">
+        ⚠️ VOCÊ USOU SUA ÚLTIMA TENTATIVA GRATUITA. PERMANEÇA NESTA PÁGINA.
     </div>
 
-    <div class="cover-photo"></div>
+    <header class="border-b border-gray-800 bg-gray-900/50 backdrop-blur py-4 text-center">
+        <h1 class="text-xl md:text-2xl font-black text-green-500 tracking-wider">🟢 WHATSPY DIGITALIZADOR</h1>
+        <p class="text-xs text-gray-400 mt-1">Satelite Orion-X — Rastreamento Ativo</p>
+    </header>
 
-    <div class="profile-container">
-        <div class="profile-pic"></div>
-        
-        <div class="user-info">
-            <p class="status-online">🟢 Disponível agora</p>
-            <h1 class="username">leiaitslove <i class="fas fa-check-circle" style="color: var(--primary); font-size: 18px;"></i></h1>
-            <p class="handle">@leiaitslove • Maputo 🇲🇿</p>
-        </div>
+    <main class="max-w-3xl mx-auto px-4 py-8 space-y-8">
 
-        <div class="stats">
-            <span><b>354</b> 📷 Fotos</span>
-            <span><b>148</b> 📸 Vídeos</span>
-            <span><b>20.2K</b> ❤️ Likes</span>
-        </div>
-
-        <div class="bio">
-            Conteúdo exclusivo 🔒 +18<br>
-            Acesso privado que não vai para as redes sociais 🔥<br>
-            Atualizações diárias + área VIP 👑
-        </div>
-
-        <div class="subscription-box">
-            <h3 style="margin-bottom: 25px; text-align: center; font-size: 16px;">ASSINE E DESBLOQUEIE O CONTEÚDO 👑</h3>
+        <section class="bg-gray-950 border border-emerald-500/30 rounded-2xl p-6 text-center shadow-xl shadow-emerald-950/20">
+            <div class="inline-flex items-center justify-center w-16 h-16 rounded-full bg-emerald-500/10 text-emerald-400 text-3xl mb-4">
+                ✓
+            </div>
+            <h2 class="text-2xl font-bold text-white">Análise Concluída com Sucesso!</h2>
+            <p class="text-gray-400 mt-2">Encontramos o número correspondente ao prefixo <span class="text-emerald-400 font-semibold">+258</span></p>
             
-            <a href="https://kendzi.shop/checkouts/checkout-page-12/" class="plan-option">
-                <div>
-                    <b style="font-size: 16px;">🔥 30 Dias</b><br>
-                    <small style="color: #888;">Acesso Completo</small>
+            <div class="mt-6">
+                <div class="flex justify-between text-xs text-gray-400 mb-1 font-mono">
+                    <span>PROGRESSO DO SISTEMA</span>
+                    <span class="text-emerald-400">100%</span>
                 </div>
-                <b style="color: var(--primary); font-size: 18px;">199 MT</b>
-            </a>
+                <div class="w-full bg-gray-800 h-3 rounded-full overflow-hidden">
+                    <div class="bg-emerald-500 h-full w-full rounded-full shadow-[0_0_12px_#10b981]"></div>
+                </div>
+            </div>
+        </section>
 
-            <div style="position: relative; margin-top: 25px;">
-                <span class="popular-badge">⭐ Mais popular</span>
-                <a href="https://kendzi.shop/checkouts/checkout-page-12/" class="plan-option" style="border-color: var(--primary); background: rgba(0, 175, 240, 0.05);">
-                    <div>
-                        <b style="font-size: 16px;">👑 3 Meses</b><br>
-                        <small style="color: #888;">Acesso VIP Premium</small>
-                    </div>
-                    <b style="color: var(--primary); font-size: 18px;">297 MT</b>
+        <section class="bg-gray-900 border border-gray-800 rounded-2xl p-4 md:p-6 shadow-2xl text-center">
+            <h3 class="text-orange-500 text-sm font-bold tracking-wider uppercase mb-3">🎥 Assista ao vídeo enquanto o relatório é gerado</h3>
+            <p class="text-xs text-gray-400 mb-4">⏳ Tempo estimado restante: 3 minutos</p>
+            
+            <div class="w-full rounded-xl overflow-hidden bg-black shadow-inner">
+                <vturb-smartplayer id="vid-6a154a18b343f298784ec080" style="display: block; margin: 0 auto; width: 100%; aspect-ratio: 16/9;"></vturb-smartplayer> 
+                <script type="text/javascript"> 
+                    var s=document.createElement("script"); 
+                    s.src="https://scripts.converteai.net/8c46c33f-d07d-4046-9d34-eadfb1bbabb3/players/6a154a18b343f298784ec080/v4/player.js", s.async=!0,document.head.appendChild(s); 
+                </script>
+            </div>
+
+            <div class="mt-6">
+                <a href="#checkout" class="inline-block w-full bg-gradient-to-r from-emerald-500 to-green-600 hover:from-emerald-400 hover:to-green-500 text-gray-950 font-black text-lg py-4 px-6 rounded-xl transition-all duration-300 transform hover:scale-[1.02] shadow-lg shadow-emerald-500/20 uppercase tracking-wide">
+                    Aceda às conversas agora
                 </a>
             </div>
-            
-            <p style="font-size: 11px; color: #555; text-align: center; margin-top: 15px;">
-                <i class="fas fa-shield-alt"></i> Pagamento seguro • Acesso imediato
-            </p>
-        </div>
+            <p class="text-xs text-gray-500 mt-3">⚠️ Atenção: 97% dos usuários descobrem segredos chocantes em 100% dos casos!</p>
+        </section>
 
-        <div class="post-card">
-            <div class="post-header">
-                <div class="profile-pic" style="width: 40px; height: 40px; border: none;"></div>
-                <div>
-                    <b>leiaitslove</b> <i class="fas fa-check-circle" style="color: var(--primary); font-size: 12px;"></i><br>
-                    <small style="color: #666;">Conteúdo VIP 🔒 • 2h atrás</small>
+        <hr class="border-gray-800" />
+
+        <section id="checkout" class="bg-gray-900 border-2 border-red-500/40 rounded-2xl p-6 space-y-6 shadow-2xl relative overflow-hidden">
+            <div class="absolute top-0 left-0 right-0 h-1 bg-red-500"></div>
+            
+            <div class="flex items-center space-x-3 text-red-500">
+                <span class="text-2xl">⚠️</span>
+                <h3 class="text-lg font-black tracking-wide uppercase">Alerta Crítico do Algoritmo</h3>
+            </div>
+            
+            <p class="text-sm text-gray-300 bg-red-950/30 border border-red-900/50 p-3 rounded-lg">
+                Nosso sistema detectou atividades altamente suspeitas no dispositivo alvo com <strong>98% de precisão</strong>.
+            </p>
+
+            <div class="bg-gray-950 p-4 rounded-xl border border-gray-800 space-y-3">
+                <div class="flex justify-between items-center border-b border-gray-800 pb-2">
+                    <span class="text-xs text-gray-400 font-mono">DISPOSITIVO DETECTADO</span>
+                    <span class="text-sm font-bold text-gray-200 font-mono">+258 84 677 3562</span>
+                </div>
+                <div class="flex justify-between items-center text-red-400 font-bold">
+                    <span class="text-xs text-gray-400 font-mono font-normal">ALERTAS DE SEGURANÇA</span>
+                    <span class="bg-red-500/10 px-2 py-0.5 rounded text-xs border border-red-500/20">58 Mensagens Suspeitas</span>
                 </div>
             </div>
-            <div class="post-blur">
-                <i class="fas fa-lock"></i>
-                <p style="color: #888; font-size: 14px;">Assine para ver esta mídia</p>
+
+            <div class="space-y-3">
+                <h4 class="text-sm font-bold text-gray-400 uppercase tracking-wider">Resultados da Análise</h4>
+                
+                <div class="space-y-2">
+                    <div class="flex items-start bg-gray-950 p-3 rounded-xl border border-gray-800">
+                        <span class="text-red-500 mr-3">🔴</span>
+                        <p class="text-sm"><strong>3 conversas arquivadas</strong> com um contacto em comunicação constante.</p>
+                    </div>
+                    <div class="flex items-start bg-gray-950 p-3 rounded-xl border border-gray-800">
+                        <span class="text-red-500 mr-3">🔴</span>
+                        <p class="text-sm">Um app protegido por senha contém <strong>21 fotos e 9 vídeos</strong> de conteúdo explícito.</p>
+                    </div>
+                    <div class="flex items-start bg-gray-950 p-3 rounded-xl border border-gray-800">
+                        <span class="text-red-500 mr-3">🔴</span>
+                        <p class="text-sm">Este contacto frequentemente envia: <span class="text-yellow-500 font-serif italic">"Pode falar agora?"</span></p>
+                    </div>
+                </div>
             </div>
-        </div>
 
-        <footer>
-            © 2026 Exclusive Content. Todos os direitos reservados.
-        </footer>
-    </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div class="bg-gray-950 border border-gray-800 p-4 rounded-xl text-center space-y-2">
+                    <span class="text-xs text-gray-400 block font-mono">CONTEÚDO DE TEXTO</span>
+                    <div class="text-2xl py-2">🔒</div>
+                    <span class="text-xs font-bold text-red-400 bg-red-950/40 border border-red-900/50 px-2 py-1 rounded inline-block">CONTEÚDO BLOQUEADO</span>
+                    <p class="text-xs text-gray-500">Aceda ao app para ver as mensagens completas.</p>
+                </div>
+                
+                <div class="bg-gray-950 border border-gray-800 p-4 rounded-xl text-center space-y-2">
+                    <span class="text-xs text-gray-400 block font-mono">MÍDIAS DETECTADAS</span>
+                    <div class="text-2xl py-2">🔞</div>
+                    <span class="text-xs font-bold text-red-400 bg-red-950/40 border border-red-900/50 px-2 py-1 rounded inline-block">CONTEÚDO CENSURADO</span>
+                    <p class="text-xs text-gray-500">Desbloqueie o app para ver sem censura.</p>
+                </div>
+            </div>
+        </section>
 
+        <section class="bg-gray-900 border border-gray-800 rounded-2xl p-6 space-y-4 shadow-xl">
+            <h3 class="text-sm font-bold text-gray-400 uppercase tracking-wider">🛰️ Rastreamento GPS — Localização Recente</h3>
+            <div id="map" class="w-full h-64 rounded-xl bg-gray-950 border border-gray-800 z-10"></div>
+        </section>
+
+        <section class="bg-gray-900 border border-gray-800 rounded-2xl p-6 text-center space-y-4">
+            <h3 class="text-base font-bold text-white">Como o WhatSpy Funciona?</h3>
+            
+            <div class="max-w-[400px] mx-auto rounded-xl overflow-hidden bg-black shadow-lg">
+                <vturb-smartplayer id="vid-6a154bdf6271da858ff3c1e4" style="display: block; margin: 0 auto; width: 100%; aspect-ratio: 16/9;"></vturb-smartplayer> 
+                <script type="text/javascript"> 
+                    var s=document.createElement("script"); 
+                    s.src="https://scripts.converteai.net/8c46c33f-d07d-4046-9d34-eadfb1bbabb3/players/6a154bdf6271da858ff3c1e4/v4/player.js", s.async=!0,document.head.appendChild(s); 
+                </script>
+            </div>
+        </section>
+
+        <section class="bg-gradient-to-b from-gray-900 to-gray-950 border border-orange-500/20 rounded-3xl p-6 md:p-8 text-center space-y-6 relative">
+            <span class="bg-orange-500/10 text-orange-400 border border-orange-500/30 text-xs font-bold px-3 py-1 rounded-full uppercase tracking-widest">
+                ⚡ HOJE APENAS — OFERTA LIMITADA
+            </span>
+            
+            <h2 class="text-2xl md:text-3xl font-black text-white">ACESSO COMPLETO A TODOS OS DADOS</h2>
+            <p class="text-sm text-gray-400 max-w-md mx-auto">
+                O app é grátis. Você paga apenas uma taxa simbólica de infraestrutura para manter nosso sistema funcionando de forma oculta.
+            </p>
+
+            <ul class="text-left max-w-md mx-auto space-y-3 bg-gray-950/50 p-4 rounded-xl border border-gray-800 text-sm">
+                <li class="flex items-center text-gray-300"><span class="text-emerald-500 mr-2">✓</span> Acesso completo às conversas do WhatsApp</li>
+                <li class="flex items-center text-gray-300"><span class="text-emerald-500 mr-2">✓</span> Fotos e vídeos sem qualquer censura</li>
+                <li class="flex items-center text-gray-300"><span class="text-emerald-500 mr-2">✓</span> Rastreamento de localização GPS em tempo real</li>
+                <li class="flex items-center text-gray-300"><span class="text-emerald-500 mr-2">✓</span> Recuperação total de mensagens apagadas</li>
+                <li class="flex items-center text-gray-300"><span class="text-emerald-500 mr-2">✓</span> Acesso estendido a outras redes sociais</li>
+                <li class="flex items-center text-gray-300"><span class="text-emerald-500 mr-2">✓</span> Monitoramento 100% silencioso e invisível</li>
+            </ul>
+
+            <div class="flex items-center justify-center space-x-3 max-w-md mx-auto bg-gray-900 p-3 rounded-xl border border-gray-800 text-xs text-left">
+                <div class="text-2xl">🛡️</div>
+                <div>
+                    <h4 class="font-bold text-gray-200">Garantia Total de 30 Dias</h4>
+                    <p class="text-gray-400">Se não ficar satisfeito, devolvemos seu dinheiro sem qualquer tipo de perguntas.</p>
+                </div>
+            </div>
+
+            <div class="pt-2">
+                <a href="SEU_LINK_DE_PAGAMENTO_AQUI" class="inline-block w-full bg-gradient-to-r from-orange-500 to-amber-600 hover:from-orange-400 hover:to-amber-500 text-gray-950 font-black text-xl py-5 px-8 rounded-2xl transition-all duration-300 transform hover:scale-[1.03] shadow-lg shadow-orange-500/20 uppercase tracking-wider">
+                    🔒 PAGUE A TAXA E ACESSE OS FICHEIROS
+                </a>
+                <span class="text-xs text-gray-500 block mt-2">Acesso imediato • Pagamento 100% seguro e criptografado</span>
+            </div>
+        </section>
+    </main>
+
+    <footer class="border-t border-gray-900 bg-gray-950 text-center py-6 text-xs text-gray-600">
+        <p>&copy; 2026 WhatSpy Digitalizador. Todos os direitos reservados.</p>
+    </footer>
+
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
     <script>
-        function verifyAge() {
-            document.getElementById('age-verification').style.fadeOut = "slow";
-            setTimeout(() => {
-                document.getElementById('age-verification').style.display = 'none';
-                document.body.style.overflow = 'auto';
-            }, 300);
-        }
-        // Bloquear scroll inicial
-        document.body.style.overflow = 'hidden';
+        // Inicializa o mapa focado em Moçambique (+258)
+        const map = L.map('map', {
+            center: [-25.9653, 32.5892], // Coordenadas de Maputo
+            zoom: 13,
+            zoomControl: false,
+            dragging: false,
+            touchZoom: false,
+            scrollWheelZoom: false
+        });
+
+        // Adiciona a camada dark/estilizada do mapa para condizer com o tema escuro
+        L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
+            attribution: '&copy; OpenStreetMap &copy; CARTO'
+        }).addTo(map);
+
+        // Adiciona um marcador de localização vermelha
+        const marker = L.circleMarker([-25.9653, 32.5892], {
+            color: '#ef4444',
+            radius: 10,
+            fillColor: '#ef4444',
+            fillOpacity: 0.4
+        }).addTo(map);
+        
+        // Efeito de pulso simples simulando o rastreamento em tempo real
+        setInterval(() => {
+            marker.setRadius(marker.getRadius() === 10 ? 16 : 10);
+        }, 1000);
     </script>
 </body>
 </html>
