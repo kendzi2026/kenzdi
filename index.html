@@ -42,8 +42,13 @@ body{
     display:flex;
     align-items:center;
     justify-content:center;
-    font-size:40px;
-    font-weight:bold;
+    overflow: hidden; /* Garante que a imagem respeite a borda arredondada */
+}
+
+.avatar img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Ajusta a imagem sem distorcer */
 }
 
 .profile h1{
@@ -252,7 +257,10 @@ body{
 <div class="container">
 
     <div class="profile">
-        <div class="avatar">BM</div>
+        <!-- Foto de perfil aplicada aqui -->
+        <div class="avatar">
+            <img src="https://i.ibb.co/BKgzXXL5/descarregar.png" alt="Bibiyane Mohamed">
+        </div>
 
         <h1>Bibiyane Mohamed</h1>
         <p>TOP 0.5% • @bibiyane mohamed • Maputo 🇲🇿</p>
