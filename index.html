@@ -147,10 +147,10 @@ body{
     color: #0044cc;
 }
 
-/* Container de Conteúdo Bloqueado com imagem borrada */
+/* Container de Conteúdo Bloqueado */
 .locked{
     position: relative;
-    height:320px; /* Aumentado ligeiramente para melhor proporção da imagem */
+    height:320px; 
     border-radius:20px;
     display:flex;
     flex-direction:column;
@@ -167,18 +167,27 @@ body{
     left: 0;
     width: 100%;
     height: 100%;
-    background-image: url('https://i.ibb.co/vCQwJH9b/Captura-de-ecr-2026-06-19-150230.png');
     background-size: cover;
     background-position: center;
-    filter: blur(8px); /* Efeito de desfoque para esconder o conteúdo */
-    transform: scale(1.05); /* Evita bordas brancas causadas pelo blur */
+    filter: blur(8px); 
+    transform: scale(1.05); 
     z-index: 1;
+}
+
+/* Imagem do Primeiro Post */
+.post-bg-1 {
+    background-image: url('https://i.ibb.co/vCQwJH9b/Captura-de-ecr-2026-06-19-150230.png');
+}
+
+/* Imagem do Segundo Post */
+.post-bg-2 {
+    background-image: url('https://i.ibb.co/7JFsp4gH/Captura-de-ecr-2026-06-19-151134.png');
 }
 
 .locked-content {
     position: relative;
     z-index: 2;
-    background: rgba(255, 255, 255, 0.85); /* Fundo branco semi-transparente para legibilidade */
+    background: rgba(255, 255, 255, 0.85); 
     padding: 25px 40px;
     border-radius: 15px;
     box-shadow: 0 4px 15px rgba(0,0,0,0.1);
@@ -402,9 +411,8 @@ body{
         </div>
 
         <div class="locked">
-            <!-- Div para a imagem de fundo borrada -->
-            <div class="locked-bg"></div>
-            <!-- Box de conteúdo por cima -->
+            <!-- Primeira imagem aplicada aqui -->
+            <div class="locked-bg post-bg-1"></div>
             <div class="locked-content">
                 <h3>Conteúdo bloqueado</h3>
                 <p>Conteúdo VIP +18</p>
@@ -426,7 +434,8 @@ body{
         </div>
 
         <div class="locked">
-            <div class="locked-bg"></div>
+            <!-- Segunda imagem aplicada aqui -->
+            <div class="locked-bg post-bg-2"></div>
             <div class="locked-content">
                 <h3>Conteúdo bloqueado</h3>
                 <p>Conteúdo VIP +18</p>
