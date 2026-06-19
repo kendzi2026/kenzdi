@@ -179,7 +179,7 @@ body{
     font-size: 15px;
 }
 
-/* Container de Conteúdo Bloqueado Focado em Cliques */
+/* Container de Conteúdo Bloqueado */
 .locked{
     position: relative;
     height:260px; 
@@ -351,7 +351,7 @@ body{
     font-size: 12px;
 }
 
-/* Ajuste do link para ocupar todo o botão sem quebrar o CSS */
+/* Links dos Botões de Assinatura */
 .subscribe-btn {
     display: block;
     margin-top:16px;
@@ -464,7 +464,6 @@ body{
             <div class="locked-content">
                 <h3>Conteúdo bloqueado</h3>
                 <p>Conteúdo VIP +18</p>
-                <!-- Redireciona para os planos abaixo por usabilidade de funil -->
                 <button class="unlock" onclick="document.getElementById('plans-section').scrollIntoView({behavior: 'smooth'});">🔓 Desbloqueie agora</button>
             </div>
         </div>
@@ -516,7 +515,7 @@ body{
 
     <div class="plans">
 
-        <!-- Plano VIP Padrão - Link de checkout integrado -->
+        <!-- Plano VIP Padrão - 199 MT -->
         <div class="plan">
             <h2>VIP</h2>
             <p style="color: #666;">Acesso completo</p>
@@ -525,7 +524,7 @@ body{
             <a href="https://pay.zenofy.io/p/6a0340fffd66df4e5df09bc9" class="subscribe-btn">Assinar Agora</a>
         </div>
 
-        <!-- Plano VVIP Destacado -->
+        <!-- Plano VVIP Destacado - 297 MT -->
         <div class="plan featured-plan">
             <div class="popular">⭐ MAIS POPULAR • POUPE 50%</div>
             <h2>VVIP</h2>
@@ -533,7 +532,7 @@ body{
             <p style="color: #666;">+ Conteúdo exclusivo +18</p>
             <p class="old-price">597 MT</p>
             <div class="price">297 MT</div>
-            <button class="subscribe-btn" style="background: linear-gradient(45deg, #0066ff, #0044cc);">Assinar Agora</button>
+            <a href="https://pay.zenofy.io/p/6a0342e8fd66df4e5df09bce" class="subscribe-btn" style="background: linear-gradient(45deg, #0066ff, #0044cc);">Assinar Agora</a>
         </div>
 
     </div>
