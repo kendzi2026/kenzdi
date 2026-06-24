@@ -1,557 +1,478 @@
 <!DOCTYPE html>
-<html lang="pt">
+<html lang="pt-PT">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>leia_itslove | Conteúdo VIP</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fortune Tiger - Oferta Exclusiva</title>
+    <style>
+        :root {
+            --primary: #ffcc00;
+            --secondary: #ff3300;
+            --bg-dark: #1a0500;
+            --card-bg: #2d0d05;
+            --text-light: #ffffff;
+            --text-muted: #ffb3a6;
+        }
 
-<style>
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-    font-family:Arial, Helvetica, sans-serif;
-    -webkit-tap-highlight-color: transparent;
-}
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
 
-body{
-    background:#f4f6f9; 
-    color:#222; 
-}
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-light);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 10px;
+        }
 
-/* Foto de Capa Otimizada para Mobile */
-.cover-banner {
-    width: 100%;
-    height: 200px;
-    background-image: url('https://i.ibb.co/MDpJx05M/Captura-de-ecr-2026-06-19-145132.png');
-    background-size: cover;
-    background-position: center;
-    border-bottom: 1px solid #e1e8ed;
-}
+        .container {
+            width: 100%;
+            max-width: 450px;
+            background: linear-gradient(135deg, #3d0f05 0%, #1a0500 100%);
+            border: 2px solid var(--primary);
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.5);
+        }
 
-.container{
-    max-width:650px; 
-    margin:auto;
-    padding: 0 12px 20px 12px; 
-}
+        .page {
+            display: none;
+            padding: 20px;
+            animation: fadeIn 0.3s ease-in-out;
+        }
 
-/* Perfil Compacto e Focado */
-.profile{
-    background:#ffffff; 
-    border: 1px solid #e1e8ed;
-    border-radius:24px;
-    padding: 20px 15px; 
-    text-align:center;
-    margin-bottom:16px;
-    margin-top: -50px; 
-    position: relative;
-    box-shadow: 0 8px 24px rgba(0,0,0,0.06); 
-    z-index: 10;
-}
+        .page.active {
+            display: block;
+        }
 
-.avatar{
-    width:100px; 
-    height:100px;
-    border-radius:50%;
-    background:linear-gradient(45deg,#0066ff,#00d4ff); 
-    margin:auto;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    overflow: hidden;
-    border: 4px solid #fff; 
-    box-shadow: 0 4px 12px rgba(0,0,0,0.12);
-}
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
 
-.avatar img{
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
+        /* Elements */
+        .header-title {
+            text-align: center;
+            color: var(--primary);
+            font-size: 28px;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.6);
+        }
 
-.profile h1{
-    margin-top:12px;
-    font-size:24px;
-    color: #0044cc; 
-    letter-spacing: -0.5px;
-}
+        .congrats {
+            text-align: center;
+            color: #fff;
+            font-size: 22px;
+            font-weight: bold;
+            background: linear-gradient(90deg, transparent, var(--secondary), transparent);
+            padding: 5px 0;
+            margin-bottom: 20px;
+        }
 
-.profile p{
-    color:#666;
-    margin-top:4px;
-    font-size: 14px;
-}
+        .offer-box {
+            background-color: rgba(0,0,0,0.4);
+            border: 1px dashed var(--primary);
+            border-radius: 8px;
+            padding: 15px;
+            text-align: center;
+            margin-bottom: 20px;
+        }
 
-/* Status de Engajamento Rápido */
-.stats{
-    display:flex;
-    justify-content:space-between;
-    background: #f8fafc;
-    border-radius: 16px;
-    padding: 12px 8px;
-    margin: 18px 0;
-}
+        .badge {
+            font-size: 40px;
+            margin-bottom: 10px;
+        }
 
-.stat {
-    flex: 1;
-    text-align: center;
-}
+        .feature-list {
+            list-style: none;
+            margin-bottom: 25px;
+        }
 
-.stat h2{
-    color:#0066ff; 
-    font-size: 18px;
-}
+        .feature-list li {
+            margin: 12px 0;
+            font-size: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
 
-.stat p {
-    font-size: 12px;
-    color: #666;
-    margin-top: 2px;
-}
+        .btn {
+            display: block;
+            width: 100%;
+            background: linear-gradient(180deg, #ffe600 0%, #ff9900 100%);
+            color: #000;
+            border: none;
+            padding: 15px;
+            font-size: 18px;
+            font-weight: bold;
+            border-radius: 30px;
+            cursor: pointer;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(255, 153, 0, 0.4);
+            transition: transform 0.2s;
+        }
 
-.online{
-    color:#28a745; 
-    margin-bottom:15px;
-    font-weight: bold;
-    font-size: 14px;
-}
+        .btn:hover {
+            transform: scale(1.02);
+        }
 
-.description{
-    line-height: 1.6;
-    color:#333;
-    font-size: 15px;
-    text-align: left; 
-    background: #f8fafc;
-    padding: 15px;
-    border-radius: 16px;
-    border-left: 4px solid #0066ff;
-}
+        .footer-text {
+            text-align: center;
+            font-size: 12px;
+            color: var(--text-muted);
+            margin-top: 15px;
+        }
 
-.badges{
-    display:flex;
-    justify-content:center;
-    gap:8px;
-    flex-wrap:wrap;
-    margin-top:16px;
-}
+        /* Form */
+        .form-group {
+            margin-bottom: 15px;
+        }
 
-.badge{
-    background:#e6f0ff; 
-    color: #0055ff; 
-    padding:8px 14px;
-    border-radius:30px;
-    font-weight: bold;
-    font-size: 12px;
-}
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-size: 14px;
+            color: var(--primary);
+        }
 
-/* Oferta Urgente com Alto Contraste */
-.offer{
-    margin-top:16px;
-    background: linear-gradient(135deg, #0055ff, #0033aa); 
-    color: white;
-    padding:14px;
-    border-radius:16px;
-    font-weight:bold;
-    font-size: 14px;
-    box-shadow: 0 4px 15px rgba(0,85,255,0.25);
-}
+        .form-group input {
+            width: 100%;
+            padding: 12px;
+            border-radius: 8px;
+            border: 1px solid #555;
+            background-color: #111;
+            color: #fff;
+            font-size: 16px;
+        }
 
-/* Feed de Posts Otimizado */
-.post{
-    background:#ffffff;
-    border: 1px solid #e1e8ed;
-    border-radius:24px;
-    padding:16px;
-    margin-bottom:16px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.03);
-}
+        /* Comments Section */
+        .comments-section {
+            margin-top: 30px;
+            border-top: 1px solid #444;
+            padding-top: 20px;
+        }
 
-.post-header{
-    display:flex;
-    justify-content:space-between;
-    align-items: center;
-    margin-bottom:12px;
-    font-size: 14px;
-    color: #555;
-}
+        .comment {
+            background: rgba(255,255,255,0.05);
+            padding: 12px;
+            border-radius: 8px;
+            margin-bottom: 12px;
+            font-size: 14px;
+        }
 
-.post-header strong {
-    color: #0044cc;
-    font-size: 15px;
-}
+        .comment-header {
+            display: flex;
+            justify-content: space-between;
+            color: var(--primary);
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
 
-/* Container de Conteúdo Bloqueado */
-.locked{
-    position: relative;
-    height:260px; 
-    border-radius:18px;
-    display:flex;
-    flex-direction:column;
-    justify-content:center;
-    align-items:center;
-    text-align:center;
-    overflow: hidden;
-    border: 1px solid #e1e8ed;
-}
+        .comment-time {
+            color: #888;
+            font-size: 11px;
+        }
 
-.locked-bg {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-size: cover;
-    background-position: center;
-    filter: blur(10px); 
-    transform: scale(1.1); 
-    z-index: 1;
-}
+        .comment-actions {
+            margin-top: 8px;
+            display: flex;
+            gap: 15px;
+            color: #aaa;
+            font-size: 12px;
+            cursor: pointer;
+        }
 
-.post-bg-1 {
-    background-image: url('https://i.ibb.co/vCQwJH9b/Captura-de-ecr-2026-06-19-150230.png');
-}
+        /* Game Screen */
+        .game-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 8px;
+            background: #000;
+            padding: 10px;
+            border-radius: 8px;
+            border: 2px solid var(--primary);
+            margin: 15px 0;
+        }
 
-.post-bg-2 {
-    background-image: url('https://i.ibb.co/7JFsp4gH/Captura-de-ecr-2026-06-19-151134.png');
-}
+        .game-cell {
+            background: #3a0000;
+            height: 75px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            font-size: 12px;
+            border-radius: 4px;
+            border: 1px solid #550000;
+            font-weight: bold;
+        }
 
-.locked-content {
-    position: relative;
-    z-index: 2;
-    background: rgba(255, 255, 255, 0.92); 
-    padding: 20px;
-    width: 85%;
-    border-radius: 16px;
-    box-shadow: 0 4px 20px rgba(0,0,0,0.15);
-    backdrop-filter: blur(4px);
-}
+        .game-cell span {
+            font-size: 18px;
+            margin-bottom: 2px;
+        }
 
-.locked h3{
-    margin-bottom:4px;
-    color: #0044cc;
-    font-size: 18px;
-}
+        .game-stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 5px;
+            text-align: center;
+            background: rgba(0,0,0,0.5);
+            padding: 10px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+        }
 
-.locked p {
-    color: #444;
-    font-size: 14px;
-    font-weight: 500;
-}
+        .stat-box {
+            font-size: 12px;
+            color: #ccc;
+        }
 
-.unlock{
-    background:#0066ff;
-    border:none;
-    color:white;
-    padding:12px 0;
-    width: 100%; 
-    border-radius:30px;
-    margin-top:12px;
-    cursor:pointer;
-    font-size:16px;
-    font-weight: bold;
-    box-shadow: 0 4px 12px rgba(0,102,255,0.3);
-}
+        .stat-box div {
+            color: var(--primary);
+            font-weight: bold;
+            font-size: 14px;
+        }
 
-.post-footer{
-    margin-top:12px;
-    color:#666;
-    display:flex;
-    gap:24px;
-    font-weight: bold;
-    font-size: 14px;
-    padding-left: 4px;
-}
+        .game-controls {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 10px;
+        }
 
-/* Prova Social Clássica */
-.section-title{
-    margin: 30px 0 16px;
-    font-size:22px;
-    color: #0044cc;
-    letter-spacing: -0.5px;
-}
+        .btn-minus, .btn-plus {
+            background: #444;
+            color: white;
+            border: none;
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            font-size: 20px;
+            cursor: pointer;
+        }
 
-.review{
-    background:#ffffff;
-    border: 1px solid #e1e8ed;
-    padding:16px;
-    border-radius:16px;
-    margin-bottom:12px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.02);
-}
+        .btn-spin {
+            flex-grow: 1;
+            background: linear-gradient(180deg, #ff3300 0%, #990000 100%);
+            color: white;
+            border: 2px solid var(--primary);
+            padding: 12px;
+            border-radius: 25px;
+            font-weight: bold;
+            cursor: pointer;
+        }
 
-.review p{
-    color:#444;
-    font-size: 14px;
-    line-height: 1.5;
-}
+        .marquee {
+            background: #222;
+            color: var(--primary);
+            padding: 5px;
+            font-size: 12px;
+            white-space: nowrap;
+            overflow: hidden;
+            box-sizing: border-box;
+            border-radius: 4px;
+            margin-bottom: 10px;
+        }
 
-.review span{
-    color:#0066ff;
-    font-weight: bold;
-    font-size: 13px;
-    display: block;
-    margin-top: 6px;
-}
+        .marquee span {
+            display: inline-block;
+            padding-left: 100%;
+            animation: marquee 15s linear infinite;
+        }
 
-/* Planos */
-.plans{
-    display: flex;
-    flex-direction: column; 
-    gap:16px;
-    margin-top:16px;
-}
-
-.plan{
-    background:#ffffff;
-    border: 1px solid #e1e8ed;
-    border-radius:24px;
-    padding:24px 20px;
-    text-align:center;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.04);
-    position: relative;
-}
-
-.plan.featured-plan {
-    border: 2px solid #0066ff;
-    box-shadow: 0 8px 24px rgba(0,102,255,0.1);
-}
-
-.plan h2{
-    margin-bottom:12px;
-    color: #0044cc;
-    font-size: 24px;
-}
-
-.plan p {
-    font-size: 14px;
-}
-
-.old-price{
-    text-decoration:line-through;
-    color:#999;
-    font-size: 14px;
-    margin-top: 8px;
-}
-
-.price{
-    font-size:42px;
-    color:#0066ff;
-    font-weight:bold;
-    line-height: 1.1;
-    margin-bottom: 4px;
-}
-
-.popular{
-    background:#0066ff;
-    color: white;
-    padding:6px 16px;
-    border-radius:30px;
-    display:inline-block;
-    margin-bottom:16px;
-    font-weight: bold;
-    font-size: 12px;
-}
-
-/* Links dos Botões de Assinatura */
-.subscribe-btn {
-    display: block;
-    margin-top:16px;
-    background:#0066ff;
-    color:#fff;
-    padding:16px 20px;
-    border-radius:30px;
-    font-weight: bold;
-    font-size: 18px; 
-    width: 100%;
-    text-decoration: none;
-    box-shadow: 0 4px 14px rgba(0,102,255,0.25);
-    text-align: center;
-    border: none;
-    cursor: pointer;
-}
-
-.features{
-    display:flex;
-    justify-content:center;
-    gap:8px;
-    flex-wrap:wrap;
-    margin:30px 0 20px;
-}
-
-.feature{
-    background:#ffffff;
-    border: 1px solid #e1e8ed;
-    padding:10px 14px;
-    border-radius:12px;
-    color: #333;
-    font-weight: 500;
-    font-size: 13px;
-}
-
-.footer{
-    text-align:center;
-    color:#777;
-    margin:30px 0 10px;
-    font-size: 13px;
-}
-
-@media(max-width:360px){
-    .price{ font-size: 36px; }
-    .cover-banner { height: 160px; }
-    .avatar { width: 90px; height: 90px; }
-}
-</style>
+        @keyframes marquee {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(-100%, 0); }
+        }
+    </style>
 </head>
-
 <body>
-
-<div class="cover-banner"></div>
 
 <div class="container">
 
-    <div class="profile">
-        <div class="avatar">
-            <img src="https://i.ibb.co/BKgzXXL5/descarregar.png" alt="leia_itslove">
+    <!-- TELA 1: BOAS-VINDAS -->
+    <div id="page1" class="page active">
+        <h1 class="header-title">Fortune Tiger</h1>
+        <div class="congrats">PARABÉNS!</div>
+        <p style="text-align: center; margin-bottom: 15px;">Bem-vindo ao Fortune Tiger</p>
+        
+        <div class="offer-box">
+            <p style="font-size: 14px; color: var(--primary); margin-bottom: 10px;">A sua conta foi selecionada para uma oferta exclusiva</p>
+            <div class="badge">🎆</div>
+            <h2 style="color: #fff;">Bónus de Boas-Vindas</h2>
+            <h3 style="color: var(--primary); font-size: 24px; margin: 10px 0;">10 Jogadas</h3>
+            <p style="font-size: 14px; color: #fff;">Cada jogada com aposta de <strong>80 MT</strong></p>
         </div>
 
-        <h1>leia_itslove</h1>
-        <p>TOP 0.5% • @leia_itslove • Maputo 🇲🇿</p>
+        <ul class="feature-list">
+            <li><span>✅</span> Jogue 10 rodadas gratuitas no Fortune Tiger</li>
+            <li><span>✅</span> Acumule ganhos com multiplicadores elevados</li>
+            <li><span>✅</span> Levante os seus ganhos após as jogadas</li>
+        </ul>
 
-        <div class="stats">
-            <div class="stat">
-                <h2>354</h2>
-                <p>📷 Fotos</p>
-            </div>
-            <div class="stat">
-                <h2>148</h2>
-                <p>📸 Vídeos</p>
-            </div>
-            <div class="stat">
-                <h2>20.2K</h2>
-                <p>❤️ Likes</p>
-            </div>
-        </div>
-
-        <p class="online">🟢 Disponível agora — respondendo rápido</p>
-
-        <div class="description">
-            🔥 Conteúdo exclusivo +18 que você nunca viu<br>
-            🔒 100% privado — não vai para redes sociais<br>
-            👑 Atualizações DIÁRIAS + área VIP<br>
-            💌 Mensagens privadas para subscritores
-        </div>
-
-        <div class="badges">
-            <div class="badge">Pagamento seguro</div>
-            <div class="badge">Acesso imediato</div>
-            <div class="badge">100% anónimo</div>
-        </div>
-
-        <div class="offer">
-            ⚡ OFERTA LIMITADA — Apenas hoje<br>
-            Restam poucas vagas no plano VIP
-        </div>
+        <button class="btn" onclick="nextPage(2)">🐅 Jogar Agora</button>
+        <p class="footer-text">Oferta limitada · Apenas para novas contas</p>
+        <p class="footer-text" style="text-decoration: underline; cursor: pointer;">Termos de Uso e Políticas.</p>
     </div>
 
-    <!-- Post 1 -->
-    <div class="post">
-        <div class="post-header">
-            <strong>leia_itslove</strong>
-            <span>Conteúdo VIP 🔒 • 5h</span>
+    <!-- TELA 2: CADASTRO -->
+    <div id="page2" class="page">
+        <h1 class="header-title">Fortune Tiger</h1>
+        <h2 style="text-align: center; margin-bottom: 5px;">Cadastre-se</h2>
+        <p style="text-align: center; font-size: 14px; color: var(--text-muted); margin-bottom: 20px;">e ganhe 10 rodadas grátis no Fortune Tiger</p>
+
+        <div class="form-group">
+            <label>Nome completo</label>
+            <input type="text" placeholder="Seu nome">
+        </div>
+        <div class="form-group">
+            <label>Número de telefone</label>
+            <input type="tel" placeholder="8X XXX XXX">
         </div>
 
-        <div class="locked">
-            <div class="locked-bg post-bg-1"></div>
-            <div class="locked-content">
-                <h3>Conteúdo bloqueado</h3>
-                <p>Conteúdo VIP +18</p>
-                <button class="unlock" onclick="document.getElementById('plans-section').scrollIntoView({behavior: 'smooth'});">🔓 Desbloqueie agora</button>
+        <button class="btn" style="margin-top: 10px;" onclick="nextPage(3)">🎰 Cadastrar e Jogar</button>
+        <p class="footer-text">Ao cadastrar-se, você aceita os termos e condições</p>
+
+        <!-- Seção de Comentários -->
+        <div class="comments-section">
+            <h3 style="font-size: 16px; margin-bottom: 15px;">💬 Comentários Recentes</h3>
+            
+            <div class="comment">
+                <div class="comment-header"><span>@maria_f</span> <span class="comment-time">há 2 minutos</span></div>
+                <p>Ainda estou emocionada 🙏 Joguei o Fortune Tiger, ganhei e recebi os 15.000 MT sem complicações. Foi tudo muito rápido e simples. Quem tiver oportunidade, aproveite.</p>
+                <div class="comment-actions"><span>👍</span> <span>👎</span> <span>Responder</span></div>
             </div>
-        </div>
 
-        <div class="post-footer">
-            <span>❤️ 2.1K</span>
-            <span>💬 184</span>
-        </div>
-    </div>
+            <div class="comment">
+                <div class="comment-header"><span>@joao_k</span> <span class="comment-time">há 5 minutos</span></div>
+                <p>No início pensei que fosse só conversa, mas resolvi tentar. Joguei, ganhei e o dinheiro caiu mesmo. Funcionou certinho. Recomendo a todos.</p>
+                <div class="comment-actions"><span>👍</span> <span>👎</span> <span>Responder</span></div>
+            </div>
 
-    <!-- Post 2 -->
-    <div class="post">
-        <div class="post-header">
-            <strong>leia_itslove</strong>
-            <span>Conteúdo VIP 🔒 • 2h</span>
-        </div>
+            <div class="comment">
+                <div class="comment-header"><span>@ana_p</span> <span class="comment-time">há 12 minutos</span></div>
+                <p>Obrigada pela seriedade 👏 Em poucos minutos joguei, confirmei o prémio e já consegui levantar o valor. Valeu muito a pena.</p>
+                <div class="comment-actions"><span>👍</span> <span>👎</span> <span>Responder</span></div>
+            </div>
 
-        <div class="locked">
-            <div class="locked-bg post-bg-2"></div>
-            <div class="locked-content">
-                <h3>Conteúdo bloqueado</h3>
-                <p>Conteúdo VIP +18</p>
-                <button class="unlock" onclick="document.getElementById('plans-section').scrollIntoView({behavior: 'smooth'});">🔓 Desbloqueie agora</button>
+            <div class="comment">
+                <div class="comment-header"><span>@carlos_m</span> <span class="comment-time">há 45 minutos</span></div>
+                <p>Não pensei duas vezes. Joguei o Fortune Tiger, ganhei os 9.200 MT e já levantei. É real e funciona mesmo. Nunca vi nada igual em Angola.</p>
+                <div class="comment-actions"><span>👍</span> <span>👎</span> <span>Responder</span></div>
             </div>
         </div>
-
-        <div class="post-footer">
-            <span>❤️ 3.4K</span>
-            <span>💬 276</span>
-        </div>
     </div>
 
-    <h2 class="section-title">⭐ O que dizem os subscritores</h2>
-
-    <div class="review">
-        <p>"Vale cada metical! Conteúdo exclusivo de verdade e ela responde mesmo as mensagens 🔥"</p>
-        <span>— Carlos M.</span>
-    </div>
-
-    <div class="review">
-        <p>"Melhor investimento. Atualizações diárias e qualidade incrível 👑"</p>
-        <span>— João P.</span>
-    </div>
-
-    <div id="plans-section">
-        <h2 class="section-title">👑 Desbloqueie tudo agora</h2>
-        <p style="color: #555; font-size: 14px; margin-bottom: 10px;">Acesso vitalício ao período pago • Cancele quando quiser</p>
-    </div>
-
-    <div class="plans">
-
-        <!-- Plano VIP Padrão - 199 MT -->
-        <div class="plan">
-            <h2>VIP</h2>
-            <p style="color: #666;">Acesso completo</p>
-            <p class="old-price">299 MT</p>
-            <div class="price">199 MT</div>
-            <a href="https://pay.zenofy.io/p/6a0340fffd66df4e5df09bc9" class="subscribe-btn">Assinar Agora</a>
+    <!-- TELA 3: SUCESSO DO CADASTRO -->
+    <div id="page3" class="page">
+        <div style="text-align: center; margin: 30px 0;">
+            <div style="font-size: 50px;">🎉</div>
+            <h2 style="color: var(--primary); margin: 10px 0;">Parabéns!</h2>
+            <p style="font-size: 18px; font-weight: bold;">Cadastro realizado com sucesso!</p>
         </div>
 
-        <!-- Plano VVIP Destacado - 297 MT -->
-        <div class="plan featured-plan">
-            <div class="popular">⭐ MAIS POPULAR • POUPE 50%</div>
-            <h2>VVIP</h2>
-            <p style="color: #666;">+ Mensagens privadas</p>
-            <p style="color: #666;">+ Conteúdo exclusivo +18</p>
-            <p class="old-price">597 MT</p>
-            <div class="price">297 MT</div>
-            <a href="https://pay.zenofy.io/p/6a0342e8fd66df4e5df09bce" class="subscribe-btn" style="background: linear-gradient(45deg, #0066ff, #0044cc);">Assinar Agora</a>
+        <div class="offer-box" style="background-color: rgba(255,204,0,0.1);">
+            <p>Você ganhou 10 rodadas grátis no Fortune Tiger</p>
+            <h3 style="color: var(--primary); margin-top: 10px; font-size: 22px;">🎰 10 Rodadas Grátis</h3>
         </div>
 
+        <button class="btn" style="margin-top: 30px;" onclick="nextPage(4)">🐅 Começar a Jogar</button>
     </div>
 
-    <div class="features">
-        <div class="feature">Pagamento seguro</div>
-        <div class="feature">Acesso imediato</div>
-        <div class="feature">100% anónimo</div>
-    </div>
+    <!-- TELA 4: O JOGO -->
+    <div id="page4" class="page">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+            <span style="font-size: 14px; color: var(--primary);">Rodadas Grátis: <strong id="spin-count">0/10</strong></span>
+            <span style="font-weight: bold; font-size: 14px; color: #fff;">FORTUNE TIGER</span>
+        </div>
+        
+        <p style="font-size: 11px; color: #888; text-align: right; margin-top: -8px; margin-bottom: 10px;">PG SOFT</p>
 
-    <p style="text-align:center; color: #666; font-size: 13px; line-height: 1.4; padding: 0 10px;">
-        🔒 Cobrança discreta • Não aparece o nome do site no extrato bancário
-    </p>
+        <div style="background: #111; padding: 5px 10px; border-radius: 4px; display: flex; justify-content: space-between; font-size: 14px; border: 1px solid #333;">
+            <span>Saldo</span>
+            <span style="color: #00ff00; font-weight: bold;">0 MT</span>
+        </div>
 
-    <div class="footer">
-        © 2026 Exclusive Content. Todos os direitos reservados.
+        <!-- Grade do Slot (Simulação) -->
+        <div class="game-grid">
+            <div class="game-cell"><span>🏮</span>Lanterna</div>
+            <div class="game-cell"><span>🍊</span>Laranja</div>
+            <div class="game-cell"><span>💰</span>Tesouro</div>
+            
+            <div class="game-cell"><span>🔔</span>Sino</div>
+            <div class="game-cell"><span>🍊</span>Laranja</div>
+            <div class="game-cell"><span>🐯</span>Wild Tiger</div>
+            
+            <div class="game-cell"><span>🔔</span>Sino</div>
+            <div class="game-cell"><span>🪙</span>Ouro</div>
+            <div class="game-cell"><span>🍊</span>Laranja</div>
+        </div>
+
+        <div class="marquee">
+            <span>🐅 Fortune Tiger • Jogue e ganhe grandes prémios! 🎰 Multiplicadores até 2500x 💰</span>
+        </div>
+
+        <!-- Painel de Estatísticas Inferior -->
+        <div class="game-stats">
+            <div class="stat-box">
+                Saldo
+                <div>0 MT</div>
+            </div>
+            <div class="stat-box">
+                Aposta Grátis
+                <div style="color: #fff;">80 MT</div>
+            </div>
+            <div class="stat-box">
+                Ganho
+                <div style="color: #00ff00;">0 MT</div>
+            </div>
+        </div>
+
+        <!-- Controles de Aposta -->
+        <div class="game-controls">
+            <button class="btn-minus">−</button>
+            <button class="btn-spin" onclick="simulateSpin()">⚡ TURBO <br> JOGAR</button>
+            <button class="btn-plus">+</button>
+        </div>
+
+        <div style="margin-top: 15px; display: flex; gap: 10px;">
+            <button class="btn" style="padding: 10px; font-size: 14px; background: #333; color: #fff; width: 35%;">🔄 AUTO</button>
+            <button class="btn" style="padding: 10px; font-size: 14px; width: 65%;" onclick="alert('Funcionalidade de saque ativa após a conclusão das rodadas!')">💰 LEVANTAR</button>
+        </div>
     </div>
 
 </div>
+
+<script>
+    // Função básica para alternar entre as páginas
+    function nextPage(pageNumber) {
+        // Oculta todas as páginas
+        document.querySelectorAll('.page').forEach(page => {
+            page.classList.remove('active');
+        });
+        // Mostra a página desejada
+        document.getElementById('page' + pageNumber).classList.add('active');
+    }
+
+    // Função interna para simular o clique de jogada no slot
+    let currentSpins = 0;
+    function simulateSpin() {
+        if(currentSpins < 10) {
+            currentSpins++;
+            document.getElementById('spin-count').innerText = currentSpins + "/10";
+            alert("Rodada executada com sucesso!");
+        } else {
+            alert("Suas 10 rodadas grátis acabaram! Clique em LEVANTAR para processar.");
+        }
+    }
+</script>
 
 </body>
 </html>
