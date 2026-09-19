@@ -141,10 +141,11 @@
       margin:26px 0 14px;
       box-shadow:0 10px 30px rgba(37,99,235,.42);
       transition:filter .12s ease, transform .12s ease;
+      cursor:pointer;
     }
     .cta:hover{filter:brightness(1.06)}
     .cta:active{transform:scale(.99)}
-    .cta:focus-visible{outline:3px solid #93c5fd;outline-offset:3px}
+
     .cta-bottom{
       font-size:clamp(15px,4.2vw,19px);
       font-weight:700;letter-spacing:0;line-height:1.35;
@@ -189,7 +190,7 @@
 <body>
   <div class="page">
 
-    <!-- ===== HERO ANIMADO ===== -->
+    <!-- HERO ANIMADO -->
     <div class="hero-anim" aria-hidden="true">
       <div class="halo"></div>
       <span class="ring r1"></span>
@@ -210,17 +211,10 @@
               <stop offset="100%" stop-color="#4aa6ff" stop-opacity="0.05"/>
             </radialGradient>
           </defs>
-
-          <!-- arcos que viajam em direcao ao ouvido -->
           <path class="arc" d="M 20 80 Q 40 50 60 80 Q 40 110 20 80" fill="none" stroke="url(#waveGrad)" stroke-width="1.5" stroke-linecap="round"/>
           <path class="arc" d="M 20 80 Q 40 50 60 80 Q 40 110 20 80" fill="none" stroke="url(#waveGrad)" stroke-width="1.5" stroke-linecap="round"/>
           <path class="arc" d="M 20 80 Q 40 50 60 80 Q 40 110 20 80" fill="none" stroke="url(#waveGrad)" stroke-width="1.5" stroke-linecap="round"/>
-          <path class="arc" d="M 20 80 Q 40 50 60 80 Q 40 110 20 80" fill="none" stroke="url(#waveGrad)" stroke-width="1.5" stroke-linecap="round"/>
-
-          <!-- linha de onda ondulando -->
           <path class="wline" d="M 8 80 Q 18 68 26 80 T 44 80 T 62 80 T 80 80" fill="none" stroke="#4aa6ff" stroke-width="1.4" stroke-linecap="round"/>
-
-          <!-- ouvido -->
           <g transform="translate(92 42)">
             <path d="M 18 6 C 34 6 44 20 44 36 C 44 50 36 58 30 64 C 26 68 24 72 24 76 C 24 80 20 82 16 80 C 10 78 8 72 10 66 C 6 62 2 54 2 42 C 2 22 8 6 18 6 Z"
                   fill="url(#earGrad)" stroke="#4aa6ff" stroke-width="1.6" stroke-linejoin="round"/>
@@ -228,21 +222,18 @@
                   fill="none" stroke="#4aa6ff" stroke-width="1.4" stroke-linecap="round"/>
             <circle class="eardot" cx="26" cy="38" r="2" fill="#4aa6ff"/>
           </g>
-
-          <!-- faiscas -->
           <circle class="spark" cx="118" cy="78" r="1.2" fill="#4aa6ff"/>
           <circle class="spark" cx="126" cy="92" r="1.2" fill="#4aa6ff"/>
           <circle class="spark" cx="112" cy="96" r="1.2" fill="#4aa6ff"/>
-          <circle class="spark" cx="130" cy="72" r="1.2" fill="#4aa6ff"/>
         </svg>
       </div>
     </div>
 
-    <!-- ===== TEXTO PRINCIPAL ===== -->
+    <!-- TEXTO PRINCIPAL -->
     <h1 class="headline">Cientistas revelaram o motivo oculto que causa o zumbido, e não é no ouvido...</h1>
     <p class="subhead">E este simples ritual de 7 segundos já silenciou o zumbido de mais de 20 mil pessoas</p>
 
-    <!-- ===== SELOS ===== -->
+    <!-- SELOS -->
     <div class="pills">
       <span class="pill">
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg>
@@ -258,7 +249,7 @@
       </span>
     </div>
 
-    <!-- ===== BOTAO 1: REVELAR RITUAL -> VSL.HTML ===== -->
+    <!-- BOTÃO 1 -->
     <a href="vsl.html#comentarios" class="cta">REVELAR RITUAL</a>
 
     <div class="lock">
@@ -266,7 +257,7 @@
       Conteúdo disponível por tempo limitado
     </div>
 
-    <!-- ===== DEPOIMENTOS PRÉ-SELL ===== -->
+    <!-- DEPOIMENTOS PRÉ-SELL -->
     <div class="tcard">
       <div class="thead">
         <div class="avatar">RA</div>
@@ -291,25 +282,22 @@
       <p class="tquote"><span class="qm">"</span> Nunca imaginei que a causa estava tão perto. Ainda bem que descobri isso logo, já estava enlouquecendo com aquele chiado no ouvido. <span class="qm">"</span></p>
     </div>
 
-    <!-- ===== BOTAO 2: DESCUBRA AGORA -> VSL.HTML ===== -->
+    <!-- BOTÃO 2 -->
     <a href="vsl.html#comentarios" class="cta cta-bottom">Descubra agora porque o zumbido não vem do ouvido</a>
 
   </div>
 
   <script>
-    // Repassa os parâmetros da URL atual (utm_source, utm_campaign, etc.)
-    // para a página da VSL, preservando a âncora #comentarios
+    // Gerenciador seguro de redirecionamento preservando UTMs e âncora
     (function(){
-      var qs = window.location.search;
-      if(!qs) return;
-      var params = qs.substring(1);
-      document.querySelectorAll('a.cta').forEach(function(a){
-        var href = a.getAttribute('href');
-        if(!href) return;
-        var parts = href.split('#');
-        var base = parts[0];
-        var hash = parts[1] ? '#' + parts[1] : '';
-        a.setAttribute('href', base + (base.indexOf('?') > -1 ? '&' : '?') + params + hash);
+      document.querySelectorAll('a.cta').forEach(function(btn){
+        btn.addEventListener('click', function(e){
+          e.preventDefault();
+          var search = window.location.search || '';
+          // Garante compatibilidade tanto com vsl quanto com vsl.html
+          var targetBase = 'vsl.html';
+          window.location.href = targetBase + search + '#comentarios';
+        });
       });
     })();
   </script>
