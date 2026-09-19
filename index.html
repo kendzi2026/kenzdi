@@ -25,24 +25,11 @@
       min-height:100vh;
       line-height:1.5;
     }
-    .page{max-width:640px;margin:0 auto;padding:20px 22px 44px}
+    .page{max-width:640px;margin:0 auto;padding:0 22px 44px}
 
-    /* ===== TEXTO ===== */
-    .headline{
-      text-align:center;font-weight:800;
-      font-size:clamp(26px,7.5vw,38px);
-      line-height:1.18;letter-spacing:-.5px;
-      margin-bottom:12px;
-    }
-    .subhead{
-      text-align:center;color:var(--texto);font-weight:400;
-      font-size:clamp(15px,4vw,18px);
-      line-height:1.5;margin-bottom:20px;
-    }
-
-    /* ===== CONTAINER VSL ===== */
+    /* ===== CONTAINER VSL (VTURB) ===== */
     .vsl-container{
-      margin:18px auto;
+      margin:20px auto 10px;
       max-width:400px;
       border-radius:14px;
       overflow:hidden;
@@ -50,15 +37,28 @@
       border:1px solid var(--card-borda);
     }
 
+    /* ===== TEXTO ===== */
+    .headline{
+      text-align:center;font-weight:800;
+      font-size:clamp(30px,8.6vw,44px);
+      line-height:1.12;letter-spacing:-.5px;
+      margin-top:20px;
+    }
+    .subhead{
+      text-align:center;color:var(--texto);font-weight:400;
+      font-size:clamp(16px,4.4vw,20px);
+      line-height:1.5;margin-top:18px;
+    }
+
     /* ===== SELOS ===== */
-    .pills{display:flex;flex-wrap:wrap;justify-content:center;gap:10px;margin:20px 0 10px}
+    .pills{display:flex;flex-wrap:wrap;justify-content:center;gap:10px;margin-top:22px}
     .pill{
       display:inline-flex;align-items:center;gap:8px;
       border:1px solid rgba(52,197,120,.42);
       background:rgba(19,38,27,.5);
       color:#5fd48b;font-weight:600;
-      border-radius:30px;padding:8px 16px;
-      font-size:clamp(13px,3.5vw,15px);
+      border-radius:30px;padding:9px 18px;
+      font-size:clamp(14px,3.8vw,16px);
     }
     .pill svg{color:var(--verde);flex:none}
 
@@ -67,10 +67,10 @@
       display:block;text-decoration:none;text-align:center;color:#fff;
       background:linear-gradient(180deg,var(--azul),var(--azul-2));
       font-weight:800;
-      font-size:clamp(18px,5vw,22px);
+      font-size:clamp(18px,5vw,24px);
       letter-spacing:.5px;
-      padding:20px 18px;border-radius:16px;
-      margin:22px 0 14px;
+      padding:22px 18px;border-radius:16px;
+      margin:26px 0 14px;
       box-shadow:0 10px 30px rgba(37,99,235,.42);
       transition:filter .12s ease, transform .12s ease;
     }
@@ -78,9 +78,9 @@
     .cta:active{transform:scale(.99)}
     .cta:focus-visible{outline:3px solid #93c5fd;outline-offset:3px}
     .cta-bottom{
-      font-size:clamp(15px,4.2vw,18px);
+      font-size:clamp(15px,4.2vw,19px);
       font-weight:700;letter-spacing:0;line-height:1.35;
-      margin-top:28px;
+      margin-top:30px;
     }
 
     .lock{
@@ -90,35 +90,27 @@
     }
     .lock svg{flex:none}
 
-    /* ===== DEPOIMENTOS / COMENTÁRIOS ===== */
-    .comments-title{
-      font-size:clamp(18px,4.8vw,22px);
-      font-weight:700;
-      margin-top:34px;
-      padding-bottom:10px;
-      border-bottom:1px solid var(--card-borda);
-      color:#e8edf3;
-    }
+    /* ===== DEPOIMENTOS ===== */
     .tcard{
       background:var(--card);
       border:1px solid var(--card-borda);
       border-radius:16px;
       padding:20px 20px 22px;
-      margin-top:16px;
+      margin-top:20px;
     }
     .thead{display:flex;align-items:center;gap:14px}
     .avatar{
-      width:50px;height:50px;border-radius:50%;flex:none;
+      width:52px;height:52px;border-radius:50%;flex:none;
       object-fit:cover;
       display:flex;align-items:center;justify-content:center;
-      font-weight:700;color:#cdd6e0;font-size:15px;letter-spacing:.5px;
+      font-weight:700;color:#cdd6e0;font-size:16px;letter-spacing:.5px;
       background:linear-gradient(135deg,#2a3646,#1b2430);
       border:1px solid #2a3542;
     }
     .tname{font-weight:700;color:#e8edf3;font-size:clamp(15px,4vw,17px)}
     .tquote{
-      color:#9aa4b2;margin-top:14px;line-height:1.6;
-      font-size:clamp(14px,3.8vw,16px);
+      color:#9aa4b2;margin-top:16px;line-height:1.6;
+      font-size:clamp(15px,4vw,17px);
     }
     .qm{color:#3aa0e0;font-weight:700}
   </style>
@@ -128,10 +120,6 @@
 </head>
 <body>
   <div class="page">
-
-    <!-- ===== HEADLINE ===== -->
-    <h1 class="headline">Cientistas revelaram o motivo oculto que causa o zumbido, e não é no ouvido...</h1>
-    <p class="subhead">Assista ao vídeo abaixo para descobrir o ritual de 7 segundos que já silenciou o zumbido de mais de 20 mil pessoas</p>
 
     <!-- ===== PLAYER DA VSL (VTURB) ===== -->
     <div class="vsl-container">
@@ -145,6 +133,11 @@
         document.head.appendChild(s);
       </script>
     </div>
+
+    <!-- ===== TEXTO PRINCIPAL ===== -->
+    <h1 class="headline">Cientistas revelaram o motivo oculto que causa o zumbido, e não é no ouvido...</h1>
+
+    <p class="subhead">E este simples ritual de 7 segundos já silenciou o zumbido de mais de 20 mil pessoas</p>
 
     <!-- ===== SELOS ===== -->
     <div class="pills">
@@ -162,17 +155,15 @@
       </span>
     </div>
 
-    <!-- ===== BOTÃO CHECKOUT PRINCIPAL ===== -->
-    <a href="https://checkout.escalepay.com/2599879" class="cta">QUERO SILENCIAR O ZUMBIDO AGORA</a>
+    <!-- ===== CTA PRINCIPAL -> CHECKOUT ===== -->
+    <a href="https://checkout.escalepay.com/2599879" class="cta">REVELAR RITUAL</a>
 
     <div class="lock">
       <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>
       Conteúdo disponível por tempo limitado
     </div>
 
-    <!-- ===== COMENTÁRIOS / DEPOIMENTOS ===== -->
-    <div class="comments-title">Comentários mais relevantes</div>
-
+    <!-- ===== DEPOIMENTOS ===== -->
     <div class="tcard">
       <div class="thead">
         <img class="avatar" src="img/1a.jpg" alt="Roberto Almeida">
@@ -197,14 +188,14 @@
       <p class="tquote"><span class="qm">"</span> Nunca imaginei que a causa estava tão perto. Ainda bem que descobri isso logo, já estava enlouquecendo com aquele chiado no ouvido. <span class="qm">"</span></p>
     </div>
 
-    <!-- ===== BOTÃO CHECKOUT FINAL ===== -->
-    <a href="https://checkout.escalepay.com/2599879" class="cta cta-bottom">Garantir Meu Acesso ao Método</a>
+    <!-- ===== CTA FINAL -> CHECKOUT ===== -->
+    <a href="https://checkout.escalepay.com/2599879" class="cta cta-bottom">Descubra agora porque o zumbido não vem do ouvido</a>
 
   </div>
 
   <script>
     // Repassa os parametros da URL atual (utm_source, utm_campaign, etc.)
-    // para os botoes de checkout.
+    // para os botoes, mantendo o trackeamento ate o checkout.
     (function(){
       var qs = window.location.search;
       if(!qs) return;
