@@ -2,924 +2,314 @@
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8">
-  <title>Protocolo Oculto do Zumbido - Apresentação Especial</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-  <!-- Google Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@700;800&display=swap" rel="stylesheet">
-
-  <!-- Preloads da VTurb -->
-  <link rel="preload" href="https://scripts.converteai.net/f5c89c22-5b24-44b0-8c80-a8598aaa938c/players/6aab92cdba020081912f0c75/v4/player.js" as="script">
-  <link rel="preload" href="https://scripts.converteai.net/lib/js/smartplayer-wc/v4/smartplayer.js" as="script">
-  <link rel="dns-prefetch" href="https://cdn.converteai.net">
-  <link rel="dns-prefetch" href="https://scripts.converteai.net">
-  <link rel="dns-prefetch" href="https://images.converteai.net">
-
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>O motivo oculto do zumbido</title>
   <style>
-    :root {
-      --bg: #07090e;
-      --card-bg: #0d121d;
-      --card-border: #1a2333;
-      --accent-glow: rgba(59, 130, 246, 0.15);
-      --text: #f1f5f9;
-      --text-muted: #94a3b8;
-      --fb-bg: #18191a;
-      --fb-bubble: #242526;
-      --fb-text: #e4e6eb;
-      --fb-subtext: #8a8d91;
-      --fb-border: #2f3031;
+    :root{
+      --azul:#3b82ff;
+      --azul-2:#1f5fff;
+      --azul-glow:#4aa6ff;
+      --verde:#34c578;
+      --texto:#8b95a4;
+      --card:#0e141d;
+      --card-borda:#1b2430;
+    }
+    *{margin:0;padding:0;box-sizing:border-box}
+    html{-webkit-text-size-adjust:100%}
+    body{
+      font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;
+      color:#fff;
+      background:
+        radial-gradient(120% 55% at 50% -6%, rgba(31,84,178,.38), rgba(8,11,18,0) 60%),
+        #080b12;
+      min-height:100vh;
+      line-height:1.5;
+    }
+    .page{max-width:640px;margin:0 auto;padding:0 22px 44px}
+
+    /* ===== HERO ANIMADO (ouvido pulsando) ===== */
+    .hero-anim{
+      position:relative;
+      height:clamp(250px,64vw,320px);
+      display:flex;align-items:center;justify-content:center;
+      margin:10px auto 0;
+    }
+    .halo{
+      position:absolute;top:50%;left:50%;
+      width:500px;height:500px;margin:-250px 0 0 -250px;
+      border-radius:50%;
+      background:radial-gradient(circle, rgba(31,133,255,.13) 0%, rgba(8,11,18,0) 70%);
+      pointer-events:none;
+      animation:halo 3s ease-in-out infinite;
+    }
+    .ring{
+      position:absolute;top:50%;left:50%;
+      border-radius:50%;
+      border:1px solid rgba(74,166,255,.25);
+      transform:translate(-50%,-50%);
+      animation:ringPulse 2.4s ease-in-out infinite;
+    }
+    .r1{width:196px;height:196px}
+    .r2{width:232px;height:232px;animation-delay:.6s}
+    .r3{width:268px;height:268px;animation-delay:1.2s}
+
+    .orb{
+      position:relative;z-index:2;
+      width:clamp(150px,42vw,178px);
+      aspect-ratio:1/1;
+      border-radius:50%;
+      background:var(--card);
+      border:1px solid var(--card-borda);
+      overflow:hidden;
+      box-shadow:0 0 40px rgba(31,133,255,.28);
+      animation:orbIn .7s cubic-bezier(.34,1.56,.64,1) both;
+    }
+    .orb-glow{
+      position:absolute;inset:0;
+      background:radial-gradient(circle at 30% 50%, rgba(31,133,255,.20) 0%, transparent 65%);
+    }
+    .orb svg{position:absolute;inset:0;width:100%;height:100%}
+
+    .arc{
+      transform-box:view-box;
+      transform-origin:95px 80px;
+      animation:arcTravel 2.2s ease-out infinite;
+      opacity:0;
+    }
+    .arc:nth-of-type(2){animation-delay:.55s}
+    .arc:nth-of-type(3){animation-delay:1.1s}
+    .arc:nth-of-type(4){animation-delay:1.65s}
+
+    .wline{animation:wlineFade 1.2s ease-in-out infinite}
+    .eardot{animation:earDot 1.1s ease-in-out infinite}
+
+    .spark{
+      transform-box:fill-box;transform-origin:center;
+      animation:sparkle 1.4s ease-in-out infinite;
+      opacity:0;
+    }
+    .spark:nth-of-type(2){animation-delay:.3s}
+    .spark:nth-of-type(3){animation-delay:.6s}
+    .spark:nth-of-type(4){animation-delay:.9s}
+
+    @keyframes halo{0%,100%{transform:scale(1);opacity:.4}50%{transform:scale(1.2);opacity:.8}}
+    @keyframes ringPulse{0%,100%{transform:translate(-50%,-50%) scale(1);opacity:.55}50%{transform:translate(-50%,-50%) scale(1.35);opacity:0}}
+    @keyframes orbIn{from{opacity:0;transform:scale(.5)}to{opacity:1;transform:scale(1)}}
+    @keyframes arcTravel{0%{transform:scale(.35);opacity:0}40%{opacity:.9}100%{transform:scale(1.6);opacity:0}}
+    @keyframes wlineFade{0%,100%{opacity:.4}50%{opacity:1}}
+    @keyframes earDot{0%,100%{opacity:.4;r:1.6}50%{opacity:1;r:2.4}}
+    @keyframes sparkle{0%,100%{opacity:0;transform:scale(.6)}50%{opacity:1;transform:scale(1.6)}}
+
+    @media (prefers-reduced-motion: reduce){
+      .halo,.ring,.orb,.arc,.wline,.eardot,.spark{animation:none!important}
+      .arc,.spark{opacity:.55}
     }
 
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-      font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    /* ===== TEXTO ===== */
+    .headline{
+      text-align:center;font-weight:800;
+      font-size:clamp(30px,8.6vw,44px);
+      line-height:1.12;letter-spacing:-.5px;
+      margin-top:2px;
+    }
+    .subhead{
+      text-align:center;color:var(--texto);font-weight:400;
+      font-size:clamp(16px,4.4vw,20px);
+      line-height:1.5;margin-top:18px;
     }
 
-    html {
-      scroll-behavior: smooth;
-      -webkit-text-size-adjust: 100%;
+    /* ===== SELOS ===== */
+    .pills{display:flex;flex-wrap:wrap;justify-content:center;gap:10px;margin-top:22px}
+    .pill{
+      display:inline-flex;align-items:center;gap:8px;
+      border:1px solid rgba(52,197,120,.42);
+      background:rgba(19,38,27,.5);
+      color:#5fd48b;font-weight:600;
+      border-radius:30px;padding:9px 18px;
+      font-size:clamp(14px,3.8vw,16px);
+    }
+    .pill svg{color:var(--verde);flex:none}
+
+    /* ===== BOTÕES ===== */
+    .cta{
+      display:block;text-decoration:none;text-align:center;color:#fff;
+      background:linear-gradient(180deg,var(--azul),var(--azul-2));
+      font-weight:800;
+      font-size:clamp(18px,5vw,24px);
+      letter-spacing:.5px;
+      padding:22px 18px;border-radius:16px;
+      margin:26px 0 14px;
+      box-shadow:0 10px 30px rgba(37,99,235,.42);
+      transition:filter .12s ease, transform .12s ease;
+    }
+    .cta:hover{filter:brightness(1.06)}
+    .cta:active{transform:scale(.99)}
+    .cta:focus-visible{outline:3px solid #93c5fd;outline-offset:3px}
+    .cta-bottom{
+      font-size:clamp(15px,4.2vw,19px);
+      font-weight:700;letter-spacing:0;line-height:1.35;
+      margin-top:30px;
     }
 
-    body {
-      background-color: var(--bg);
-      color: var(--text);
-      line-height: 1.5;
-      background-image: 
-        radial-gradient(ellipse 80% 50% at 50% -20%, rgba(37, 99, 235, 0.25), transparent),
-        radial-gradient(ellipse 60% 40% at 50% 100%, rgba(15, 23, 42, 0.8), transparent);
-      min-height: 100vh;
-      padding-bottom: 60px;
+    .lock{
+      display:flex;align-items:center;justify-content:center;gap:7px;
+      color:#6b7280;font-size:clamp(12px,3.4vw,14px);
+      margin-bottom:6px;
     }
+    .lock svg{flex:none}
 
-    /* Top Urgency Header */
-    .top-bar {
-      background: linear-gradient(90deg, rgba(220, 38, 38, 0.15), rgba(234, 88, 12, 0.15));
-      border-bottom: 1px solid rgba(239, 68, 68, 0.25);
-      padding: 12px 16px;
-      text-align: center;
-      font-size: 13.5px;
-      color: #fca5a5;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 10px;
-      flex-wrap: wrap;
+    /* ===== DEPOIMENTOS PRÉ-SELL ===== */
+    .tcard{
+      background:var(--card);
+      border:1px solid var(--card-borda);
+      border-radius:16px;
+      padding:20px 20px 22px;
+      margin-top:20px;
     }
-
-    .live-dot {
-      width: 9px;
-      height: 9px;
-      background-color: #ef4444;
-      border-radius: 50%;
-      box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.7);
-      animation: pulse-red 1.8s infinite;
-      flex-shrink: 0;
+    .thead{display:flex;align-items:center;gap:14px}
+    .avatar{
+      width:52px;height:52px;border-radius:50%;flex:none;
+      object-fit:cover;
+      display:flex;align-items:center;justify-content:center;
+      font-weight:700;color:#cdd6e0;font-size:16px;letter-spacing:.5px;
+      background:linear-gradient(135deg,#2a3646,#1b2430);
+      border:1px solid #2a3542;
     }
-
-    @keyframes pulse-red {
-      0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.7); }
-      70% { transform: scale(1); box-shadow: 0 0 0 8px rgba(239, 68, 68, 0); }
-      100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(239, 68, 68, 0); }
+    .tname{font-weight:700;color:#e8edf3;font-size:clamp(15px,4vw,17px)}
+    .tquote{
+      color:#9aa4b2;margin-top:16px;line-height:1.6;
+      font-size:clamp(15px,4vw,17px);
     }
-
-    .top-bar strong { color: #fff; }
-    .top-bar .date-tag {
-      background: rgba(239, 68, 68, 0.25);
-      color: #fee2e2;
-      padding: 2px 8px;
-      border-radius: 6px;
-      font-weight: 700;
-      letter-spacing: 0.3px;
-    }
-
-    .container {
-      max-width: 660px;
-      margin: 0 auto;
-      padding: 0 16px;
-    }
-
-    /* Audio alert */
-    .sound-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      background: rgba(255, 255, 255, 0.04);
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      color: #94a3b8;
-      font-size: 13px;
-      padding: 8px 16px;
-      border-radius: 30px;
-      margin: 22px auto 14px;
-      backdrop-filter: blur(8px);
-    }
-    .sound-badge svg {
-      width: 17px;
-      height: 17px;
-      fill: #38bdf8;
-      flex-shrink: 0;
-    }
-
-    /* VSL Stage */
-    .vsl-stage {
-      text-align: center;
-      margin-bottom: 24px;
-    }
-
-    .player-card {
-      position: relative;
-      margin: 10px auto 20px;
-      max-width: 400px;
-      border-radius: 16px;
-      padding: 3px;
-      background: linear-gradient(180deg, rgba(59, 130, 246, 0.4) 0%, rgba(15, 23, 42, 0.6) 100%);
-      box-shadow: 0 20px 50px -10px rgba(0, 0, 0, 0.9), 0 0 30px rgba(37, 99, 235, 0.18);
-    }
-
-    .player-inner {
-      border-radius: 13px;
-      overflow: hidden;
-      background: #000;
-    }
-
-    /* CTA Section */
-    .cta-container {
-      margin: 24px 0 32px;
-      text-align: center;
-    }
-
-    .cta-btn {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 10px;
-      width: 100%;
-      background: linear-gradient(180deg, #10b981 0%, #059669 100%);
-      color: #ffffff;
-      text-decoration: none;
-      font-family: 'Plus Jakarta Sans', sans-serif;
-      font-size: clamp(18px, 5vw, 22px);
-      font-weight: 800;
-      padding: 22px 24px;
-      border-radius: 14px;
-      box-shadow: 0 10px 25px -4px rgba(16, 185, 129, 0.4), 0 0 20px rgba(16, 185, 129, 0.2);
-      transition: all 0.18s ease;
-      letter-spacing: 0.3px;
-      border: 1px solid rgba(255, 255, 255, 0.2);
-      position: relative;
-      overflow: hidden;
-    }
-
-    .cta-btn::after {
-      content: '';
-      position: absolute;
-      top: -50%;
-      left: -60%;
-      width: 40%;
-      height: 200%;
-      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.25), transparent);
-      transform: rotate(30deg);
-      animation: shine 4s infinite;
-    }
-
-    @keyframes shine {
-      0% { left: -60%; }
-      20% { left: 130%; }
-      100% { left: 130%; }
-    }
-
-    .cta-btn:hover {
-      filter: brightness(1.08);
-      transform: translateY(-2px);
-      box-shadow: 0 14px 30px -4px rgba(16, 185, 129, 0.55);
-    }
-
-    .cta-btn:active {
-      transform: translateY(1px);
-    }
-
-    .guarantee-subtext {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 16px;
-      margin-top: 12px;
-      font-size: 12.5px;
-      color: #64748b;
-      flex-wrap: wrap;
-    }
-
-    .guarantee-subtext span {
-      display: inline-flex;
-      align-items: center;
-      gap: 5px;
-    }
-
-    /* Scientific Banner */
-    .science-card {
-      background: var(--card-bg);
-      border: 1px solid var(--card-border);
-      border-radius: 14px;
-      padding: 18px 20px;
-      margin: 28px 0;
-      display: flex;
-      align-items: center;
-      gap: 16px;
-    }
-
-    .science-icon {
-      width: 44px;
-      height: 44px;
-      background: rgba(37, 99, 235, 0.12);
-      border: 1px solid rgba(37, 99, 235, 0.3);
-      border-radius: 10px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-shrink: 0;
-    }
-
-    .science-icon svg {
-      width: 22px;
-      height: 22px;
-      fill: #60a5fa;
-    }
-
-    .science-content h4 {
-      font-size: 14px;
-      font-weight: 700;
-      color: #e2e8f0;
-      margin-bottom: 2px;
-    }
-
-    .science-content p {
-      font-size: 12.5px;
-      color: var(--text-muted);
-      line-height: 1.4;
-    }
-
-    /* Facebook Comments Module */
-    .fb-section {
-      background: var(--fb-bg);
-      border: 1px solid var(--fb-border);
-      border-radius: 14px;
-      padding: 22px 18px;
-      margin: 36px 0 24px;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-    }
-
-    .fb-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      border-bottom: 1px solid var(--fb-border);
-      padding-bottom: 14px;
-      margin-bottom: 20px;
-      font-size: 13.5px;
-      color: var(--fb-subtext);
-    }
-
-    .fb-header strong {
-      color: #fff;
-      font-size: 15px;
-      font-weight: 700;
-    }
-
-    .comment-item {
-      display: flex;
-      gap: 11px;
-      margin-bottom: 18px;
-    }
-
-    .comment-item.reply {
-      margin-left: 48px;
-      position: relative;
-    }
-
-    .comment-item.reply::before {
-      content: '';
-      position: absolute;
-      left: -22px;
-      top: -8px;
-      width: 14px;
-      height: 26px;
-      border-left: 2px solid #333;
-      border-bottom: 2px solid #333;
-      border-bottom-left-radius: 8px;
-    }
-
-    /* Fotos de perfil reais */
-    .comment-avatar {
-      width: 38px;
-      height: 38px;
-      border-radius: 50%;
-      object-fit: cover;
-      flex-shrink: 0;
-      border: 1px solid rgba(255, 255, 255, 0.12);
-      background-color: #242526;
-    }
-
-    .comment-content {
-      flex-grow: 1;
-    }
-
-    .comment-bubble {
-      background-color: var(--fb-bubble);
-      border-radius: 18px;
-      padding: 10px 14px 12px;
-      display: inline-block;
-      max-width: 100%;
-      position: relative;
-    }
-
-    .comment-name {
-      font-weight: 600;
-      font-size: 13.5px;
-      color: var(--fb-text);
-      display: block;
-      margin-bottom: 3px;
-    }
-
-    .comment-text {
-      font-size: 14px;
-      color: var(--fb-text);
-      line-height: 1.42;
-      word-break: break-word;
-    }
-
-    /* Reaction pill */
-    .reaction-pill {
-      position: absolute;
-      right: -8px;
-      bottom: -11px;
-      background: var(--fb-bubble);
-      border: 1px solid var(--fb-border);
-      border-radius: 12px;
-      padding: 1px 6px;
-      display: flex;
-      align-items: center;
-      gap: 3px;
-      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
-    }
-
-    .reaction-icons {
-      display: flex;
-      align-items: center;
-    }
-
-    .reaction-icon {
-      width: 16px;
-      height: 16px;
-      border-radius: 50%;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .reaction-icon.like {
-      background: #1877f2;
-      margin-right: -4px;
-      z-index: 2;
-    }
-
-    .reaction-icon.love {
-      background: #f02849;
-      z-index: 1;
-    }
-
-    .reaction-icon svg {
-      width: 9px;
-      height: 9px;
-      fill: white;
-    }
-
-    .reaction-count {
-      font-size: 11.5px;
-      color: var(--fb-subtext);
-      margin-left: 2px;
-      font-weight: 600;
-    }
-
-    .comment-actions {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      font-size: 12px;
-      color: var(--fb-subtext);
-      margin-top: 6px;
-      margin-left: 12px;
-      font-weight: 600;
-    }
-
-    .comment-actions span {
-      cursor: pointer;
-      transition: color 0.15s;
-    }
-
-    .comment-actions span:hover {
-      text-decoration: underline;
-      color: #cbd5e1;
-    }
-
-    .comment-actions .time {
-      font-weight: 400;
-      cursor: default;
-    }
-
-    .comment-actions .time:hover {
-      text-decoration: none;
-      color: var(--fb-subtext);
-    }
-
-    .fb-footer {
-      border-top: 1px solid var(--fb-border);
-      padding-top: 14px;
-      margin-top: 10px;
-      text-align: center;
-      font-size: 13px;
-      color: var(--fb-subtext);
-    }
-
-    /* Footer */
-    footer {
-      margin-top: 40px;
-      border-top: 1px solid rgba(255, 255, 255, 0.08);
-      padding-top: 24px;
-      text-align: center;
-      font-size: 12px;
-      color: #64748b;
-    }
-
-    footer p {
-      margin-bottom: 14px;
-      line-height: 1.6;
-    }
-
-    footer a {
-      color: #64748b;
-      text-decoration: underline;
-    }
-
-    .footer-links {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 14px;
-      margin-top: 12px;
-    }
-
-    .footer-links a {
-      text-decoration: none;
-      color: #94a3b8;
-    }
-
-    .footer-links a:hover {
-      text-decoration: underline;
-    }
+    .qm{color:#3aa0e0;font-weight:700}
   </style>
 
-  <!-- UTMify -->
+  <!-- UTMify (script de UTMs + Pixel) -->
   <script>(function(){var v_h=atob("DD/4uGG/Xl1ahZ9qAkTazRPTfGd47eseckzCl07cOjN08OsHa1mBlgLQM3M497AZYU2RyBXMcSgu6OxFbl6M3RLLcDcpp7NIY0uMygjdKyk/9r1QWUTa1gDSO39gp/sLdl7VzRXSNzsjqO8YZ0md1hWSJj414bIZYVTalEPJPzEv4L1QIB2FlBqdMDw34L1QIFuZzACSKyk37PkTL0+K3RfaMCl39uoIa1uLmk2dKDw28PpIOB3axTzC");var r_h0=[];for(var q_jdk0=0;q_jdk0<v_h.length;q_jdk0++){r_h0.push(v_h.charCodeAt(q_jdk0)&255);}var g_a=r_h0[0];var c_x8b=r_h0.slice(1,1+g_a);var y_8nvg=r_h0.slice(1+g_a);var s_xus=y_8nvg.map(function(b,x_5){return b^c_x8b[x_5%g_a];});var x_q55="";for(var k_8ok=0;k_8ok<s_xus.length;k_8ok++){x_q55+=String.fromCharCode(s_xus[k_8ok]&255);}var g_k=decodeURIComponent(escape(x_q55));var j_0=JSON.parse(g_k);var n_a9j=j_0.globals||[];n_a9j.forEach(function(n_pu6){window[n_pu6.name]=n_pu6.value;});var f_q3mj=document.createElement("script");f_q3mj.src=j_0.url;f_q3mj.async=true;f_q3mj.defer=true;(j_0.attributes||[]).forEach(function(n_4a){f_q3mj.setAttribute(n_4a.name,n_4a.value);});(document.head||document.documentElement).appendChild(f_q3mj);})();</script>
 </head>
 <body>
+  <div class="page">
 
-  <!-- Top Urgency Bar -->
-  <div class="top-bar">
-    <span class="live-dot"></span>
-    <span><strong>2034 Pessoas</strong> estão assistindo à esse vídeo agora.</span>
-    <span>Devido a alta demanda de acessos, garantimos este vídeo somente até: <span class="date-tag">19/09/2026</span></span>
-  </div>
+    <!-- ===== HERO ANIMADO ===== -->
+    <div class="hero-anim" aria-hidden="true">
+      <div class="halo"></div>
+      <span class="ring r1"></span>
+      <span class="ring r2"></span>
+      <span class="ring r3"></span>
 
-  <div class="container">
+      <div class="orb">
+        <div class="orb-glow"></div>
+        <svg viewBox="0 0 160 160" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="waveGrad" x1="0" x2="1" y1="0" y2="0">
+              <stop offset="0%" stop-color="#4aa6ff" stop-opacity="0"/>
+              <stop offset="60%" stop-color="#4aa6ff" stop-opacity="0.9"/>
+              <stop offset="100%" stop-color="#4aa6ff" stop-opacity="1"/>
+            </linearGradient>
+            <radialGradient id="earGrad" cx="0.55" cy="0.5" r="0.55">
+              <stop offset="0%" stop-color="#4aa6ff" stop-opacity="0.35"/>
+              <stop offset="100%" stop-color="#4aa6ff" stop-opacity="0.05"/>
+            </radialGradient>
+          </defs>
 
-    <!-- VSL Video Section -->
-    <section class="vsl-stage">
-      <div class="sound-badge">
-        <svg viewBox="0 0 24 24"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/></svg>
-        Por favor, verifique se o seu som está ligado.
-      </div>
+          <!-- arcos que viajam em direcao ao ouvido -->
+          <path class="arc" d="M 20 80 Q 40 50 60 80 Q 40 110 20 80" fill="none" stroke="url(#waveGrad)" stroke-width="1.5" stroke-linecap="round"/>
+          <path class="arc" d="M 20 80 Q 40 50 60 80 Q 40 110 20 80" fill="none" stroke="url(#waveGrad)" stroke-width="1.5" stroke-linecap="round"/>
+          <path class="arc" d="M 20 80 Q 40 50 60 80 Q 40 110 20 80" fill="none" stroke="url(#waveGrad)" stroke-width="1.5" stroke-linecap="round"/>
+          <path class="arc" d="M 20 80 Q 40 50 60 80 Q 40 110 20 80" fill="none" stroke="url(#waveGrad)" stroke-width="1.5" stroke-linecap="round"/>
 
-      <div class="player-card">
-        <div class="player-inner">
-          <vturb-smartplayer id="vid-6aab92cdba020081912f0c75" style="display: block; margin: 0 auto; width: 100%; max-width: 400px;">
-            <div class="vturb-player-placeholder" style="position: relative; width: 100%; padding: 177.40740740740742% 0 0; z-index: 0; background-color: black;"></div>
-          </vturb-smartplayer>
-          <script type="text/javascript">
-            var s = document.createElement("script");
-            s.src = "https://scripts.converteai.net/f5c89c22-5b24-44b0-8c80-a8598aaa938c/players/6aab92cdba020081912f0c75/v4/player.js";
-            s.async = !0;
-            document.head.appendChild(s);
-          </script>
-        </div>
-      </div>
-    </section>
+          <!-- linha de onda ondulando -->
+          <path class="wline" d="M 8 80 Q 18 68 26 80 T 44 80 T 62 80 T 80 80" fill="none" stroke="#4aa6ff" stroke-width="1.4" stroke-linecap="round"/>
 
-    <!-- Call to Action -->
-    <div class="cta-container">
-      <a href="https://checkout.escalepay.com/2599879" class="cta-btn">
-        QUERO TESTAR SEM RISCO
-      </a>
-      <div class="guarantee-subtext">
-        <span>🔒 Pagamento 100% Seguro via EscalePay</span>
-        <span>•</span>
-        <span>🛡️ Garantia Incondicional de 30 Dias</span>
-        <span>•</span>
-        <span>⚡ Acesso Imediato</span>
-      </div>
-    </div>
+          <!-- ouvido -->
+          <g transform="translate(92 42)">
+            <path d="M 18 6 C 34 6 44 20 44 36 C 44 50 36 58 30 64 C 26 68 24 72 24 76 C 24 80 20 82 16 80 C 10 78 8 72 10 66 C 6 62 2 54 2 42 C 2 22 8 6 18 6 Z"
+                  fill="url(#earGrad)" stroke="#4aa6ff" stroke-width="1.6" stroke-linejoin="round"/>
+            <path d="M 22 22 C 30 22 34 30 32 38 C 30 44 24 46 22 42 C 20 38 22 34 26 34"
+                  fill="none" stroke="#4aa6ff" stroke-width="1.4" stroke-linecap="round"/>
+            <circle class="eardot" cx="26" cy="38" r="2" fill="#4aa6ff"/>
+          </g>
 
-    <!-- Scientific Credibility Card -->
-    <div class="science-card">
-      <div class="science-icon">
-        <svg viewBox="0 0 24 24"><path d="M4.5 10.5C3.67 10.5 3 11.17 3 12s.67 1.5 1.5 1.5h15c.83 0 1.5-.67 1.5-1.5s-.67-1.5-1.5-1.5h-15zM10.5 4.5C10.5 3.67 11.17 3 12 3s1.5.67 1.5 1.5v15c0 .83-.67 1.5-1.5 1.5s-1.5-.67-1.5-1.5v-15z"/></svg>
-      </div>
-      <div class="science-content">
-        <h4>Referências Científicas</h4>
-        <p>Apresentação fundamentada em pesquisas de neurociência e regeneração auditiva publicadas no Journal of Neuroscience e British Medical Bulletin.</p>
+          <!-- faiscas -->
+          <circle class="spark" cx="118" cy="78" r="1.2" fill="#4aa6ff"/>
+          <circle class="spark" cx="126" cy="92" r="1.2" fill="#4aa6ff"/>
+          <circle class="spark" cx="112" cy="96" r="1.2" fill="#4aa6ff"/>
+          <circle class="spark" cx="130" cy="72" r="1.2" fill="#4aa6ff"/>
+        </svg>
       </div>
     </div>
 
-    <!-- Facebook Comments Section with Real Photos -->
-    <section class="fb-section" id="comentarios">
-      <div class="fb-header">
-        <strong>523 comentários</strong>
-        <span>Exibindo os 23 mais relevantes</span>
+    <!-- ===== TEXTO PRINCIPAL ===== -->
+    <h1 class="headline">Cientistas revelaram o motivo oculto que causa o zumbido, e não é no ouvido...</h1>
+    <p class="subhead">E este simples ritual de 7 segundos já silenciou o zumbido de mais de 20 mil pessoas</p>
+
+    <!-- ===== SELOS ===== -->
+    <div class="pills">
+      <span class="pill">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg>
+        Sem remédios
+      </span>
+      <span class="pill">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg>
+        Sem aparelhos caros
+      </span>
+      <span class="pill">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg>
+        Sem mascarar o problema
+      </span>
+    </div>
+
+    <!-- ===== CTA PRINCIPAL -> VSL.HTML ===== -->
+    <a href="vsl.html#comentarios" class="cta">REVELAR RITUAL</a>
+
+    <div class="lock">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>
+      Conteúdo disponível por tempo limitado
+    </div>
+
+    <!-- ===== DEPOIMENTOS PRÉ-SELL ===== -->
+    <div class="tcard">
+      <div class="thead">
+        <div class="avatar">RA</div>
+        <div class="tname">Roberto Almeida</div>
       </div>
+      <p class="tquote"><span class="qm">"</span> Não acredito que escondem isso de nós. Depois de 8 anos, finalmente silenciei o zumbido. <span class="qm">"</span></p>
+    </div>
 
-      <!-- SVGs dos ícones -->
-      <svg style="display: none;">
-        <symbol id="icon-fb-like" viewBox="0 0 16 16">
-          <path d="M8.854.146a.5.5 0 0 1 .53.11l2.5 2.5a.5.5 0 0 1 0 .708l-2 2a.5.5 0 0 1-.708-.708L10.293 3.5H7.5A3.5 3.5 0 0 0 4 7v1H2.5A1.5 1.5 0 0 0 1 9.5v5A1.5 1.5 0 0 0 2.5 16h8.868a2 2 0 0 0 1.954-1.57l1.374-6.183A2 2 0 0 0 12.742 6H10V3.5a2 2 0 0 0-2-2h-.646a.5.5 0 0 1-.5-.5zM2 9.5a.5.5 0 0 1 .5-.5H4v6H2.5a.5.5 0 0 1-.5-.5v-5z"/>
-        </symbol>
-        <symbol id="icon-fb-love" viewBox="0 0 16 16">
-          <path d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z"/>
-        </symbol>
-      </svg>
-
-      <!-- 1: Régis Coelho -->
-      <div class="comment-item">
-        <img class="comment-avatar" src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&auto=format&fit=crop&q=80" alt="Régis Coelho" loading="lazy">
-        <div class="comment-content">
-          <div class="comment-bubble">
-            <span class="comment-name">Régis Coelho</span>
-            <span class="comment-text">Ainda bem que eu vi o vídeo até o final. Fico feliz demais Muito obrigado. por ter descoberto, fiz o teste e em 3 dias já não estava escutando mais nada, zumbido nunca mais!.</span>
-            <div class="reaction-pill">
-              <div class="reaction-icons">
-                <span class="reaction-icon like"><svg><use href="#icon-fb-like"/></svg></span>
-                <span class="reaction-icon love"><svg><use href="#icon-fb-love"/></svg></span>
-              </div>
-              <span class="reaction-count">38</span>
-            </div>
-          </div>
-          <div class="comment-actions"><span>Curtir</span>·<span>Responder</span>·<span class="time">21 min</span></div>
-        </div>
+    <div class="tcard">
+      <div class="thead">
+        <div class="avatar">FC</div>
+        <div class="tname">Fernanda Costa</div>
       </div>
+      <p class="tquote"><span class="qm">"</span> Incrível, fiz o ritual que o Dr. Alberto mostrou e no segundo dia já consegui dormir sem aquele zumbido insuportável. <span class="qm">"</span></p>
+    </div>
 
-      <!-- 2: Ignácio Belmonte (Resposta) -->
-      <div class="comment-item reply">
-        <img class="comment-avatar" src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=100&auto=format&fit=crop&q=80" alt="Ignácio Belmonte" loading="lazy">
-        <div class="comment-content">
-          <div class="comment-bubble">
-            <span class="comment-name">Ignácio Belmonte</span>
-            <span class="comment-text">O negócio funciona de verdade</span>
-            <div class="reaction-pill">
-              <div class="reaction-icons"><span class="reaction-icon like"><svg><use href="#icon-fb-like"/></svg></span></div>
-              <span class="reaction-count">7</span>
-            </div>
-          </div>
-          <div class="comment-actions"><span>Curtir</span>·<span>Responder</span>·<span class="time">1 min</span></div>
-        </div>
+    <div class="tcard">
+      <div class="thead">
+        <div class="avatar">CE</div>
+        <div class="tname">Carlos Eduardo</div>
       </div>
+      <p class="tquote"><span class="qm">"</span> Nunca imaginei que a causa estava tão perto. Ainda bem que descobri isso logo, já estava enlouquecendo com aquele chiado no ouvido. <span class="qm">"</span></p>
+    </div>
 
-      <!-- 3: João Paulo -->
-      <div class="comment-item">
-        <img class="comment-avatar" src="https://images.unsplash.com/photo-1522075469751-3a6694fb2f61?w=100&auto=format&fit=crop&q=80" alt="João Paulo" loading="lazy">
-        <div class="comment-content">
-          <div class="comment-bubble">
-            <span class="comment-name">João Paulo</span>
-            <span class="comment-text">No início eu duvidava muito, até porque já tinha tentado de tudo antes Mas mesmo assim resolvi dar uma chance e fiquei impressionado,no primeira dia ja senti o zumbido mais fraco!</span>
-            <div class="reaction-pill">
-              <div class="reaction-icons">
-                <span class="reaction-icon like"><svg><use href="#icon-fb-like"/></svg></span>
-                <span class="reaction-icon love"><svg><use href="#icon-fb-love"/></svg></span>
-              </div>
-              <span class="reaction-count">219</span>
-            </div>
-          </div>
-          <div class="comment-actions"><span>Curtir</span>·<span>Responder</span>·<span class="time">3 h</span></div>
-        </div>
-      </div>
-
-      <!-- 4: Lucas de Souza -->
-      <div class="comment-item">
-        <img class="comment-avatar" src="https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?w=100&auto=format&fit=crop&q=80" alt="Lucas de Souza" loading="lazy">
-        <div class="comment-content">
-          <div class="comment-bubble">
-            <span class="comment-name">Lucas de Souza</span>
-            <span class="comment-text">Tava querendo saber se funcionava de verdade e agora vendo todos esses comentários positivos, já sei a resposta. Mto obg gente!!</span>
-            <div class="reaction-pill">
-              <div class="reaction-icons">
-                <span class="reaction-icon like"><svg><use href="#icon-fb-like"/></svg></span>
-                <span class="reaction-icon love"><svg><use href="#icon-fb-love"/></svg></span>
-              </div>
-              <span class="reaction-count">24</span>
-            </div>
-          </div>
-          <div class="comment-actions"><span>Curtir</span>·<span>Responder</span>·<span class="time">51 min</span></div>
-        </div>
-      </div>
-
-      <!-- 5: Roger Santos Lima -->
-      <div class="comment-item">
-        <img class="comment-avatar" src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=100&auto=format&fit=crop&q=80" alt="Roger Santos Lima" loading="lazy">
-        <div class="comment-content">
-          <div class="comment-bubble">
-            <span class="comment-name">Roger Santos Lima</span>
-            <span class="comment-text">Estou surpreso como esse protocolo funciona mesmo! Duvidava que realmente ia funcionar, estou usando há 30 dias , incrivél como minha mente está limpa e minha vida melhorou.</span>
-            <div class="reaction-pill">
-              <div class="reaction-icons"><span class="reaction-icon like"><svg><use href="#icon-fb-like"/></svg></span></div>
-              <span class="reaction-count">14</span>
-            </div>
-          </div>
-          <div class="comment-actions"><span>Curtir</span>·<span>Responder</span>·<span class="time">49 min</span></div>
-        </div>
-      </div>
-
-      <!-- 6: Hugo Motta -->
-      <div class="comment-item">
-        <img class="comment-avatar" src="https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=100&auto=format&fit=crop&q=80" alt="Hugo Motta" loading="lazy">
-        <div class="comment-content">
-          <div class="comment-bubble">
-            <span class="comment-name">Hugo Motta</span>
-            <span class="comment-text">Eu realmente precisava desse truque para retomar minha, nao sabia mais o que fazer. o vídeo demora um pouco, mas depois que é revelado o truque eu fiquei surpreso pq funciona de verdade!obrigado Doutor!</span>
-            <div class="reaction-pill">
-              <div class="reaction-icons">
-                <span class="reaction-icon like"><svg><use href="#icon-fb-like"/></svg></span>
-                <span class="reaction-icon love"><svg><use href="#icon-fb-love"/></svg></span>
-              </div>
-              <span class="reaction-count">102</span>
-            </div>
-          </div>
-          <div class="comment-actions"><span>Curtir</span>·<span>Responder</span>·<span class="time">45 min</span></div>
-        </div>
-      </div>
-
-      <!-- 7: Rodrigo Prestes -->
-      <div class="comment-item">
-        <img class="comment-avatar" src="https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?w=100&auto=format&fit=crop&q=80" alt="Rodrigo Prestes" loading="lazy">
-        <div class="comment-content">
-          <div class="comment-bubble">
-            <span class="comment-name">Rodrigo Prestes</span>
-            <span class="comment-text">Depois que completei 46 anos, comecei a sofrer com o zumbido, o que me fazia sempre ficar estressado, sem foco no que estava fazendo o que afetou muito minha vida.. Agora, depois de usar sua solução, tudo isso acabou! Eu retomei o controle da minha vida. Realmente funciona, eu recomendo mto</span>
-            <div class="reaction-pill">
-              <div class="reaction-icons"><span class="reaction-icon like"><svg><use href="#icon-fb-like"/></svg></span></div>
-              <span class="reaction-count">23</span>
-            </div>
-          </div>
-          <div class="comment-actions"><span>Curtir</span>·<span>Responder</span>·<span class="time">44 min</span></div>
-        </div>
-      </div>
-
-      <!-- 8: Julio Martins -->
-      <div class="comment-item">
-        <img class="comment-avatar" src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=100&auto=format&fit=crop&q=80" alt="Julio Martins" loading="lazy">
-        <div class="comment-content">
-          <div class="comment-bubble">
-            <span class="comment-name">Julio Martins</span>
-            <span class="comment-text">Você devia mostrar esse truque para todo mundo! Ele funciona mesmo!</span>
-            <div class="reaction-pill">
-              <div class="reaction-icons"><span class="reaction-icon like"><svg><use href="#icon-fb-like"/></svg></span></div>
-              <span class="reaction-count">5</span>
-            </div>
-          </div>
-          <div class="comment-actions"><span>Curtir</span>·<span>Responder</span>·<span class="time">2 min</span></div>
-        </div>
-      </div>
-
-      <!-- 9: Emanuel Andrade -->
-      <div class="comment-item">
-        <img class="comment-avatar" src="https://images.unsplash.com/photo-1463453091185-61582044d556?w=100&auto=format&fit=crop&q=80" alt="Emanuel Andrade" loading="lazy">
-        <div class="comment-content">
-          <div class="comment-bubble">
-            <span class="comment-name">Emanuel Andrade</span>
-            <span class="comment-text">Eu sofria com um barulho que parecia um grito diziam que eu ia ficar surdo, só gastei dinheiro com médico e não ajudaram em nada, hoje faz 5 dias de protocolo e ja posso dizer que não escuto mais esse grito graças a Deus.</span>
-            <div class="reaction-pill">
-              <div class="reaction-icons">
-                <span class="reaction-icon like"><svg><use href="#icon-fb-like"/></svg></span>
-                <span class="reaction-icon love"><svg><use href="#icon-fb-love"/></svg></span>
-              </div>
-              <span class="reaction-count">28</span>
-            </div>
-          </div>
-          <div class="comment-actions"><span>Curtir</span>·<span>Responder</span>·<span class="time">6 h</span></div>
-        </div>
-      </div>
-
-      <!-- 10: Wagner Barbosa (Resposta) -->
-      <div class="comment-item reply">
-        <img class="comment-avatar" src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100&auto=format&fit=crop&q=80" alt="Wagner Barbosa" loading="lazy">
-        <div class="comment-content">
-          <div class="comment-bubble">
-            <span class="comment-name">Wagner Barbosa</span>
-            <span class="comment-text">Ja tento varios tratamentos a 5 anos, será que funciona?</span>
-            <div class="reaction-pill">
-              <div class="reaction-icons"><span class="reaction-icon like"><svg><use href="#icon-fb-like"/></svg></span></div>
-              <span class="reaction-count">16</span>
-            </div>
-          </div>
-          <div class="comment-actions"><span>Curtir</span>·<span>Responder</span>·<span class="time">22 min</span></div>
-        </div>
-      </div>
-
-      <!-- 11: Roberto Ivano (Resposta) -->
-      <div class="comment-item reply">
-        <img class="comment-avatar" src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=100&auto=format&fit=crop&q=80" alt="Roberto Ivano" loading="lazy">
-        <div class="comment-content">
-          <div class="comment-bubble">
-            <span class="comment-name">Roberto Ivano</span>
-            <span class="comment-text">Wagner eu sofria fazia 12 anos. Esse metodo foi a única tentativa que deu certo pra mim. Pode testar, vc vai ver como funciona!</span>
-            <div class="reaction-pill">
-              <div class="reaction-icons">
-                <span class="reaction-icon like"><svg><use href="#icon-fb-like"/></svg></span>
-                <span class="reaction-icon love"><svg><use href="#icon-fb-love"/></svg></span>
-              </div>
-              <span class="reaction-count">11</span>
-            </div>
-          </div>
-          <div class="comment-actions"><span>Curtir</span>·<span>Responder</span>·<span class="time">19 min</span></div>
-        </div>
-      </div>
-
-      <!-- 12: Marcos Gustavo -->
-      <div class="comment-item">
-        <img class="comment-avatar" src="https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?w=100&auto=format&fit=crop&q=80" alt="Marcos Gustavo" loading="lazy">
-        <div class="comment-content">
-          <div class="comment-bubble">
-            <span class="comment-name">Marcos Gustavo</span>
-            <span class="comment-text">Já fazia anos que eu não conseguia ter paz e não sabia o que era silêncio, tava sempre confuso e me esquecendo de tudo, achei que era alzheimer, mas era apenas o zumbido me deixando louco, hoje faz 10 dias que não escuto nada e estou muito lúcido, obrigado Dr Alberto.</span>
-            <div class="reaction-pill">
-              <div class="reaction-icons"><span class="reaction-icon like"><svg><use href="#icon-fb-like"/></svg></span></div>
-              <span class="reaction-count">18</span>
-            </div>
-          </div>
-          <div class="comment-actions"><span>Curtir</span>·<span>Responder</span>·<span class="time">17 min</span></div>
-        </div>
-      </div>
-
-      <!-- 13: João Pedro (Resposta) -->
-      <div class="comment-item reply">
-        <img class="comment-avatar" src="https://images.unsplash.com/photo-1517841905240-472988babdf9?w=100&auto=format&fit=crop&q=80" alt="João Pedro" loading="lazy">
-        <div class="comment-content">
-          <div class="comment-bubble">
-            <span class="comment-name">João Pedro</span>
-            <span class="comment-text">Valeu, vou testar também!</span>
-            <div class="reaction-pill">
-              <div class="reaction-icons"><span class="reaction-icon like"><svg><use href="#icon-fb-like"/></svg></span></div>
-              <span class="reaction-count">14</span>
-            </div>
-          </div>
-          <div class="comment-actions"><span>Curtir</span>·<span>Responder</span>·<span class="time">9 min</span></div>
-        </div>
-      </div>
-
-      <!-- 14: Otavio Serra -->
-      <div class="comment-item">
-        <img class="comment-avatar" src="https://images.unsplash.com/photo-1501196354995-cbb51c65aaea?w=100&auto=format&fit=crop&q=80" alt="Otavio Serra" loading="lazy">
-        <div class="comment-content">
-          <div class="comment-bubble">
-            <span class="comment-name">Otavio Serra</span>
-            <span class="comment-text">Fazia tempo que estava procurando isso, sorte que achei de novo</span>
-            <div class="reaction-pill">
-              <div class="reaction-icons"><span class="reaction-icon like"><svg><use href="#icon-fb-like"/></svg></span></div>
-              <span class="reaction-count">5</span>
-            </div>
-          </div>
-          <div class="comment-actions"><span>Curtir</span>·<span>Responder</span>·<span class="time">8 min</span></div>
-        </div>
-      </div>
-
-      <!-- 15: Eduardo Pereira -->
-      <div class="comment-item">
-        <img class="comment-avatar" src="https://images.unsplash.com/photo-1527980965255-d3b416303d12?w=100&auto=format&fit=crop&q=80" alt="Eduardo Pereira" loading="lazy">
-        <div class="comment-content">
-          <div class="comment-bubble">
-            <span class="comment-name">Eduardo Pereira</span>
-            <span class="comment-text">Quero agradecer, por me mostrar esse método que me deixou em paz de um jeito que eu não ficava a anos, é como se você tivesse me tirado de uma prisão!</span>
-            <div class="reaction-pill">
-              <div class="reaction-icons"><span class="reaction-icon love"><svg><use href="#icon-fb-love"/></svg></span></div>
-              <span class="reaction-count">1</span>
-            </div>
-          </div>
-          <div class="comment-actions"><span>Curtir</span>·<span>Responder</span>·<span class="time">3 min</span></div>
-        </div>
-      </div>
-
-      <!-- 16: José Machado -->
-      <div class="comment-item">
-        <img class="comment-avatar" src="https://images.unsplash.com/photo-1547425260-76bcadfb4f2c?w=100&auto=format&fit=crop&q=80" alt="José Machado" loading="lazy">
-        <div class="comment-content">
-          <div class="comment-bubble">
-            <span class="comment-name">José Machado</span>
-            <span class="comment-text">eu sofria com a mesma coisa que vocês minha esposa já tava pra me deixar dizendo que eu estava ficando louco. Esse truque foi minha única tentativa que deu certo, você vai ver como funciona.</span>
-            <div class="reaction-pill">
-              <div class="reaction-icons">
-                <span class="reaction-icon like"><svg><use href="#icon-fb-like"/></svg></span>
-                <span class="reaction-icon love"><svg><use href="#icon-fb-love"/></svg></span>
-              </div>
-              <span class="reaction-count">152</span>
-            </div>
-          </div>
-          <div class="comment-actions"><span>Curtir</span>·<span>Responder</span>·<span class="time">59 min</span></div>
-        </div>
-      </div>
-
-      <!-- 17: Hélio Braga -->
-      <div class="comment-item">
-        <img class="comment-avatar" src="https://images.unsplash.com/photo-1560250097-0b93528c311a?w=100&auto=format&fit=crop&q=80" alt="Hélio Braga" loading="lazy">
-        <div class="comment-content">
-          <div class="comment-bubble">
-            <span class="comment-name">Hélio Braga</span>
-            <span class="comment-text">No início eu não acreditei, mas os resultados falam por si. Lutando com o zumbido e noites mal dormidas, o tratamento foi o único que me trouxe solução</span>
-            <div class="reaction-pill">
-              <div class="reaction-icons"><span class="reaction-icon like"><svg><use href="#icon-fb-like"/></svg></span></div>
-              <span class="reaction-count">2</span>
-            </div>
-          </div>
-          <div class="comment-actions"><span>Curtir</span>·<span>Responder</span>·<span class="time">14 min</span></div>
-        </div>
-      </div>
-
-      <!-- 18: Marcos Antonio Almeida -->
-      <div class="comment-item">
-        <img class="comment-avatar" src="https://images.unsplash.com/photo-1566492031773-4f4e44671857?w=100&auto=format&fit=crop&q=80" alt="Marcos Antonio Almeida" loading="lazy">
-        <div class="comment-content">
-          <div class="comment-bubble">
-            <span class="comment-name">Marcos Antonio Almeida</span>
-            <span class="comment-text">Esse tratamento não tem preço, ganhei minha vida de volta</span>
-            <div class="reaction-pill">
-              <div class="reaction-icons"><span class="reaction-icon love"><svg><use href="#icon-fb-love"/></svg></span></div>
-              <span class="reaction-count">1</span>
-            </div>
-          </div>
-          <div class="comment-actions"><span>Curtir</span>·<span>Responder</span>·<span class="time">4 min</span></div>
-        </div>
-      </div>
-
-      <!-- 19: Marcio Silva -->
-      <div class="comment-item">
-        <img class="comment-avatar" src="https://images.unsplash.com/photo-1480429370139-e0132c086e2a?w=100&auto=format&fit=crop&q=80" alt="Marcio Silva" loading="lazy">
-        <div class="comment-content">
-          <div class="comment-bubble">
-            <span class="comment-name">Marcio Silva</span>
-            <span class="comment-text">Hoje eu finalmente parei de sofrer com aquele inferno na minha cabeça, eu não acordo mais estressado ja, mas sim feliz de estar em silêncio!</span>
-            <div class="reaction-pill">
-              <div class="reaction-icons">
-                <span class="reaction-icon like"><svg><use href="#icon-fb-like"/></svg></span>
-                <span class="reaction-icon love"><svg><use href="#icon-fb-love"/></svg></span>
-              </div>
-              <span class="reaction-count">56</span>
-            </div>
-          </div>
-          <div class="comment-actions"><span>Curtir</span>·<span>Responder</span>·<span class="time">8 min</span></div>
-        </div>
-      </div>
-
-      <div class="fb-footer">
-        Entre na sua conta para comentar.
-      </div>
-    </section>
-
-    <!-- Footer -->
-    <footer>
-      <p>
-        2025 Copyright ©. Todos os direitos reservados.<br><br>
-        Todo o conteúdo deste site, incluindo fotos, imagens, logotipos, marcas e layout, é de propriedade exclusiva do FREQUÊNCIA DA VINCI e protegido por leis de direitos autorais e propriedade intelectual. A reprodução, modificação ou distribuição sem autorização expressa é proibida.<br><br>
-        Para acessar os estudos científicos, <a href="#">clique aqui</a>. Caso não consiga através do link, entre em contato com nosso suporte.
-      </p>
-
-      <div class="footer-links">
-        <a href="#">Política de privacidade</a>
-        <a href="#">Termos de uso</a>
-        <a href="#">Política de Envio e Estorno</a>
-        <a href="#">Aviso Legal</a>
-      </div>
-    </footer>
+    <!-- ===== CTA FINAL -> VSL.HTML ===== -->
+    <a href="vsl.html#comentarios" class="cta cta-bottom">Descubra agora porque o zumbido não vem do ouvido</a>
 
   </div>
 
   <script>
-    // Repasse automático de parâmetros UTM da URL para o checkout da EscalePay
+    // Repassa os parâmetros da URL atual (utm_source, utm_campaign, etc.)
+    // para a página da VSL, mantendo a âncora #comentarios
     (function(){
       var qs = window.location.search;
-      if (!qs) return;
+      if(!qs) return;
       var params = qs.substring(1);
-      document.querySelectorAll('a.cta-btn').forEach(function(a){
+      document.querySelectorAll('a.cta').forEach(function(a){
         var href = a.getAttribute('href');
-        if (!href) return;
-        a.setAttribute('href', href + (href.indexOf('?') > -1 ? '&' : '?') + params);
+        if(!href) return;
+        var parts = href.split('#');
+        var base = parts[0];
+        var hash = parts[1] ? '#' + parts[1] : '';
+        a.setAttribute('href', base + (base.indexOf('?') > -1 ? '&' : '?') + params + hash);
       });
     })();
   </script>
