@@ -1,43 +1,172 @@
 <!DOCTYPE html>
 <html lang="pt">
-
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Empréstimos M-Pesa | Vodacom Moçambique</title>
-    <meta name="description" content="Foste selecionado para ativar o novo serviço Empréstimos M-Pesa da Vodacom. Segue as instruções e começa agora." />
-    
-    <!-- Tailwind CSS para garantir que todas as cores e estilos funcionam num único ficheiro -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        background: '#f8fafc',
-                        foreground: '#0f172a',
-                        card: '#ffffff',
-                        primary: '#e60000', /* Vermelho estilo Vodacom/M-Pesa */
-                        'primary-foreground': '#ffffff',
-                        'primary-soft': '#fee2e2',
-                        'muted-foreground': '#64748b',
-                    }
-                }
-            }
-        }
-    </script>
     <style>
-        :root {
-            --shadow-card: 0 10px 25px -5px rgba(0, 0, 0, 0.08), 0 8px 10px -6px rgba(0, 0, 0, 0.04);
-            --shadow-glow: 0 10px 15px -3px rgba(230, 0, 0, 0.3);
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
         }
-    </style>
-</head>
-
-<body class="min-h-screen bg-background font-sans antialiased">
-    <div class="min-h-screen bg-background">
-        <!-- Cabeçalho -->
-        <header class="flex items-center justify-between gap-3 bg-card px-4 py-3 shadow-sm">
-            <button type="button" aria-label="Vodacom M-Pesa" class="flex items-center gap-3 text-left">
-                <!-- Nota: Mantenha a pasta 'assets' junto deste ficheiro ou troque o src abaixo pelo link de uma imagem -->
-                <img src="assets/mpesa-logo-E_5cvoS6.png" alt="Logótipo M-Pesa" width="44" height="44" class="h-11 w-11 rounded
+        body {
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background-color: #f8fafc;
+            color: #0f172a;
+            min-height: 100vh;
+            -webkit-font-smoothing: antialiased;
+        }
+        /* Cabeçalho */
+        header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background-color: #ffffff;
+            padding: 12px 16px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+        }
+        .brand-btn {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            background: none;
+            border: none;
+            text-align: left;
+            cursor: pointer;
+        }
+        .logo-small {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            object-fit: cover;
+            background-color: #e60000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            font-weight: bold;
+            font-size: 12px;
+        }
+        .brand-title {
+            font-size: 16px;
+            font-weight: 800;
+            color: #e60000;
+            line-height: 1.2;
+        }
+        .brand-title span {
+            font-weight: 400;
+            color: #64748b;
+        }
+        .brand-subtitle {
+            font-size: 10px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+            color: #64748b;
+            margin-top: 2px;
+        }
+        .live-badge {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            background-color: #fee2e2;
+            color: #e60000;
+            padding: 4px 10px;
+            border-radius: 9999px;
+            font-size: 10px;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+        .live-dot {
+            width: 6px;
+            height: 6px;
+            background-color: #e60000;
+            border-radius: 50%;
+        }
+        /* Conteúdo Principal */
+        main {
+            padding: 24px 12px;
+        }
+        .card {
+            max-width: 440px;
+            margin: 0 auto;
+            background-color: #ffffff;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.08), 0 8px 10px -6px rgba(0, 0, 0, 0.04);
+        }
+        .card-top-bar {
+            height: 8px;
+            width: 100%;
+            background-color: #e60000;
+        }
+        .card-body {
+            padding: 24px 20px 28px;
+            text-align: center;
+        }
+        .logo-large {
+            width: 96px;
+            height: 96px;
+            border-radius: 16px;
+            object-fit: cover;
+            margin: 0 auto;
+            display: block;
+            background-color: #e60000;
+            box-shadow: 0 10px 15px -3px rgba(230, 0, 0, 0.3);
+        }
+        .congrats-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background-color: #fee2e2;
+            color: #e60000;
+            padding: 6px 16px;
+            border-radius: 9999px;
+            font-size: 12px;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.18em;
+            margin-top: 16px;
+        }
+        h1 {
+            margin-top: 16px;
+            font-size: 30px;
+            font-weight: 800;
+            line-height: 1.2;
+            color: #0f172a;
+        }
+        h1 span {
+            color: #e60000;
+        }
+        .description {
+            margin-top: 12px;
+            font-size: 16px;
+            line-height: 1.6;
+            color: #64748b;
+        }
+        .text-red {
+            color: #e60000;
+            font-weight: 800;
+        }
+        .text-dark {
+            color: #0f172a;
+            font-weight: 800;
+        }
+        .cta-btn {
+            margin-top: 20px;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            background-color: #e60000;
+            color: #ffffff;
+            border: none;
+            border-radius: 9999px;
+            padding: 14px 20px;
+            font-size: 18px;
+            font-weight: 800;
+            cursor: pointer;
+            box
