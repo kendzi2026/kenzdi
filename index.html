@@ -12,7 +12,7 @@
         }
         body {
             font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            background-color: #f8fafc;
+            background-color: #f4f6f9;
             color: #0f172a;
             min-height: 100vh;
             -webkit-font-smoothing: antialiased;
@@ -39,14 +39,8 @@
             width: 44px;
             height: 44px;
             border-radius: 50%;
-            object-fit: cover;
-            background-color: #e60000;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #fff;
-            font-weight: bold;
-            font-size: 12px;
+            overflow: hidden;
+            flex-shrink: 0;
         }
         .brand-title {
             font-size: 16px;
@@ -90,7 +84,7 @@
             padding: 24px 12px;
         }
         .card {
-            max-width: 440px;
+            max-width: 420px;
             margin: 0 auto;
             background-color: #ffffff;
             border-radius: 16px;
@@ -103,18 +97,17 @@
             background-color: #e60000;
         }
         .card-body {
-            padding: 24px 20px 28px;
+            padding: 28px 20px 32px;
             text-align: center;
         }
         .logo-large {
             width: 96px;
             height: 96px;
-            border-radius: 16px;
-            object-fit: cover;
+            border-radius: 18px;
             margin: 0 auto;
             display: block;
-            background-color: #e60000;
-            box-shadow: 0 10px 15px -3px rgba(230, 0, 0, 0.3);
+            box-shadow: 0 10px 20px -3px rgba(230, 0, 0, 0.35);
+            overflow: hidden;
         }
         .congrats-pill {
             display: inline-flex;
@@ -128,20 +121,20 @@
             font-weight: 800;
             text-transform: uppercase;
             letter-spacing: 0.18em;
-            margin-top: 16px;
+            margin-top: 18px;
         }
         h1 {
             margin-top: 16px;
-            font-size: 30px;
+            font-size: 32px;
             font-weight: 800;
-            line-height: 1.2;
+            line-height: 1.15;
             color: #0f172a;
         }
         h1 span {
             color: #e60000;
         }
         .description {
-            margin-top: 12px;
+            margin-top: 14px;
             font-size: 16px;
             line-height: 1.6;
             color: #64748b;
@@ -154,19 +147,3 @@
             color: #0f172a;
             font-weight: 800;
         }
-        .cta-btn {
-            margin-top: 20px;
-            width: 100%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-            background-color: #e60000;
-            color: #ffffff;
-            border: none;
-            border-radius: 9999px;
-            padding: 14px 20px;
-            font-size: 18px;
-            font-weight: 800;
-            cursor: pointer;
-            box
